@@ -1,10 +1,17 @@
 @import url(../variables.css);
 
 .card {
-  width: 390px;
   background: var(--color-white);
   border-radius: 10px;
   overflow: hidden;
-  padding: 77px 55px 33px;
+  padding: 50px;
   box-shadow: 0 5px 10px 0 rgb(0 0 0 / 10%);
+}
+
+.card__header {
+  display: flex;
+  justify-content: center;
+}
+.card__title {
+  font-size: var(--text-size-2);
 }

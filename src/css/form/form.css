@@ -1,1 +1,71 @@
-@import '../variables.css';
+@import url('../variables.css');
+
+.form {
+  display: flex;
+}
+
+.form--vertical {
+  flex-direction: column;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__field--centered {
+  margin: 0 auto;
+}
+
+.form__field:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.form__label {
+  color: var(--color-dark-gray);
+  display: block;
+  font-size: var(--text-size-3);
+}
+
+.form__control {
+}
+
+.form__input {
+  border: 1px solid transparent;
+  border-bottom: 1px solid var(--color-blue);
+  font-size: var(--text-size-2);
+  line-height: 1.5;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 0px;
+  padding-right: 7px;
+}
+
+.form__input:focus {
+  outline: none;
+}
+
+.form__button {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: var(--text-size-2);
+  border-radius: 20px;
+  border: 1px solid transparent;
+}
+.form__button--main {
+  background-color: var(--color-blue);
+  color: var(--color-white);
+}
+
+.form__help {
+  display: block;
+  font-size: var(--text-size-4);
+  margin-top: 4px;
+}
