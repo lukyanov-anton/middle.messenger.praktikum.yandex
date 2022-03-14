@@ -1,0 +1,19 @@
+.page-404 {
+  margin-top: 100px;
+  text-align: center;
+  color: var(--text-color-main);
+}
+
+.page-404__message::before {
+  content: '404';
+  font-size: var(--text-size-1);
+  display: block;
+  margin-bottom: 20px;
+}
+
+.page-404__message::after {
+  content: 'Здесь ничего нет';
+  font-size: var(--text-size-2);
+  display: block;
+  margin-bottom: 20px;
+}

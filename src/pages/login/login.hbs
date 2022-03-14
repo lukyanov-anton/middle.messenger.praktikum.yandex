@@ -1,0 +1,20 @@
+---
+title: Вход
+stylesheets:
+  - ./login.css
+---
+{{!< main}}
+
+ <div class='card'>
+      <form class='form'>
+          {{title}}
+        <label for='login'>Логин</label>
+        <input type='text' name='login' class='form__field' />
+
+        <label for='password'>Пароль</label>
+        <input type='password' name='password' class='form__field' />
+
+        <button type='submit' class='form__button'>Войти</button>
+      </form>
+      <a href='' class='link'>Ещё не зарегистрированы?</a>
+</div>

@@ -1,0 +1,19 @@
+.page-500 {
+  margin-top: 100px;
+  text-align: center;
+  color: var(--text-color-main);
+}
+
+.page-500::before {
+  content: '500';
+  font-size: var(--text-size-1);
+  display: block;
+  margin-bottom: 20px;
+}
+
+.page-500::after {
+  content: 'Уже чиним...';
+  font-size: var(--text-size-2);
+  display: block;
+  margin-bottom: 20px;
+}
