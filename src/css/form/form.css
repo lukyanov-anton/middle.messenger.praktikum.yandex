@@ -13,10 +13,6 @@
   flex-direction: column;
 }
 
-.form__field--centered {
-  margin: 0 auto;
-}
-
 .form__field:not(:last-child) {
   margin-bottom: 30px;
 }
@@ -25,9 +21,6 @@
   color: var(--color-dark-gray);
   display: block;
   font-size: var(--text-size-3);
-}
-
-.form__control {
 }
 
 .form__input {

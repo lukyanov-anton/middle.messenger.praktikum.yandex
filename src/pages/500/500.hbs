@@ -1,14 +1,11 @@
-<html lang='en'>
-  <head>
-    <meta charset='UTF-8' />
-    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <script src='./index.js' type='module'></script>
-    <title>Ошибка</title>
-  </head>
-  <body>
-    <main class='page-500'>
-      <a href='/chats' class='link'> Назад к чатам</a>
-    </main>
-  </body>
-</html>
+---
+title: Что-то пошло не так
+stylesheets:
+  - ./500.css  
+---
+{{!< page}}
+<div class='page-500'>
+  <div class='page-500__message'>
+  </div>
+  {{> link href='../chats/chats.hbs' text="Назад к чатам"}}
+</div>

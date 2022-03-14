@@ -1,17 +1,21 @@
+@import url(../../css/main.css);
+@import url(../../layouts/page.css);
+@import url(../../css/link/link.css);
+
 .page-500 {
   margin-top: 100px;
   text-align: center;
   color: var(--text-color-main);
 }
 
-.page-500::before {
+.page-500__message::before {
   content: '500';
   font-size: var(--text-size-1);
   display: block;
   margin-bottom: 20px;
 }
 
-.page-500::after {
+.page-500__message::after {
   content: 'Уже чиним...';
   font-size: var(--text-size-2);
   display: block;
