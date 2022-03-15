@@ -1,0 +1,12 @@
+---
+title: Изменение аватара
+stylesheets:
+  - ./changeavatar.css  
+---
+{{!< profile}}
+
+<form class="form form--vertical">
+  {{> forminput label="Выбрать файл на компьютере" name="avatar" type="file"}}
+ 
+  {{> formbutton text="Поменять"}}       
+</form>
