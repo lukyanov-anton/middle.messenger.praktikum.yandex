@@ -1,0 +1,19 @@
+@import url(../variables.css);
+.property {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: var(--text-size-2);
+  padding: 10px 0;
+}
+.property:not(:last-child) {
+  border-bottom: 1px solid;
+  border-color: var(--color-gray);
+}
+
+.property__label {
+  color: var(--color-black);
+}
+.property__value {
+  color: var(--color-gray);
+}

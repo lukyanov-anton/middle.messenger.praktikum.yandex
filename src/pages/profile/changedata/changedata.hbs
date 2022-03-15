@@ -1,0 +1,13 @@
+---
+title: Изменение профиля
+stylesheets:
+  - ./changedata.css  
+---
+{{!< profile}}
+
+<form class="form form--vertical">
+  {{> forminput label="Старый пароль" name="oldPassword" type="password"}}
+  {{> forminput label="Новый пароль" name="newPassword" type="password"}}
+  {{> forminput label="Повторите новый пароль" name="confirmNewPassword" type="password"}}
+  {{> formbutton text="Сохранить"}}       
+</form>

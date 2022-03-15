@@ -1,6 +1,8 @@
 <div class="form__field">
+  {{#if value}}
   <label for='{{name}}' class="form__label">{{label}}</label>
-  <input type='{{type}}' name='{{name}}' class='form__input' />
+  {{/if}}
+  <input type='{{type}}' name='{{name}}' class='form__input' placeholder="{{label}}" value="{{value}}" />
   {{#if help }}
     <p class="form_help">{{help}}</p>
   {{/if}}
