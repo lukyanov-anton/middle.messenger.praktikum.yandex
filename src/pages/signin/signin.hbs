@@ -1,0 +1,29 @@
+---
+title: Регистрация
+stylesheets:
+  - ./signin.css
+  - ../../layouts/page.css
+---
+{{!< page}}
+
+
+<div class ="signin-page" >
+{{#> card title='Регистрация'}}      
+ {{#*inline "content"}}
+    <form class='form form--vertical signin-page__form'>
+        {{> forminput label="Почта" name="email" type="email"}}
+        {{> forminput label="Логин" name="login" type="text"}}
+        {{> forminput label="Имя" name="first_name" type="text"}}
+        {{> forminput label="Фамилия" name="second_name" type="text"}}
+        {{> forminput label="Телефон" name="phone" type="tel"}}
+        {{> forminput label="Пароль" name="password" type="password"}}
+        {{> forminput label="Пароль (еще раз)" name="password_confirm" type="password"}}
+        {{> formbutton text="Зарегистрироваться"}}
+        <div class="signin-page__link">
+          {{> link href='../login/login.hbs' text="Войти"}}
+        </div>
+      </form>
+      
+  {{/inline}}
+{{/card}}
+</div>

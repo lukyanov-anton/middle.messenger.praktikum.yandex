@@ -1,0 +1,23 @@
+---
+title: Вход
+stylesheets:
+  - ./login.css  
+---
+{{#> page}}
+{{/page}}
+
+<div class ="login-page" >
+{{#> card title="Вход"}}      
+ {{#*inline "content"}}
+    <form class="form form--vertical login-page__form">
+        {{> forminput label="Логин" name="login" type="text" value="macho"}}
+        {{> forminput label="Пароль" name="password" type="password"}}
+        {{> formbutton text="Войти"}}       
+        <div class="login-page__link">
+          {{> link href='../signin/signin.hbs' text="Ещё не зарегистрированы?"}}
+        </div>
+
+      </form>
+  {{/inline}}
+{{/card}}
+</div>
