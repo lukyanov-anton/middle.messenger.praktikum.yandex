@@ -11,7 +11,7 @@ export class Link extends Block{
     constructor(props:LinkProps){
         const onClick=(e:MouseEvent)=>{
             console.log("Link click");
-            e.preventDefault();            
+            //e.preventDefault();            
         };
         super({...props,events:{click:onClick}});
     }

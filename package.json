@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "parcel ./src/index.html --no-cache",
-    "build": "parcel build ./src/index.html --no-source-map",
+    "dev": "parcel ./src/stubPages/*.html --no-cache",
+    "build": "parcel build ./src/index.html --no-source-map",    
     "start": "node ./server.js"
   },
   "keywords": [
