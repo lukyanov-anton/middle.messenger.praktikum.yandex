@@ -1,0 +1,15 @@
+
+@import url(../../css/form/form.css);
+
+
+.login-page {
+  width: 390px;
+}
+
+.login-page__form {
+  margin-bottom: 14px;
+}
+
+.login-page__link {
+  margin: 0 auto;
+}

@@ -6,7 +6,15 @@ interface BlockConstructable<Props = any> {
 }
 
 export default function registerComponent<Props = any>(Component: BlockConstructable) {
-  Handlebars.registerHelper(Component.name, function ({ hash: { ref, ...hash }, data }: HelperOptions) {
+  Handlebars.registerHelper(Component.name, function ({ hash: { ref, ...hash }, data,fn,inverse }: HelperOptions) {
+    if(inverse){
+      debugger
+    }
+    if(fn){        
+        return new Handlebars.SafeString(fn(this));
+    }else{
+    
+    
     if (!data.root.children) {
       data.root.children = {};
     }
@@ -26,5 +34,6 @@ export default function registerComponent<Props = any>(Component: BlockConstruct
     }
 
     return `<div data-id="${component.id}"></div>`;
+  }
   })
 }
