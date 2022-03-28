@@ -1,6 +1,6 @@
 import { Block } from "../../core";
 
-import './loginPage.css';
+import './login.css';
 
 export class LoginPage extends Block{
     constructor(){

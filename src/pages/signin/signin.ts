@@ -1,6 +1,6 @@
 import { Block } from "../../core";
 
-import './signinPage.css';
+import './signin.css';
 
 export class SigninPage extends Block{
     protected render(): string {

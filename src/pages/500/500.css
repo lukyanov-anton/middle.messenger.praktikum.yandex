@@ -1,6 +1,4 @@
-@import url(../../css/main.css);
-@import url(../../layouts/page.css);
-@import url(../../css/link/link.css);
+@import url('../../styles/baseLayout.css');
 
 .page-500 {
   margin-top: 100px;

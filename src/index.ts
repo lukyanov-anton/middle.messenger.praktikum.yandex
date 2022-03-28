@@ -1,6 +1,6 @@
 import {Block} from './core';
 import {renderDOM, registerComponent} from './helpers';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/login';
 
 import './styles/app.css'
 import BaseLayout from './components/layouts/BaseLayout'
