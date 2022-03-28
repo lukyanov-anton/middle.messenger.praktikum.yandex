@@ -200,6 +200,7 @@ export default class Block<P = any> {
     /**
      * Заменяем заглушки на компоненты
      */
+    debugger
     Object.entries(this.children).forEach(([id, component]) => {
       /**
        * Ищем заглушку по id
