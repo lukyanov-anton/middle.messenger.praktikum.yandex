@@ -1,7 +1,6 @@
 import '../styles/app.css'
 
 import {renderDOM, registerComponent} from '../helpers';
-
 import SigninPage from '../pages/signin';
 import Link from '../components/Link'
 import Input from '../components/Input'
