@@ -1,0 +1,13 @@
+.container {
+  margin: 60px auto;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__avatar {
+  margin: 0 auto;
+  padding-bottom: 100px;
+}
+.profile__properties {
+}
