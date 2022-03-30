@@ -29,7 +29,7 @@
 .chat__messages{
     flex-grow: 1;
 }
-.chat__message{
+.chat__new-message{
 
 }
 .chat__message--in{

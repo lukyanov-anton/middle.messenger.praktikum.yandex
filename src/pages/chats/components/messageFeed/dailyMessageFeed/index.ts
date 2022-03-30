@@ -1,0 +1,1 @@
+export {DailyMessageFeed as default} from './dailyMessageFeed'
