@@ -1,4 +1,5 @@
-import { Block } from "../../../../core";
+import { Block } from "../../../../../core";
+import './newMessage.css'
 
 export class NewMessage extends Block{
     protected render(): string {
@@ -8,6 +9,6 @@ export class NewMessage extends Block{
             {{{Input label="Сообщение" name="message" type="text"}}} 
             <button type='submit' class='new-message__button'></button>      
         </form>
-        `
+        `;
     }
 }

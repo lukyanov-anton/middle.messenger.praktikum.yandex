@@ -1,9 +1,12 @@
 import { Block } from "../../../../../core";
 
-type MessageDirection="in"|"out";
+enum MessageDirection {
+    In,
+    Out,    
+  }
 
 interface MessageProps{
-    id:number,
+    id:number,    
     text:string,
     direction:MessageDirection,
     time:Date

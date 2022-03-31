@@ -1,7 +1,13 @@
-.placeholder{
+@import url('../../../../styles/variables.css');
 
+.placeholder {
+  display: flex;
+  height: 100%;
 }
 
-.placeholder__message{
-    
+.placeholder__message {
+  margin: 0 auto;
+  align-self: center;
+  color: var(--color-dark-gray);
+  font-size: var(--text-size-2);
 }

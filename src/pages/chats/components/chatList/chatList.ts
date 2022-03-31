@@ -1,22 +1,12 @@
 import { Block } from "../../../../core";
 
-enum MessageDirection={
-    "in",
-    "out"
-}
-
-type Message{
-    id:number,
-    text:string,
-    direction:MessageDirection,
-    time:Date
-}
 
 type ChatInfo={
     name:string,
     image:string,
     newMessageCount:number,
-    lastMessage:Message
+    lastMessage:string,
+    lastMessageDate:Date
 }
 
 interface ChatListProps{
@@ -30,8 +20,9 @@ export class ChatList extends Block{
     protected render(): string {
         return `
         <div class="chat-list">
-            {{#each chatList}}
-                {{ChatInfo}}
+            {{{ SearchField }}}
+            {{#each items}}
+                {{{ChatInfo name={{this.name}} }}}
             {{/each}}
         </div>
         `;

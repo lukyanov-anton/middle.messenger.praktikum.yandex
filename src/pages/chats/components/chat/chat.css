@@ -1,0 +1,29 @@
+.chat {
+  height: 100%;
+  width: 100%;
+  background-color: red;
+
+  /*   display: flex;
+  flex-direction: column;
+  height: 100%; */
+}
+
+.chat__header {
+  height: 80px;
+  background-color: blue;
+}
+
+.chat__message-ribbon {
+  flex-grow: 1;
+}
+
+.chat__new-message {
+}
+.chat__message--in {
+}
+.chat__message--out {
+}
+.chat__footer {
+  height: 80px;
+  background-color: brown;
+}

@@ -1,4 +1,5 @@
 import { Block } from "../../../../core";
+import './placeholder.css'
 
 export class Placeholder extends Block{
     protected render(): string {

@@ -1,14 +1,14 @@
 import { Block } from "../../../../../core";
 
 
-interface ChatListProps{
+interface ChatInfoProps{
     name:string,
     lastMessage:string,
     lastMessageDate:Date    
 }
 
-export class ChatList extends Block{
-    constructor(props: ChatListProps){        
+export class ChatInfo extends Block{
+    constructor(props: ChatInfoProps){        
         super({...props});
     }
     protected render(): string {

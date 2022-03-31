@@ -1,44 +1,17 @@
-.chats{
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-    width: 100vw;
+.chats {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
 }
 
-.chats__left-panel{
-    width: 300px;
-    height: 100%;
-    background-color: bisque;
+.chats__left-panel {
+  min-width: 300px;
+  height: 100%;
+  background-color: bisque;
 }
 
-.chats__right-panel{
-    height: 100%;
-    flex-grow: 1;
-    background-color: aqua;
-}
-
-.chat{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-.chat__header{
-    height: 80px;
-    background-color: blue;
-}
-.chat__messages{
-    flex-grow: 1;
-}
-.chat__new-message{
-
-}
-.chat__message--in{
-
-}
-.chat__message--out{
-
-}
-.chat__footer{
-    height: 80px;
-    background-color:brown;
+.chats__right-panel {
+  height: 100%;
+  flex-grow: 1;
 }

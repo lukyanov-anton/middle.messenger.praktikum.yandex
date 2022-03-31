@@ -8,17 +8,10 @@ export class ChatsPage extends Block{
             <section class="chats__left-panel">
             </section>
             <section class="chats__right-panel">
-                <div class="chat">
-                    <div class="chat__header"></div>
-                    <div class="chat__messages"></div>
-                    <div class="chat__footer">
-                        {{{Message}}}
-                    </div>
-                </div>
+            {{{ Placeholder }}}               
             
             </section>
         </main>
-
-        `
+        `;
     }
 }

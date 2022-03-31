@@ -1,0 +1,1 @@
+export {DailyMessageRibbon as default} from './dailyMessageRibbon'
