@@ -1,1 +1,1 @@
-export {Message as default} from './message'
+export {MessageBlock as default} from './message'

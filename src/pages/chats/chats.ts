@@ -1,18 +1,22 @@
 import { Block } from "../../core";
+import {Chat, MessageDirection} from "./modules/chat";
+
 import './chats.css'
 
 interface ChatsPageProps{
-    selectedChatId:number|null;
-    profileClick:()=>void;
-   
+    selectedChatId:number|null,
+    profileClick:()=>void,
+    onChatSelect:()=>void
 }
 
 export class ChatsPage extends Block{
     constructor(){
         const props:ChatsPageProps={
-            selectedChatId:1, 
-            profileClick:()=>{console.log("Покажи профиль");           
-        }}
+            selectedChatId:1,             
+            profileClick:()=>{console.log("Покажи профиль")},          
+            onChatSelect:()=>{console.log("Чат выбран")}        
+        };  
+
         super(props);
     }
     protected render(): string {
@@ -24,7 +28,7 @@ export class ChatsPage extends Block{
             </section>
             <section class="chats__right-panel">
             {{#if selectedChatId }}
-                {{{ Chat chatId="selectedChatId"}}}
+                {{{ ChatBlock chatId="selectedChatId"  }}}
             {{else}}
                 {{{ Placeholder }}}   
             {{/if}}           

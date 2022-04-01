@@ -1,9 +1,5 @@
 import { Block } from "../../../../../core";
-
-enum MessageDirection {
-    In,
-    Out,    
-  }
+import {MessageDirection} from "../../../modules/chat";
 
 interface MessageProps{
     id:number,    
@@ -12,7 +8,7 @@ interface MessageProps{
     time:Date
 }
 
-export class Message extends Block{
+export class MessageBlock extends Block{
     constructor(props:MessageProps){        
         super({...props});
     }
