@@ -1,0 +1,1 @@
+export {BaseButton as default} from './baseButton'

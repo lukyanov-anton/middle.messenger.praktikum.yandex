@@ -1,7 +1,8 @@
 import { Block } from "../../core";
 
 interface SearchFieldProps{
-    searchString:string,    
+    value:string,
+    onInput:()=>void    
 }
 
 export class SearchField extends Block{
@@ -9,10 +10,8 @@ export class SearchField extends Block{
         super({...props});
     }
     protected render(): string {
-        return `
-        <div class="search-field">
-            {{{ Input type="text" name="search" value={{searchString}} }}}
-        </div>
+        return `        
+            {{{ Input type="text" name="search" value=value onInput=onInput }}}        
         `;
     }
 }

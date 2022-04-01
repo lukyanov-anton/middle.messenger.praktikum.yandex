@@ -1,11 +1,7 @@
 .chat {
   height: 100%;
-  width: 100%;
-  background-color: red;
-
-  /*   display: flex;
+  display: flex;
   flex-direction: column;
-  height: 100%; */
 }
 
 .chat__header {
@@ -24,6 +20,6 @@
 .chat__message--out {
 }
 .chat__footer {
-  height: 80px;
+  height: 100px;
   background-color: brown;
 }

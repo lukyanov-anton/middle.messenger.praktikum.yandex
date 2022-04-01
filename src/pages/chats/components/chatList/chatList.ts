@@ -10,19 +10,21 @@ type ChatInfo={
 }
 
 interface ChatListProps{
-    items:ChatInfo[],    
+    items:ChatInfo[],
+    searchString:string,
+    searchInput:()=>void;    
 }
 
 export class ChatList extends Block{
     constructor(props: ChatListProps){        
-        super({...props});
+        super({...props, searchInput:(e:any)=>{console.log(111) }});
     }
     protected render(): string {
         return `
         <div class="chat-list">
-            {{{ SearchField }}}
+            {{{ SearchField onInput=searchInput }}}
             {{#each items}}
-                {{{ChatInfo name={{this.name}} }}}
+                {{{ ChatInfo name="{{this.name}}" }}}
             {{/each}}
         </div>
         `;

@@ -1,11 +1,12 @@
-.new-message{
-
+.new-message {
+  display: flex;
 }
 
-.new-message__attach{
-
+.new-message__attach {
+}
+.new-message__input {
+  flex-grow: 1;
 }
 
-.new-message__button{
-
+.new-message__button {
 }

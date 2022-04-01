@@ -13,12 +13,13 @@ export class Chat extends Block{
         return `
         <div data-chat-id="{{id}}" class="chat"> 
             <header class="chat__header">
+                Заголовок
             </header>
             <div class="chat__message-ribbon">
-
+                Лента
             </div>
-            <footer class="chat__footer>
-                {{{NewMessage}}}
+            <footer class="chat__footer">            
+                {{{ NewMessage }}}
             </footer>
         </div>
         `;

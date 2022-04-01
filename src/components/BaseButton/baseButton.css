@@ -1,0 +1,13 @@
+.button {
+}
+
+.button--link {
+  outline: none;
+}
+.button--arrow-right {
+}
+
+.button--arrow-right::after {
+  content: '';
+  background-image: url('../../../static/svg/chevron.svg');
+}

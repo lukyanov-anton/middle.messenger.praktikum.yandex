@@ -22,8 +22,7 @@ export class DailyMessageRibbon extends Block{
             <time class="daily-message-ribbon__date">{{date}}</time>
             {{#each messages}}
                 {{{Message text=this.text}}}
-            {{/each}}         
-            
+            {{/each}}
         </div>
         `;
     }
