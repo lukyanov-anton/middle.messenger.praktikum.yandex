@@ -13,6 +13,7 @@ import MessageBlock from '../pages/chats/components/chat/message';
 import NewMessage from '../pages/chats/components/chat/newMessage';
 import Input from '../components/Input';
 import BaseButton from '../components/BaseButton';
+import ImagePlaceholderBlock from '../components/ImagePlaceholder'; 
 
 registerDateHelper();
 registerComponent(Placeholder);
@@ -25,6 +26,7 @@ registerComponent(MessageBlock);
 registerComponent(NewMessage);
 registerComponent(Input);
 registerComponent(BaseButton);
+registerComponent(ImagePlaceholderBlock);
 
 
 document.addEventListener('DOMContentLoaded', ()=>renderDOM("#app", ChatsPage));

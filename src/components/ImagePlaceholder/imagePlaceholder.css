@@ -1,0 +1,22 @@
+.image-placeholder {
+  display: block;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-gray);
+}
+
+.image-placeholder--128x128 {
+  height: 128px;
+  width: 128px;
+}
+.image-placeholder--34x34 {
+  height: 34;
+  width: 34;
+}
+.image-placeholder--47x47 {
+  height: 47;
+  width: 47;
+}
+.image-placeholder--rounded {
+  border-radius: 9999px;
+}

@@ -1,8 +1,12 @@
 .button {
+  color: inherit;
+  cursor: pointer;
 }
 
-.button--link {
+.button--text {
   outline: none;
+  background-color: transparent;
+  border-color: transparent;
 }
 .button--arrow-right {
 }
@@ -10,4 +14,10 @@
 .button--arrow-right::after {
   content: '';
   background-image: url('../../../static/svg/chevron.svg');
+}
+
+.button--text {
+  outline: none;
+  background-color: transparent;
+  border-color: transparent;
 }

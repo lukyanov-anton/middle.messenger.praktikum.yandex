@@ -1,5 +1,38 @@
-.chat-info{
+.chat-info {
+  display: grid;
+  grid-template-columns: 47px auto 25px;
+  column-gap: 10px;
+  grid-template-rows: 25px auto;
+  height: 100%;
+  cursor: pointer;
+  color: var(--color-dark-gray);
 }
-.chat-info__name{
-    
+.chat-info__image {
+  grid-column: 1/1;
+  grid-row: 1/2;
+}
+.chat-info__title {
+  font-weight: 600;
+  color: var(--color-black);
+}
+.chat-info__last-message {
+  grid-column: 2/2;
+  grid-row: 2/2;
+}
+.chat-info__new-message-count {
+  grid-column: 3/3;
+  display: block;
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  border-radius: 9999;
+  min-width: 18px;
+  min-height: 18px;
+  max-width: 24px;
+  max-height: 24px;
+  padding: 4px;
+}
+.chat-info__time {
+  grid-column: 3/3;
+  grid-row: 1/1;
+  font-size: var(--text-size-3);
 }

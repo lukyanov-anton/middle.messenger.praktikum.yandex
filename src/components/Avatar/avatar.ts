@@ -3,6 +3,7 @@ import { Block } from "../../core";
 import './avatar.css'
 
 interface AvatarProps{
+    
     onClick:()=>void
 }
 

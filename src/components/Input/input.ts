@@ -1,9 +1,11 @@
+import { LargeNumberLike } from "crypto";
 import { Block } from "../../core";
 
 import '../../styles/form.css'
 
 interface InputProps{
     label:string,
+    placeholder:string,
     name:string,
     value:string,
     className:string,
@@ -20,7 +22,7 @@ export class Input extends Block{
             {{#if value}}
             <label for='{{name}}' class="form__label">{{label}}</label>
             {{/if}}
-            <input type='{{type}}' name='{{name}}' class='form__input' placeholder="{{label}}" value="{{value}}" input=onInput />
+            <input type='{{type}}' name='{{name}}' class='form__input' placeholder="{{placeholder}}" value="{{value}}" input=onInput />
             {{#if help }}
                 <p class="form_help">{{help}}</p>
             {{/if}}

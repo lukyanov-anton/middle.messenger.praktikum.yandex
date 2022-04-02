@@ -4,7 +4,8 @@ import './baseButton.css'
 
 interface BaseButtonProps{
     text:string,   
-    onClick:()=>void
+    onClick:()=>void,
+    className:string
 }
 
 export class BaseButton extends Block{
@@ -14,7 +15,7 @@ export class BaseButton extends Block{
     }
     protected render(): string {
         return `
-        <button type="button" class="button">{{text}}</button>
+        <button type="button" class="button {{className}}">{{text}}</button>
         `;
     }
 }

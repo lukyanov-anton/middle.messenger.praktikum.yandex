@@ -12,8 +12,6 @@ interface MessageProps{
 
 export class MessageBlock extends Block{
     constructor(props:MessageProps){   
-        
-        console.log("ddd",props);             
         super({...props});
     }
     protected render(): string {

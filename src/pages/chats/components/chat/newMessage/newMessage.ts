@@ -6,7 +6,7 @@ export class NewMessage extends Block{
         return `
         <form class="new-message" >
             <button type='button' class='new-message__attach'>Вложение</button>
-            {{{Input label="Сообщение" name="message" type="text" className="new-message__input"}}} 
+            <input type="text" class="new-message__input" name="message" placeholder="Сообщение">            
             <button type='submit' class='new-message__button'>Отправить</button>      
         </form>
         `;

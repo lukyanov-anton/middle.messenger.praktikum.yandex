@@ -20,3 +20,11 @@ export type Chat={
   id:number,
   messages:DailyMessages[]
 }
+
+export type ChatInfo={
+  title:string,
+  image:string,
+  newMessageCount:number,
+  lastMessage:string,
+  lastMessageDate:Date
+}

@@ -6,7 +6,7 @@
 
 .chat__header {
   height: 80px;
-  background-color: blue;
+  border-bottom: 1px solid var(--color-gray);
 }
 
 .chat__message-ribbon {
@@ -15,6 +15,29 @@
   height: 100%;
 }
 .chat__footer {
-  height: 100px;
-  background-color: brown;
+  border-top: 1px solid var(--color-gray);
+  height: 70px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+.header__image {
+  display: block;
+  margin-right: 10px;
+  border-radius: 9999px;
+  background-color: var(--color-gray);
+}
+.header__title {
+  flex-grow: 1;
+  color: var(--color-black);
+  font-weight: 600;
+}
+.header__controls {
+  width: 30px;
+}
+.header__controls:after {
+  content: '\2807';
+  font-size: 30px;
 }

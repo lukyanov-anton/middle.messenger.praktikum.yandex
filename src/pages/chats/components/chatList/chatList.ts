@@ -1,13 +1,7 @@
+import './chatList.css';
 import { Block } from "../../../../core";
-
-
-type ChatInfo={
-    name:string,
-    image:string,
-    newMessageCount:number,
-    lastMessage:string,
-    lastMessageDate:Date
-}
+import {ChatInfo} from "../../../../models/chat";
+import {ChatInfosStub} from "../../../../models/chat/stub";
 
 interface ChatListProps{
     items:ChatInfo[],
@@ -17,14 +11,18 @@ interface ChatListProps{
 
 export class ChatList extends Block{
     constructor(props: ChatListProps){        
-        super({...props, searchInput:(e:any)=>{console.log(111) }});
+        console.log(ChatInfosStub);
+        
+        super({...props, items:ChatInfosStub,events:{input:(e:InputEvent)=>{console.log(e.target.value) }} });
     }
     protected render(): string {
         return `
         <div class="chat-list">
-            {{{ SearchField onInput=searchInput }}}
+            {{{ SearchField onInput=searchInput placeholder="Поиск" className="chat-list__search"}}}
             {{#each items}}
-                {{{ ChatInfo name="{{this.name}}" }}}
+                <div class="chat-list__item">
+                    {{{ ChatInfo title=this.title lastMessage=this.lastMessage lastMessageDate=this.lastMessageDate newMessageCount=this.newMessageCount }}}
+                </div>
             {{/each}}
         </div>
         `;

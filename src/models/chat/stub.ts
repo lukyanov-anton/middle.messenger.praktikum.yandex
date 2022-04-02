@@ -1,4 +1,4 @@
-import {Chat,MessageDirection} from './index';
+import {Chat,MessageDirection, ChatInfo} from './index';
 
 export const ChatsStub:Chat[] = [{
   id:1,
@@ -28,3 +28,65 @@ export const ChatsStub:Chat[] = [{
               {id:2, text:"Messsage 4", time:new Date(), direction:MessageDirection.Out},
               {id:3, text:"Messsage 5", time:new Date(), direction:MessageDirection.Out}]}]
   }];
+  const getRandomInt=(max:number)=> {
+    return Math.floor(Math.random() * max);
+  }
+  export const ChatInfosStub:ChatInfo[] = [
+    {
+        title:"Citilink",
+        image:"",
+        newMessageCount:getRandomInt(10),
+        lastMessage:"macbook",
+        lastMessageDate:new Date()
+    },
+    {
+        title:"W3School",
+        image:"",
+        newMessageCount:2,
+        lastMessage:"How To Create a Search Button",
+        lastMessageDate:new Date()
+    },
+    {
+        title:"Citilink",
+        image:"",
+        newMessageCount:getRandomInt(10),
+        lastMessage:"macbook",
+        lastMessageDate:new Date()
+    },
+    {
+        title:"Citilink",
+        image:"",
+        newMessageCount:getRandomInt(10),
+        lastMessage:"macbook",
+        lastMessageDate:new Date()
+    },
+    {
+        title:"Citilink",
+        image:"",
+        newMessageCount:1,
+        lastMessage:"macbook",
+        lastMessageDate:new Date()
+    },
+    {
+        title:"Citilink",
+        image:"",
+        newMessageCount:getRandomInt(10),
+        lastMessage:"macbook",
+        lastMessageDate:new Date()
+    },
+    {
+        title:"Citilink",
+        image:"",
+        newMessageCount:1,
+        lastMessage:"macbook",
+        lastMessageDate:new Date()
+    },
+    {
+        title:"Citilink",
+        image:"",
+        newMessageCount:1,
+        lastMessage:"macbook",
+        lastMessageDate:new Date()
+    },
+    ];
+  
