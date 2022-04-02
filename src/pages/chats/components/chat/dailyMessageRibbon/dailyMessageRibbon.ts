@@ -9,8 +9,7 @@ interface DailyMessageRibbonProps{
 }
 
 export class DailyMessageRibbonBlock extends Block{
-    constructor(props:DailyMessageRibbonProps){ 
-        console.log(props);               
+    constructor(props:DailyMessageRibbonProps){                  
         super({...props});
     }
     protected render(): string {
@@ -19,7 +18,7 @@ export class DailyMessageRibbonBlock extends Block{
             <time class="daily-message-ribbon__date">{{{dateFormat date}}}</time>
             {{#each messages}}
                 <div class="daily-message-ribbon__message daily-message-ribbon__message--{{this.direction}}">
-                    {{{MessageBlock id=this.id text=this.text direction=this.direction time=this.date }}}
+                    {{{MessageBlock id=this.id text=this.text direction=this.direction time=this.time }}}
                 </div>
             {{/each}}
         </div>

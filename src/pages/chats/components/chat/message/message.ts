@@ -22,7 +22,7 @@ export class MessageBlock extends Block{
             <p class="message__text">
                 {{text}}       
             </p>
-            <time class="message__time">{{timeFormat time}}</time>
+            <time class="message__time" datetime=time>{{timeFormat time}}</time>
         </div>
         `;
     }

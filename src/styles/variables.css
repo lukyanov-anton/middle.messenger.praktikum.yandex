@@ -2,8 +2,10 @@
   --color-black: #1e1e1e;
   --color-white: #fff;
   --color-blue: #3369f3;
+  --color-light-blue: #e4edfd;
   --color-gray: #dbdbdb;
   --color-dark-gray: #999999;
+  --color-light-gray: #f8f8f8;
 
   --text-color-main: var(--color-black);
   --text-size-1: 40px;

@@ -11,13 +11,8 @@
 
 .chat__message-ribbon {
   flex-grow: 1;
-}
-
-.chat__new-message {
-}
-.chat__message--in {
-}
-.chat__message--out {
+  overflow: auto;
+  height: 100%;
 }
 .chat__footer {
   height: 100px;

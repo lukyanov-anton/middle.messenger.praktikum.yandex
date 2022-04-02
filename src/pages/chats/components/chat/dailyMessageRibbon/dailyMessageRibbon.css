@@ -1,28 +1,30 @@
 @import url('../../../../../styles/variables.css');
 
 .daily-message-ribbon {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 0 20px;
+}
+.daily-message-ribbon:last-child {
+  padding-bottom: 20px;
 }
 
 .daily-message-ribbon__date {
-    color: var(--color-dark-gray);
-    margin: 0 auto;
-    padding: 10px;
+  color: var(--color-dark-gray);
+  margin: 0 auto;
+  padding: 10px;
 }
 
 .daily-message-ribbon__message {
-    max-width:50%;    
-    
+  max-width: 50%;
 }
 
-.daily-message-ribbon__message--in {    
-    align-self: start;
-    margin: 10px 0 10px 20px;
+.daily-message-ribbon__message--in {
+  align-self: start;
+  margin: 10px 0;
 }
 
 .daily-message-ribbon__message--out {
-    align-self: end;
-    margin: 10px 20px 10px 0;
-   
+  align-self: end;
+  margin: 10px 0;
 }
