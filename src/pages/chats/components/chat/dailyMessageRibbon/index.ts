@@ -1,1 +1,1 @@
-export {DailyMessageRibbon as default} from './dailyMessageRibbon'
+export {DailyMessageRibbonBlock as default} from './dailyMessageRibbon'

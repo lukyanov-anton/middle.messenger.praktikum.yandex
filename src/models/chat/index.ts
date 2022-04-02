@@ -6,8 +6,8 @@ export type  Message = {
 }
 
 export enum MessageDirection {
-  In,
-  Out,    
+  In="in",
+  Out="out",    
 }
 
 

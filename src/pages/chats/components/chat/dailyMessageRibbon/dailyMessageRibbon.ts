@@ -1,22 +1,26 @@
 import { Block } from "../../../../../core";
-import {Message} from "../../../modules/chat";
+import {Message} from "../../../../../models/chat";
 
+import './dailyMessageRibbon.css'
 
 interface DailyMessageRibbonProps{    
-    date:Date,
+    date:string,
     messages:Message[],
 }
 
-export class DailyMessageRibbon extends Block{
-    constructor(props:DailyMessageRibbonProps){        
+export class DailyMessageRibbonBlock extends Block{
+    constructor(props:DailyMessageRibbonProps){ 
+        console.log(props);               
         super({...props});
     }
     protected render(): string {
         return `
-        <div data-date="{{date}}" class="daily-message-feed">  
-            <time class="daily-message-ribbon__date">{{date}}</time>
+        <div data-date="{{{dateFormat date}}}" class="daily-message-ribbon">  
+            <time class="daily-message-ribbon__date">{{{dateFormat date}}}</time>
             {{#each messages}}
-                {{{MessageBlock id=this.id text=this.text direction =this.direction time=this.date }}}
+                <div class="daily-message-ribbon__message daily-message-ribbon__message--{{this.direction}}">
+                    {{{MessageBlock id=this.id text=this.text direction=this.direction time=this.date }}}
+                </div>
             {{/each}}
         </div>
         `;

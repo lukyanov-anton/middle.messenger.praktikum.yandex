@@ -1,13 +1,15 @@
 .message{
-
+    color: var(--color-black);
+    padding: 11px;
+    
 }
 
 .message--in{
-
+    background: #F8F8F8;
 }
 
 .message--out{
-
+    background: #E4EDFD;
 }
 
 .message__text{
