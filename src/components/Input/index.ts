@@ -1,1 +1,1 @@
-export {Input as default} from './input'
+export {InputBlock as default} from './input'

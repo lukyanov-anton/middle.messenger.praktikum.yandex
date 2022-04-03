@@ -1,6 +1,12 @@
+import './signin.css';
 import { Block } from "../../core";
 
-import './signin.css';
+
+
+type SignData={
+    login:string,
+    password:string
+}
 
 export class SigninPage extends Block{
     protected render(): string {
@@ -12,17 +18,16 @@ export class SigninPage extends Block{
                 </header>
                 <div class="card__content">
                     <form class='form form--vertical signin-page__form'>
-                        {{{ Input label="Почта" name="email" type="email"}}}
-                        {{{ Input label="Логин" name="login" type="text"}}}
-                        {{{ Input label="Имя" name="first_name" type="text"}}}
-                        {{{ Input label="Фамилия" name="second_name" type="text"}}}
-                        {{{ Input label="Телефон" name="phone" type="tel"}}}
-                        {{{ Input label="Пароль" name="password" type="password"}}}
-                        {{{ Input label="Пароль (еще раз)" name="password_confirm" type="password"}}}
-                        {{{ Button text="Зарегистрироваться" mode="primary" }}}       
-                        
+                        {{{ InputBlock label="Почта" name="email" type="email" placeholder="Почта"}}}
+                        {{{ InputBlock label="Логин" name="login" type="text" placeholder="Почта"}}}
+                        {{{ InputBlock label="Имя" name="first_name" type="text" placeholder="Логин"}}}
+                        {{{ InputBlock label="Фамилия" name="second_name" type="text" placeholder="Фамилия"}}}
+                        {{{ InputBlock label="Телефон" name="phone" type="tel" placeholder="Телефон"}}}
+                        {{{ InputBlock label="Пароль" name="password" type="password" placeholder="Пароль"}}}
+                        {{{ InputBlock label="Пароль (еще раз)" name="password_confirm" type="password" placeholder="Пароль (еще раз)"}}}
+                        {{{ Button text="Зарегистрироваться" mode="primary" onClick=onSubmit}}}
                         <div class="signin-page__link">                  
-                            {{{ Link to='./login.html' text="Войти"}}}
+                            {{{ Link to='#/login' text="Войти"}}}
                         </div>
                     </form> 
                 </div>    

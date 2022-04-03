@@ -4,9 +4,9 @@ import { Block } from "../../core";
 import '../../styles/form.css'
 
 interface ButtonProps{
-    text:string,
-    mode:string,
-    onClick:()=>void
+    text?:string,
+    mode?:string,
+    onClick?:()=>void
 }
 
 export class Button extends Block{

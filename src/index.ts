@@ -17,7 +17,7 @@ import DailyMessageRibbonBlock from './pages/chats/components/chat/dailyMessageR
 import MessageBlock from './pages/chats/components/chat/message';
 import NewMessage from './pages/chats/components/chat/newMessage';
 import Link from './components/Link';
-import Input from './components/Input';
+import InputBlock from './components/Input';
 import Button from './components/Button';
 import BaseButton from './components/BaseButton';
 import ImagePlaceholderBlock from './components/ImagePlaceholder';
@@ -27,7 +27,7 @@ import Property from './components/Property';
 registerDateHelper();
 //registerComponent(BaseLayout);
 registerComponent(Link);
-registerComponent(Input);
+registerComponent(InputBlock);
 registerComponent(Button);
 registerComponent(BaseButton);
 registerComponent(ImagePlaceholderBlock);
@@ -39,6 +39,8 @@ registerComponent(ChatBlock);
 registerComponent(DailyMessageRibbonBlock);
 registerComponent(MessageBlock);
 registerComponent(NewMessage);
+registerComponent(Avatar);
+registerComponent(Property);
 
 
 
