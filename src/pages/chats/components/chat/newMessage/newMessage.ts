@@ -1,6 +1,10 @@
 import { Block } from "../../../../../core";
 import './newMessage.css'
 
+type NeeMessageData={
+    message:string,
+   
+}
 export class NewMessage extends Block{
     protected render(): string {
         return `
