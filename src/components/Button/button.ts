@@ -6,7 +6,9 @@ import '../../styles/form.css'
 interface ButtonProps{
     text?:string,
     mode?:string,
-    onClick?:()=>void
+    type?:'submit'|'button',
+    onClick?:()=>void,
+    className?:string
 }
 
 export class Button extends Block{
@@ -16,8 +18,8 @@ export class Button extends Block{
     }
     protected render(): string {
         return `
-        <div class="form__field">
-            <button type='submit' class='form__button form__button--{{mode}}'>{{text}}</button>
+        <div class="form__field {{className}}">
+            <button type={{#if type}}{{type}}{{else}}'submit'{{/if}} class='form__button form__button--{{mode}}'>{{text}}</button>
         </div>
         `;
     }

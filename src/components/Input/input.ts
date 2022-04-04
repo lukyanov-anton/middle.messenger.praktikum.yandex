@@ -20,13 +20,14 @@ export class InputBlock extends Block{
     }
     protected render(): string {
         return `
-        <div class="form__field {{className}}">
+        <div class="form__field {{className}}" tabindex=1>
             <input 
                 type='{{type}}'
                 name='{{name}}' 
                 class='form__input' 
                 placeholder="{{placeholder}}" 
-                value="{{value}}"/>          
+                value="{{value}}"
+                />          
             
             {{#if error }}
                 <p class="field-error">{{error}}</p>
