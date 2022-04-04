@@ -6,6 +6,8 @@ import LoginPage from './pages/login';
 import SigninPage from './pages/signin';
 import ChatsPage from './pages/chats';
 import ProfilePage from './pages/profile';
+import ChangeDataPage from './pages/profile/changedata';
+import ChangePasswordPage from './pages/profile/changepassword';
 import NotFoundPage from './pages/404';
 import InternalServerErrorPage from './pages/500';
 import Placeholder from './pages/chats/components/placeholder';
@@ -66,7 +68,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 case '#profile':{
                     renderDOM("#app",ProfilePage);                
                     break;
-                }                
+                } 
+                case '#profile/changepassword':{                    
+                    renderDOM("#app",ChangePasswordPage);                
+                    break;
+                }
+                case '#profile/changedata':{                    
+                    renderDOM("#app",ChangeDataPage);                
+                    break;
+                }               
                 case '#404':{
                     renderDOM("#app",NotFoundPage);                
                     break;
