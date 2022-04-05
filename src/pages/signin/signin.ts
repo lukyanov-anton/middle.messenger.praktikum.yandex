@@ -1,6 +1,6 @@
 import './signin.css';
 import { Block } from "../../core";
-import { validatePassword, validateLogin, validatePhone, validateEmail } from '../../modules/validation';
+import { validatePassword, validateLogin, validatePhone, validateEmail, validateName } from '../../modules/validation';
 
 type SignData={
     email:string,
@@ -34,11 +34,11 @@ export class SigninPage extends Block{
         if(validationResult.isFailure){
             nextSate.errors.login=validationResult.error!;
         }
-        validationResult = validatePhone(signinData.first_name);
+        validationResult = validateName(signinData.first_name);
         if(validationResult.isFailure){
             nextSate.errors.first_name=validationResult.error!;
         }
-        validationResult = validatePhone(signinData.second_name);
+        validationResult = validateName(signinData.second_name);
         if(validationResult.isFailure){
             nextSate.errors.second_name=validationResult.error!;
         } 
@@ -94,7 +94,7 @@ export class SigninPage extends Block{
                 const signinData=this.getSigninData();
                 this.validate(signinData);
             },
-            onSubmit:(e:Event)=>{ 
+            onSubmit:(e:Event)=>{
                 const signinData=this.getSigninData();
                 this.validate(signinData);
                 console.log('/signin', signinData);
@@ -127,7 +127,7 @@ export class SigninPage extends Block{
                             name="login"
                             ref="login"  
                             type="text" 
-                            placeholder="Почта"
+                            placeholder="Логин"
                             value="${values.login}"
                             error="${errors.login}"
                             className="form__field"
@@ -137,7 +137,7 @@ export class SigninPage extends Block{
                             name="first_name"
                             ref="first_name" 
                             type="text" 
-                            placeholder="Логин"
+                            placeholder="Имя"
                             value="${values.first_name}"
                             error="${errors.first_name}"
                             className="form__field"
@@ -175,7 +175,7 @@ export class SigninPage extends Block{
                         {{{ InputBlock 
                             label="Пароль (еще раз)"
                             name="password_confirm" 
-                            ref="password"
+                            ref="password_confirm"
                             type="password" 
                             placeholder="Пароль (еще раз)"
                             value="${values.password_confirm}"

@@ -50,7 +50,7 @@ export class LoginPage extends Block{
                 const loginData=this.getLoginData();
                 this.validate(loginData);
             },
-            onLogin:(e:Event)=>{ 
+            onSubmit:(e:Event)=>{ 
                 const loginData=this.getLoginData();
                 this.validate(loginData);
                 console.log('/login', loginData);
@@ -92,7 +92,7 @@ export class LoginPage extends Block{
                         {{{ Button 
                             text="Войти" 
                             mode="primary" 
-                            onClick=onLogin
+                            onClick=onSubmit
                             className="form__field"
                         }}}       
                         <div class="login-page__link">

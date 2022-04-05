@@ -159,7 +159,11 @@ export class ChangeDataPage extends Block{
                         error="${errors.phone}"
                         className="form__field"
                     }}}                    
-                    {{{ Button text="Сохранить" mode="primary" onClick=onSubmit}}}       
+                    {{{ Button 
+                        text="Сохранить" 
+                        mode="primary" 
+                        onClick=onSubmit 
+                        className="form__field"}}}       
                 </form>                
             </div>    
         </div>`;        

@@ -24,7 +24,12 @@ export class ChatsPage extends Block{
                 <div class="left-panel">
                     <div class="left-panel__header">
                         <div class="left-panel__profile">
-                            {{{ BaseButton text="Профиль >" onClick=profileClick className="button--text"}}}
+                            {{{ Button 
+                                text="Профиль >" 
+                                onClick=profileClick
+                                mode="text" 
+                                className="button--text"
+                            }}}
                         </div>
                     </div>
                     <div class="left-panel__content">

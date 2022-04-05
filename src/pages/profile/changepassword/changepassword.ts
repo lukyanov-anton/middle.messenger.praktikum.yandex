@@ -103,7 +103,12 @@ export class ChangePasswordPage extends Block{
                         error="${errors.confirmNewPassword}"
                         className="form__field"
                     }}}
-                    {{{ Button text="Сохранить" mode="primary" onClick=onSubmit}}}       
+                    {{{ Button 
+                        text="Сохранить" 
+                        mode="primary" 
+                        onClick=onSubmit
+                        className="form__field"
+                    }}}       
                 </form>          
             </div>    
         </div>`;        

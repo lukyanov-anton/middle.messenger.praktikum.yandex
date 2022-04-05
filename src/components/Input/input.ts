@@ -33,7 +33,7 @@ export class InputBlock extends Block{
                 />          
             
             {{#if error }}
-                <p class="field-error">{{error}}</p>
+                <p class="input-error">{{error}}</p>
             {{/if}}
         </div>
         `;

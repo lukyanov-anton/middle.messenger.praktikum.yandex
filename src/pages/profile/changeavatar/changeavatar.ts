@@ -66,14 +66,14 @@ export class ChangeAvatarPage extends Block{
                     type="file"
                     value="${values.avatar}"
                     error="${errors.avatar}"
-                    className="form_field"
-                }}}            
+                    className="form__field"
+                }}} 
                 {{{ Button 
                     text="Поменять" 
                     mode="primary"                     
                     onClick=onSubmit
                     className="form__field"
-                }}}       
+                }}}                 
             </form>                
             </div>    
         </div>   

@@ -1,4 +1,5 @@
 .button {
+  color: inherit;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -15,4 +16,27 @@
 .button--primary {
   background-color: var(--color-blue);
   color: var(--color-white);
+}
+/* .button {
+  
+  cursor: pointer;
+} */
+
+.button--text {
+  outline: none;
+  background-color: transparent;
+  border-color: transparent;
+}
+.button--arrow-right {
+}
+
+.button--arrow-right::after {
+  content: '';
+  background-image: url('../../../static/svg/chevron.svg');
+}
+
+.button--text {
+  outline: none;
+  background-color: transparent;
+  border-color: transparent;
 }
