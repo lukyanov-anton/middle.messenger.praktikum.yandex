@@ -1,6 +1,5 @@
-import { Block } from "../../core";
-
 import './404.css';
+import { Block } from "../../core";
 
 export class NotFoundPage extends Block{
     
@@ -10,7 +9,7 @@ export class NotFoundPage extends Block{
                 <div class='page-404'>
                     <div class='page-404__message'>
                     </div>
-                    {{{ Link to='/#chats.html' text="Назад к чатам"}}}
+                    {{{ Link to="chats.html" text="Назад к чатам"}}}
                 </div>                
             </main>
         `;        

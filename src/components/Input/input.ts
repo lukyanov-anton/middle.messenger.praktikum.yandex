@@ -1,8 +1,9 @@
+import './input.css';
+
 import { Block } from "../../core";
-import '../../styles/form.css';
 
 interface InputBlockProps{
-    type?:'text' | 'email' | 'password'| 'tel',
+    type?:'text' | 'email' | 'password'| 'tel' |'file',
     label?:string,
     value?:string,
     error?:string,
@@ -10,6 +11,7 @@ interface InputBlockProps{
     name:string,    
     className:string,
     ref:string,
+    accept?:string,
     onInput?:()=>void,
     onBlur?:()=>void
 }
@@ -20,13 +22,14 @@ export class InputBlock extends Block{
     }
     protected render(): string {
         return `
-        <div class="form__field {{className}}" tabindex=1>
+        <div class="{{className}}" tabindex=1>
             <input 
                 type='{{type}}'
                 name='{{name}}' 
-                class='form__input' 
+                class='input' 
                 placeholder="{{placeholder}}" 
                 value="{{value}}"
+                accept="{{accept}}"
                 />          
             
             {{#if error }}

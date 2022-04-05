@@ -75,8 +75,9 @@ export class LoginPage extends Block{
                             placeholder="Логин" 
                             type="text"
                             value="${values.login}"
-                            error="${errors.login}"                            
+                            error="${errors.login}"
                             onBlur=onBlur
+                            className="form__field"
                         }}}
                         {{{ InputBlock 
                             label="Пароль" 
@@ -86,15 +87,17 @@ export class LoginPage extends Block{
                             type="password"
                             value="${values.password}"
                             error="${errors.password}"
+                            className="form__field"
                         }}}
                         {{{ Button 
                             text="Войти" 
                             mode="primary" 
                             onClick=onLogin
+                            className="form__field"
                         }}}       
                         <div class="login-page__link">
                             {{{ 
-                                Link to='/#signin' 
+                                Link to='./signin.html' 
                                 text="Ещё не зарегистрированы?"
                             }}}
                         </div>

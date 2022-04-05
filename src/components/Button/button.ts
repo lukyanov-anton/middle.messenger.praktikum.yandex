@@ -1,7 +1,6 @@
 import { Block } from "../../core";
 
-//import './button.css'
-import '../../styles/form.css'
+import './button.css'
 
 interface ButtonProps{
     text?:string,
@@ -18,8 +17,8 @@ export class Button extends Block{
     }
     protected render(): string {
         return `
-        <div class="form__field {{className}}">
-            <button type={{#if type}}{{type}}{{else}}'submit'{{/if}} class='form__button form__button--{{mode}}'>{{text}}</button>
+        <div class="{{className}}">
+            <button type={{#if type}}{{type}}{{else}}'submit'{{/if}} class='button button--{{mode}}'>{{text}}</button>
         </div>
         `;
     }

@@ -120,6 +120,7 @@ export class SigninPage extends Block{
                             placeholder="Почта"
                             value="${values.email}"
                             error="${errors.email}"
+                            className="form__field"
                         }}}
                         {{{ InputBlock 
                             label="Логин" 
@@ -129,6 +130,7 @@ export class SigninPage extends Block{
                             placeholder="Почта"
                             value="${values.login}"
                             error="${errors.login}"
+                            className="form__field"
                         }}}
                         {{{ InputBlock 
                             label="Имя" 
@@ -138,6 +140,7 @@ export class SigninPage extends Block{
                             placeholder="Логин"
                             value="${values.first_name}"
                             error="${errors.first_name}"
+                            className="form__field"
                         }}}
                         {{{ InputBlock 
                             label="Фамилия" 
@@ -147,6 +150,7 @@ export class SigninPage extends Block{
                             placeholder="Фамилия"
                             value="${values.second_name}"
                             error="${errors.second_name}"
+                            className="form__field"
                         }}}
                         {{{ InputBlock 
                             label="Телефон" 
@@ -156,6 +160,7 @@ export class SigninPage extends Block{
                             placeholder="Телефон"
                             value="${values.phone}"
                             error="${errors.phone}"
+                            className="form__field"
                         }}}
                         {{{ InputBlock 
                             label="Пароль" 
@@ -165,6 +170,7 @@ export class SigninPage extends Block{
                             placeholder="Пароль"
                             value="${values.password}"
                             error="${errors.password}"
+                            className="form__field"
                         }}}
                         {{{ InputBlock 
                             label="Пароль (еще раз)"
@@ -174,10 +180,16 @@ export class SigninPage extends Block{
                             placeholder="Пароль (еще раз)"
                             value="${values.password_confirm}"
                             error="${errors.password_confirm}"
+                            className="form__field"
                         }}}
-                        {{{ Button text="Зарегистрироваться" mode="primary" onClick=onSubmit}}}
+                        {{{ Button 
+                            text="Зарегистрироваться" 
+                            mode="primary" 
+                            onClick=onSubmit
+                            className="form__field"
+                        }}}
                         <div class="signin-page__link">                  
-                            {{{ Link to='#/login' text="Войти"}}}
+                            {{{ Link to='login.html' text="Войти"}}}
                         </div>
                     </form> 
                 </div>    

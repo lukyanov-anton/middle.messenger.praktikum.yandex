@@ -2,8 +2,7 @@ import { Block } from "../../core";
 
 import './avatar.css'
 
-interface AvatarProps{
-    
+interface AvatarProps{    
     onClick:()=>void
 }
 
@@ -14,7 +13,7 @@ export class Avatar extends Block{
     protected render(): string {
         return `
         <figure class="avatar avatar--128x128">
-          <img class="avatar__image avatar__image--rounded" >
+          <img class="avatar__image avatar__image--rounded" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" >
         </figure>
         `;
     }

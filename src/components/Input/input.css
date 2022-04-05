@@ -1,0 +1,14 @@
+.input {
+  border: 1px solid transparent;
+  border-bottom: 1px solid var(--color-blue);
+  font-size: var(--text-size-2);
+  line-height: 1.5;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 0px;
+  padding-right: 7px;
+}
+
+.input:focus {
+  outline: none;
+}

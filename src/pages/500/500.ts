@@ -1,6 +1,5 @@
-import { Block } from "../../core";
-
 import './500.css';
+import { Block } from "../../core";
 
 export class InternalServerErrorPage extends Block{
     
@@ -10,7 +9,7 @@ export class InternalServerErrorPage extends Block{
                 <div class='page-500'>
                     <div class='page-500__message'>
                     </div>  
-                    {{{ Link to='/#chats.html' text="Назад к чатам"}}}
+                    {{{ Link to='chats.html' text="Назад к чатам"}}}
                 </div>
             </main>
         `;        
