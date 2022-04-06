@@ -22,7 +22,10 @@ export class InputBlock extends Block{
     }
     protected render(): string {
         return `
-        <div class="{{className}}" tabindex=1>
+        <div class="{{className}}">
+            {{#if value}}
+                <label for='{{name}}' class="form__label">{{label}}</label>
+            {{/if}}
             <input 
                 type='{{type}}'
                 name='{{name}}' 
