@@ -1,30 +1,30 @@
-import './chats.css'
+import "./chats.css";
 import { Block } from "../../core";
 
-interface ChatsPageProps{
-    selectedChatId:number|null,    
-    profileClick:()=>void,
-    onChatSelect:()=>void
+interface ChatsPageProps {
+  selectedChatId: number | null;
+  profileClick: () => void;
 }
 
-export class ChatsPage extends Block{
-    constructor(){
-        const props:ChatsPageProps={
-            selectedChatId:1,                 
-            profileClick:()=>{console.log("Покажи профиль 1")},          
-            onChatSelect:()=>{console.log("Чат выбран")}        
-        };  
-        
-        super(props);
-    }
-    protected render(): string {
-        return `
+export class ChatsPage extends Block {
+  constructor() {
+    const props: ChatsPageProps = {
+      selectedChatId: 1,
+      profileClick: () => {
+        console.log("Переход к профиль");
+      },
+    };
+
+    super(props);
+  }
+  protected render(): string {
+    return `
         <main class="chats">
             <section class="chats__left-panel">
                 <div class="left-panel">
                     <div class="left-panel__header">
                         <div class="left-panel__profile">
-                            {{{ Button 
+                            {{{ ButtonBlock 
                                 text="Профиль >" 
                                 onClick=profileClick
                                 mode="text" 
@@ -46,5 +46,5 @@ export class ChatsPage extends Block{
             </section>
         </main>
         `;
-    }
+  }
 }

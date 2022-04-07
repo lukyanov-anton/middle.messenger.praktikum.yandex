@@ -1,1 +1,1 @@
-export {ImagePlaceholderBlock as default} from './imagePlaceholder'
+export { ImagePlaceholderBlock as default } from "./imagePlaceholder";

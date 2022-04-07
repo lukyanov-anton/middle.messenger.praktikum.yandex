@@ -1,1 +1,1 @@
-export {Avatar as default} from './avatar'
+export { AvatarBlock as default } from "./avatar";

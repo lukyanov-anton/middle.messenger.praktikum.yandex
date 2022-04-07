@@ -1,110 +1,146 @@
-import './signin.css';
+import "./signin.css";
 import { Block } from "../../core";
-import { validatePassword, validateLogin, validatePhone, validateEmail, validateName } from '../../modules/validation';
+import {
+  validatePassword,
+  validateLogin,
+  validatePhone,
+  validateEmail,
+  validateName,
+} from "../../modules/validation";
 
-type SignData={
-    email:string,
-    login:string,
-    first_name:string,
-    second_name:string,
-    phone:string,
-    password:string,
-    password_confirm:string
-}
-
-export class SigninPage extends Block{
-    validate(signinData:SignData){      
-        const nextSate={
-            errors:{
-                email:'',
-                login:'',
-                first_name:'',
-                second_name:'',
-                phone:'',
-                password:'',
-                password_confirm:''
-            },
-            values:{...signinData}
-        }
-        let validationResult = validateEmail(signinData.email);
-        if(validationResult.isFailure){
-            nextSate.errors.email=validationResult.error!;
-        }
-         validationResult = validateLogin(signinData.login);
-        if(validationResult.isFailure){
-            nextSate.errors.login=validationResult.error!;
-        }
-        validationResult = validateName(signinData.first_name);
-        if(validationResult.isFailure){
-            nextSate.errors.first_name=validationResult.error!;
-        }
-        validationResult = validateName(signinData.second_name);
-        if(validationResult.isFailure){
-            nextSate.errors.second_name=validationResult.error!;
-        } 
-        validationResult = validatePhone(signinData.phone);
-        if(validationResult.isFailure){
-            nextSate.errors.phone=validationResult.error!;
-        }                
-        validationResult = validatePassword(signinData.password);
-        if(validationResult.isFailure){
-            nextSate.errors.password=validationResult.error!;
-        }
-        validationResult = validatePassword(signinData.password_confirm);
-        if(validationResult.isFailure){
-            nextSate.errors.password_confirm=validationResult.error!;
-        }
-
-        this.setState(nextSate);
-    }
-    getSigninData(): SignData{
-        const signinData={
-            email:(this.refs.email.firstElementChild as HTMLInputElement).value,
-            login:(this.refs.login.firstElementChild as HTMLInputElement).value,
-            first_name:(this.refs.first_name.firstElementChild as HTMLInputElement).value,
-            second_name:(this.refs.second_name.firstElementChild as HTMLInputElement).value,
-            phone:(this.refs.phone.firstElementChild as HTMLInputElement).value,
-            password:(this.refs.password.firstElementChild as HTMLInputElement).value,
-            password_confirm:(this.refs.password_confirm.firstElementChild as HTMLInputElement).value
-        };
-        return signinData;
-    }
-    protected getStateFromProps(): void {
-        this.state={
-            values:{
-                email:'',
-                login:'',
-                first_name:'',
-                second_name:'',
-                phone:'',
-                password:'',
-                password_confirm:''
-            },
-            errors:{
-                email:'',
-                login:'',
-                first_name:'',
-                second_name:'',
-                phone:'',
-                password:'',
-                password_confirm:''
-            },           
-            onBlur:()=>{
-                console.log("onBlur");
-                const signinData=this.getSigninData();
-                this.validate(signinData);
-            },
-            onSubmit:(e:Event)=>{
-                const signinData=this.getSigninData();
-                this.validate(signinData);
-                console.log('/signin', signinData);
-                e.preventDefault();                 
-            }            
-        };
-    }
-    protected render(): string {
-        const {values,errors}=this.state;
-        return `  
+export class SigninPage extends Block {
+  constructor() {
+    const onChange = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (target) {
+        this.state.values[target.name] = target.value;
+      }
+    };
+    const onBlur = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (target) {
+        this.state.validators[target.name]();
+      }
+    };
+    const onFocus = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (target) {
+        this.state.errors[target.name] = "";
+      }
+    };
+    const onSubmit = (e: Event) => {
+      this.validate();
+      console.log("/signin", this.state.values);
+      e.preventDefault();
+    };
+    super({
+      events: {
+        input: onChange,
+        focusin: onFocus,
+        focusout: onBlur,
+        submit: onSubmit,
+      },
+    });
+  }
+  validate() {
+    Object.values(this.state.validators).forEach((value) => {
+      (value as () => void)();
+    });
+  }
+  protected getStateFromProps(): void {
+    this.state = {
+      values: {
+        email: "",
+        login: "",
+        first_name: "",
+        second_name: "",
+        phone: "",
+        password: "",
+        password_confirm: "",
+      },
+      errors: {
+        email: "",
+        login: "",
+        first_name: "",
+        second_name: "",
+        phone: "",
+        password: "",
+        password_confirm: "",
+      },
+      validators: {
+        email: () => {
+          const validationResult = validateEmail(this.state.values.email);
+          if (validationResult.isFailure) {
+            this.state.errors.email = validationResult.error;
+          } else {
+            this.state.errors.email = "";
+          }
+          this.setState(this.state);
+        },
+        login: () => {
+          const validationResult = validateLogin(this.state.values.login);
+          if (validationResult.isFailure) {
+            this.state.errors.login = validationResult.error;
+          } else {
+            this.state.errors.login = "";
+          }
+          this.setState(this.state);
+        },
+        first_name: () => {
+          const validationResult = validateName(this.state.values.first_name);
+          if (validationResult.isFailure) {
+            this.state.errors.first_name = validationResult.error;
+          } else {
+            this.state.errors.first_name = "";
+          }
+          this.setState(this.state);
+        },
+        second_name: () => {
+          const validationResult = validateName(this.state.values.second_name);
+          if (validationResult.isFailure) {
+            this.state.errors.second_name = validationResult.error;
+          } else {
+            this.state.errors.second_name = "";
+          }
+          this.setState(this.state);
+        },
+        phone: () => {
+          const validationResult = validatePhone(this.state.values.phone);
+          if (validationResult.isFailure) {
+            this.state.errors.phone = validationResult.error;
+          } else {
+            this.state.errors.phone = "";
+          }
+          this.setState(this.state);
+        },
+        password: () => {
+          const nextSate = { ...this.state };
+          const validationResult = validatePassword(this.state.values.password);
+          if (validationResult.isFailure) {
+            nextSate.errors.password = validationResult.error;
+          } else {
+            nextSate.errors.password = "";
+          }
+          this.setState(nextSate);
+        },
+        password_confirm: () => {
+          const nextSate = { ...this.state };
+          const validationResult = validatePassword(
+            this.state.values.password_confirm
+          );
+          if (validationResult.isFailure) {
+            nextSate.errors.password_confirm = validationResult.error;
+          } else {
+            nextSate.errors.password_confirm = "";
+          }
+          this.setState(nextSate);
+        },
+      },
+    };
+  }
+  protected render(): string {
+    const { values, errors } = this.state;
+    return `  
         <main class="container"> 
             <div class='card'>
                 <header class="card__header">
@@ -182,19 +218,19 @@ export class SigninPage extends Block{
                             error="${errors.password_confirm}"
                             className="form__field"
                         }}}
-                        {{{ Button 
+                        {{{ ButtonBlock 
                             text="Зарегистрироваться" 
                             mode="primary" 
                             onClick=onSubmit
                             className="form__field"
                         }}}
                         <div class="signin-page__link">                  
-                            {{{ Link to='login.html' text="Войти"}}}
+                            {{{ LinkBlock to='login.html' text="Войти"}}}
                         </div>
                     </form> 
                 </div>    
             </div>
         </main>
-        `;        
-    }
+        `;
+  }
 }

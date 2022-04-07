@@ -13,14 +13,11 @@
   border-radius: 20px;
   border: 1px solid transparent;
 }
+
 .button--primary {
   background-color: var(--color-blue);
   color: var(--color-white);
 }
-/* .button {
-  
-  cursor: pointer;
-} */
 
 .button--text {
   outline: none;

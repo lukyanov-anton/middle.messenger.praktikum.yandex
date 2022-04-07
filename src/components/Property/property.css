@@ -1,4 +1,5 @@
 @import url(../../styles/variables.css);
+
 .property {
   display: flex;
   justify-content: space-between;

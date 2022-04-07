@@ -1,20 +1,16 @@
+import "./avatar.css";
 import { Block } from "../../core";
 
-import './avatar.css'
-
-interface AvatarProps{    
-    onClick:()=>void
+interface AvatarProps {
+  onClick: () => void;
 }
 
-export class Avatar extends Block{
-   /*  constructor({onClick}: AvatarProps){        
-        super({ events:{click:onClick}});
-    } */
-    protected render(): string {
-        return `
+export class AvatarBlock extends Block {
+  protected render(): string {
+    return `
         <figure class="avatar avatar--128x128">
           <img class="avatar__image avatar__image--rounded" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" >
         </figure>
         `;
-    }
+  }
 }

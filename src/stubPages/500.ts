@@ -1,11 +1,10 @@
-import '../styles/app.css';
+import "../styles/app.css";
+import { renderDOM, registerComponent } from "../helpers";
+import InternalServerErrorPage from "../pages/500";
+import LinkBlock from "../components/link";
 
-import {renderDOM, registerComponent} from '../helpers';
+registerComponent(LinkBlock);
 
-import InternalServerErrorPage from '../pages/500';
-import Link from '../components/Link'
-
-registerComponent(Link);
-
-
-document.addEventListener('DOMContentLoaded', ()=>renderDOM("#app", InternalServerErrorPage));
+document.addEventListener("DOMContentLoaded", () =>
+  renderDOM("#app", InternalServerErrorPage)
+);

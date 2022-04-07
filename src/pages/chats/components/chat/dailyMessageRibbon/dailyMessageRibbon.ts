@@ -1,19 +1,18 @@
+import "./dailyMessageRibbon.css";
 import { Block } from "../../../../../core";
-import {Message} from "../../../../../models/chat";
+import { Message } from "../../../../../models/chat";
 
-import './dailyMessageRibbon.css'
-
-interface DailyMessageRibbonProps{    
-    date:string,
-    messages:Message[],
+interface DailyMessageRibbonProps {
+  date: string;
+  messages: Message[];
 }
 
-export class DailyMessageRibbonBlock extends Block{
-    constructor(props:DailyMessageRibbonProps){                  
-        super({...props});
-    }
-    protected render(): string {
-        return `
+export class DailyMessageRibbonBlock extends Block {
+  constructor(props: DailyMessageRibbonProps) {
+    super({ ...props });
+  }
+  protected render(): string {
+    return `
         <div data-date="{{{dateFormat date}}}" class="daily-message-ribbon">  
             <time class="daily-message-ribbon__date">{{{dateFormat date}}}</time>
             {{#each messages}}
@@ -23,5 +22,5 @@ export class DailyMessageRibbonBlock extends Block{
             {{/each}}
         </div>
         `;
-    }
+  }
 }

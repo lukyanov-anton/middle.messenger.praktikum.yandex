@@ -1,20 +1,19 @@
-import './chatInfo.css'
+import "./chatInfo.css";
 import { Block } from "../../../../../core";
 
-
-interface ChatInfoProps{
-    title:string,
-    lastMessage:string,
-    lastMessageDate:Date
-    newMessageCount:number    
+interface ChatInfoProps {
+  title: string;
+  lastMessage: string;
+  lastMessageDate: Date;
+  newMessageCount: number;
 }
 
-export class ChatInfo extends Block{
-    constructor(props: ChatInfoProps){        
-        super({...props});
-    }
-    protected render(): string {
-        return `
+export class ChatInfo extends Block {
+  constructor(props: ChatInfoProps) {
+    super({ ...props });
+  }
+  protected render(): string {
+    return `
         <div class="chat-info">
             <div class="chat-info__image">            
                 {{{ImagePlaceholderBlock className="image-placeholder--47x47"}}}
@@ -30,5 +29,5 @@ export class ChatInfo extends Block{
             <span class="chat-info__new-message-count">{{newMessageCount}}</span>
         </div>
         `;
-    }
+  }
 }

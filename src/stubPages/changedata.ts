@@ -1,14 +1,14 @@
-import '../styles/app.css'
+import "../styles/app.css";
+import { renderDOM, registerComponent } from "../helpers";
+import ChangeDataPage from "../pages/profile/changedata";
+import AvatarBlock from "../components/avatar";
+import InputBlock from "../components/input";
+import ButtonBlock from "../components/button";
 
-import {renderDOM, registerComponent} from '../helpers';
-
-import ChangeDataPage from '../pages/profile/changedata';
-import Avatar from '../components/Avatar'
-import InputBlock from '../components/Input'
-import Button from '../components/Button';
-
-registerComponent(Avatar);
+registerComponent(AvatarBlock);
 registerComponent(InputBlock);
-registerComponent(Button);
+registerComponent(ButtonBlock);
 
-document.addEventListener('DOMContentLoaded', ()=>renderDOM("#app", ChangeDataPage));
+document.addEventListener("DOMContentLoaded", () =>
+  renderDOM("#app", ChangeDataPage)
+);

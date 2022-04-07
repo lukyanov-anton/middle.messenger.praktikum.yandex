@@ -1,69 +1,77 @@
-import './newMessage.css';
+import "./newMessage.css";
 import { Block } from "../../../../../core";
-import { required } from '../../../../../modules/validation/common';
+import { required } from "../../../../../modules/validation/common";
 
-type NewMessageData={
-    message:string   
-}
-
-export class NewMessage extends Block{
-    validate(newMessageData:NewMessageData){      
-        const nextState={
-            errors:{
-                message:'',               
-            },
-            values:{...newMessageData}
-        }
-        const validationResult = required(newMessageData.message);
-        if(validationResult.isFailure){
-            nextState.errors.message="Напишите сообщение"!;
-        }        
-        
-        this.setState(nextState);
-    }
-    getNewMessageData(): NewMessageData{        
-        const newMessageData={
-            message:(this.getContent().querySelector('input') as HTMLInputElement).value,           
-        };
-        return newMessageData;
-    }
-    protected getStateFromProps(): void {
-        this.state={
-            values:{
-                massage:'',               
-            },
-            errors:{
-                message:'',               
-            },           
-            onBlur:()=>{
-                console.log("onBlur");
-                const newMessageData=this.getNewMessageData();
-                this.validate(newMessageData);
-            },
-            onFileSubmit:(e:Event)=>{                 
-                console.log('/newFileMessage');
-                e.preventDefault();                 
-            },
-            onMessageSubmit:(e:Event)=>{ 
-                const newMessageData=this.getNewMessageData();
-                this.validate(newMessageData);
-                console.log('/newMessage', newMessageData);
-                e.preventDefault();                 
-            }            
-        };
-    }
-    protected render(): string {
-        
-        const {values,errors}=this.state;
-        return `
+export class NewMessage extends Block {
+  constructor() {
+    const onChange = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (target) {
+        this.state.values[target.name] = target.value;
+      }
+    };
+    const onBlur = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (target) {
+        this.state.validators[target.name]();
+      }
+    };
+    const onFocus = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (target) {
+        this.state.errors[target.name] = "";
+      }
+    };
+    const onSubmit = (e: Event) => {
+      this.validate();
+      console.log("/newmessage", this.state.values);
+      e.preventDefault();
+    };
+    super({
+      events: {
+        input: onChange,
+        focusin: onFocus,
+        focusout: onBlur,
+        submit: onSubmit,
+      },
+    });
+  }
+  validate() {
+    Object.values(this.state.validators).forEach((value) => {
+      (value as () => void)();
+    });
+  }
+  protected getStateFromProps(): void {
+    this.state = {
+      values: {
+        massage: "",
+      },
+      errors: {
+        message: "",
+      },
+      validators: {
+        message: () => {
+          const validationResult = required(this.state.values.message);
+          if (validationResult.isFailure) {
+            this.state.errors.message = validationResult.error;
+          } else {
+            this.state.errors.message = "Напишите сообщение";
+          }
+          this.setState(this.state);
+        },
+      },
+    };
+  }
+  protected render(): string {
+    const { values, errors } = this.state;
+    return `
         <form class="new-message" >            
-            {{{ Button 
+            {{{ ButtonBlock 
                 text="Вложение" 
                 type='button'               
                 onClick=onFileSubmit
                 className='new-message__file'
-            }}}            
-
+            }}}
             {{{ InputBlock                
                 name="message" 
                 ref="message"
@@ -73,9 +81,8 @@ export class NewMessage extends Block{
                 error="${errors.message}"
                 className="new-message__input" 
                 onBlur=onBlur
-            }}}                   
-           
-            {{{ Button 
+            }}}
+            {{{ ButtonBlock 
                 text="Ок"
                 mode="primary" 
                 onClick=onMessageSubmit
@@ -83,5 +90,5 @@ export class NewMessage extends Block{
             }}}   
         </form>
         `;
-    }
+  }
 }

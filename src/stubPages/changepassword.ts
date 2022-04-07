@@ -1,15 +1,14 @@
-import '../styles/app.css'
+import "../styles/app.css";
+import { renderDOM, registerComponent } from "../helpers";
+import ChangePasswordPage from "../pages/profile/changepassword";
+import AvatarBlock from "../components/avatar";
+import Input from "../components/input";
+import ButtonBlock from "../components/button";
 
-import {renderDOM, registerComponent} from '../helpers';
-
-import ChangePasswordPage from '../pages/profile/changepassword';
-import Avatar from '../components/Avatar'
-import Input from '../components/Input'
-import Button from '../components/Button';
-
-registerComponent(Avatar);
+registerComponent(AvatarBlock);
 registerComponent(Input);
-registerComponent(Button);
+registerComponent(ButtonBlock);
 
-
-document.addEventListener('DOMContentLoaded', ()=>renderDOM("#app", ChangePasswordPage));
+document.addEventListener("DOMContentLoaded", () =>
+  renderDOM("#app", ChangePasswordPage)
+);

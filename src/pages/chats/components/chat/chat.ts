@@ -1,23 +1,23 @@
-import './chat.css'
+import "./chat.css";
 import { Block } from "../../../../core";
-import {DailyMessages} from "../../../../models/chat";
-import {ChatsStub} from "../../../../models/chat/stub";
+import { DailyMessages } from "../../../../models/chat";
+import { ChatsStub } from "../../../../models/chat/stub";
 
-interface ChatBlockProps{
-    id:number,
-    title:string,
-    image:string,
-    messages:DailyMessages[]
+interface ChatBlockProps {
+  id: number;
+  title: string;
+  image: string;
+  messages: DailyMessages[];
 }
 
-export class ChatBlock extends Block{
-    constructor(props: ChatBlockProps){ 
-        const {id:chatId}=props;
-        const chat=ChatsStub.find(chat=>chat.id==chatId);        
-        super({...props,...chat});
-    }
-    protected render(): string {
-        return `
+export class ChatBlock extends Block {
+  constructor(props: ChatBlockProps) {
+    const { id: chatId } = props;
+    const chat = ChatsStub.find((chat) => chat.id == chatId);
+    super({ ...props, ...chat });
+  }
+  protected render(): string {
+    return `
         <div data-chat-id="{{id}}" class="chat"> 
             <header class="chat__header header">
                 <div class="header__image">
@@ -36,5 +36,5 @@ export class ChatBlock extends Block{
             </footer>
         </div>
         `;
-    }
+  }
 }

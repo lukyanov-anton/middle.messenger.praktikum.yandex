@@ -1,1 +1,1 @@
-export {InternalServerErrorPage as default} from './500'
+export { InternalServerErrorPage as default } from "./500";

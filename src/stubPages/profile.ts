@@ -1,15 +1,14 @@
-import '../styles/app.css'
+import "../styles/app.css";
+import { renderDOM, registerComponent } from "../helpers";
+import ProfilePage from "../pages/profile";
+import AvatarBlock from "../components/avatar";
+import LinkBlock from "../components/link";
+import PropertyBlock from "../components/property";
 
-import {renderDOM, registerComponent} from '../helpers';
+registerComponent(AvatarBlock);
+registerComponent(LinkBlock);
+registerComponent(PropertyBlock);
 
-import ProfilePage from '../pages/profile';
-import Avatar from '../components/Avatar'
-import Link from '../components/Link'
-import Property from '../components/Property';
-
-registerComponent(Avatar);
-registerComponent(Link);
-registerComponent(Property);
-
-
-document.addEventListener('DOMContentLoaded', ()=>renderDOM("#app", ProfilePage));
+document.addEventListener("DOMContentLoaded", () =>
+  renderDOM("#app", ProfilePage)
+);

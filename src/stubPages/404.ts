@@ -1,11 +1,10 @@
-import '../styles/app.css';
+import "../styles/app.css";
+import { renderDOM, registerComponent } from "../helpers";
+import NotFoundPage from "../pages/404";
+import LinkBlock from "../components/link";
 
-import {renderDOM, registerComponent} from '../helpers';
+registerComponent(LinkBlock);
 
-import NotFoundPage from '../pages/404';
-import Link from '../components/Link'
-
-registerComponent(Link);
-
-
-document.addEventListener('DOMContentLoaded', ()=>renderDOM("#app", NotFoundPage));
+document.addEventListener("DOMContentLoaded", () =>
+  renderDOM("#app", NotFoundPage)
+);

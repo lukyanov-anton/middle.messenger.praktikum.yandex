@@ -1,17 +1,14 @@
-import '../styles/app.css';
+import "../styles/app.css";
+import { renderDOM, registerComponent } from "../helpers";
+import LoginPage from "../pages/login";
+import LinkBlock from "../components/link";
+import InputBlock from "../components/input";
+import ButtonBlock from "../components/button";
 
-import {renderDOM, registerComponent} from '../helpers';
-
-import LoginPage from '../pages/login';
-import Link from '../components/Link'
-import InputBlock from '../components/Input';
-import Button from '../components/Button';
-import FormBlock from '../components/Form';
-
-registerComponent(Link);
+registerComponent(LinkBlock);
 registerComponent(InputBlock);
-registerComponent(Button);
-registerComponent(FormBlock);
+registerComponent(ButtonBlock);
 
-
-document.addEventListener('DOMContentLoaded', ()=>renderDOM("#app", LoginPage));
+document.addEventListener("DOMContentLoaded", () =>
+  renderDOM("#app", LoginPage)
+);

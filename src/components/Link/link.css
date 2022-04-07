@@ -1,4 +1,5 @@
 @import url('../../styles/variables.css');
+
 .link {
   color: var(--color-blue);
   text-decoration: none;

@@ -1,1 +1,1 @@
-export {NewMessage as default} from './newMessage'
+export { NewMessage as default } from "./newMessage";

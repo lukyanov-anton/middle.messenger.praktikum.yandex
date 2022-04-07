@@ -1,1 +1,1 @@
-export {ChangeDataPage as default} from './changedata'
+export { ChangeDataPage as default } from "./changedata";

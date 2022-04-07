@@ -114,8 +114,7 @@ export default class Block<P = any> {
     this._element!.replaceWith(newElement);
 
     this._element = newElement as HTMLElement;
-    this._addEvents();
-    console.log("RENDER");
+    this._addEvents();    
   }
 
   protected render(): string {

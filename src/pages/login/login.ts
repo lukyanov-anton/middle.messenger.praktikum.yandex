@@ -2,11 +2,6 @@ import "./login.css";
 import { Block } from "../../core";
 import { validatePassword, validateLogin } from "../../modules/validation";
 
-type LoginData = {
-  login: string;
-  password: string;
-};
-
 export class LoginPage extends Block {
   constructor() {
     const onChange = (e: Event) => {
@@ -25,16 +20,14 @@ export class LoginPage extends Block {
       const target = e.target as HTMLInputElement;
       if (target) {
         this.state.errors[target.name] = "";
-        //this.setState(this.state);
+        //this.setState(this.state); //todo Если изменять state это приведет к перерендеру компонента и потере фокуса
       }
     };
     const onSubmit = (e: Event) => {
-      const loginData = { ...this.state.values };
-      this.validate(loginData);
-      console.log("/login", loginData);
+      this.validate();
+      console.log("/login", this.state.values);
       e.preventDefault();
     };
-
     super({
       events: {
         input: onChange,
@@ -44,27 +37,10 @@ export class LoginPage extends Block {
       },
     });
   }
-  validate(loginData: LoginData) {
+  validate() {
     Object.values(this.state.validators).forEach((value) => {
-      value();
+      (value as () => void)();
     });
-
-    /* const nextSate = {
-      errors: {
-        login: "",
-        password: "",
-      },
-      values: { ...loginData },
-    };
-    let validationResult = validateLogin(loginData.login);
-    if (validationResult.isFailure) {
-      nextSate.errors.login = validationResult.error!;
-    }
-    validationResult = validatePassword(loginData.password);
-    if (validationResult.isFailure) {
-      nextSate.errors.password = validationResult.error!;
-    }
-    this.setState(nextSate); */
   }
   protected getStateFromProps(): void {
     this.state = {
@@ -78,17 +54,9 @@ export class LoginPage extends Block {
       },
       validators: {
         login: () => {
-          /*  const nextSate = { ...this.state };
           const validationResult = validateLogin(this.state.values.login);
           if (validationResult.isFailure) {
-            nextSate.errors.login = validationResult.error!;
-          } else {
-            nextSate.errors.login = "";
-          }
-          this.setState(nextSate); */
-          const validationResult = validateLogin(this.state.values.login);
-          if (validationResult.isFailure) {
-            this.state.errors.login = validationResult.error!;
+            this.state.errors.login = validationResult.error;
           } else {
             this.state.errors.login = "";
           }
@@ -98,7 +66,7 @@ export class LoginPage extends Block {
           const nextSate = { ...this.state };
           const validationResult = validatePassword(this.state.values.password);
           if (validationResult.isFailure) {
-            nextSate.errors.password = validationResult.error!;
+            nextSate.errors.password = validationResult.error;
           } else {
             nextSate.errors.password = "";
           }
@@ -137,15 +105,15 @@ export class LoginPage extends Block {
                             error="${errors.password}"
                             className="form__field"
                         }}}
-                        {{{ Button 
+                        {{{ ButtonBlock 
                             text="Войти" 
                             mode="primary" 
                             onClick=onSubmit
                             className="form__field"
                         }}}       
                         <div class="login-page__link">
-                            {{{ 
-                                Link to='./signin.html' 
+                            {{{ LinkBlock 
+                                to='./signin.html' 
                                 text="Ещё не зарегистрированы?"
                             }}}
                         </div>

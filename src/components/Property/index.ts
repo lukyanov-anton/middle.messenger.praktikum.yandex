@@ -1,1 +1,1 @@
-export {Property as default} from './property'
+export { PropertyBlock as default } from "./property";

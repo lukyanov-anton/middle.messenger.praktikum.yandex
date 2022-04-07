@@ -1,107 +1,140 @@
-import './changedata.css';
+import "./changedata.css";
 import { Block } from "../../../core";
-import { validateEmail, validateLogin, validateName, validatePhone } from '../../../modules/validation';
-import { required } from '../../../modules/validation/common';
+import {
+  validateEmail,
+  validateLogin,
+  validateName,
+  validatePhone,
+} from "../../../modules/validation";
+import { required } from "../../../modules/validation/common";
 
+export class ChangeDataPage extends Block {
+  constructor() {
+    const onChange = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (target) {
+        this.state.values[target.name] = target.value;
+      }
+    };
+    const onBlur = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (target) {
+        this.state.validators[target.name]();
+      }
+    };
+    const onFocus = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (target) {
+        this.state.errors[target.name] = "";
+      }
+    };
+    const onSubmit = (e: Event) => {
+      this.validate();
+      console.log("/changedata", this.state.values);
+      e.preventDefault();
+    };
+    super({
+      events: {
+        input: onChange,
+        focusin: onFocus,
+        focusout: onBlur,
+        submit: onSubmit,
+      },
+    });
+  }
+  validate() {
+    Object.values(this.state.validators).forEach((value) => {
+      (value as () => void)();
+    });
+  }
 
-type ChangeDataData={    
-    email:string,
-    login:string,
-    first_name:string,
-    second_name:string,
-    display_name:string,
-    phone:string,
-}
+  protected getStateFromProps(): void {
+    this.state = {
+      values: {
+        email: "",
+        login: "",
+        first_name: "",
+        second_name: "",
+        display_name: "",
+        phone: "",
+      },
+      errors: {
+        email: "",
+        login: "",
+        first_name: "",
+        second_name: "",
+        display_name: "",
+        phone: "",
+      },
 
-export class ChangeDataPage extends Block{
-    validate(changeData:ChangeDataData){      
-        const nextSate={
-            errors:{                
-                email:'',
-                login:'',
-                first_name:'',
-                second_name:'',
-                display_name:'',
-                phone:'',
-            },
-            values:{...changeData}
-        }
-        let validationResult = validateEmail(changeData.email);
-        if(validationResult.isFailure){
-            nextSate.errors.email=validationResult.error!;
-        }
-        validationResult = validateLogin(changeData.login);
-        if(validationResult.isFailure){
-            nextSate.errors.login=validationResult.error!;
-        }
-        validationResult = validateName(changeData.first_name);
-        if(validationResult.isFailure){
-            nextSate.errors.first_name=validationResult.error!;
-        }
-        validationResult = validateName(changeData.second_name);
-        if(validationResult.isFailure){
-            nextSate.errors.second_name=validationResult.error!;
-        }
-        validationResult = required(changeData.display_name);
-        if(validationResult.isFailure){
-            nextSate.errors.display_name="Имя в чате не должно быть пустым.";
-        }
-        validationResult = validatePhone(changeData.phone);
-        if(validationResult.isFailure){
-            nextSate.errors.phone=validationResult.error!;
-        }
-
-        this.setState(nextSate);
-    }
-    getData():ChangeDataData{
-        const changeData={
-            email:(this.refs.email.firstElementChild as HTMLInputElement).value,
-            login:(this.refs.login.firstElementChild as HTMLInputElement).value,
-            first_name:(this.refs.first_name.firstElementChild as HTMLInputElement).value,
-            second_name:(this.refs.second_name.firstElementChild as HTMLInputElement).value,
-            display_name:(this.refs.display_name.firstElementChild as HTMLInputElement).value,
-            phone:(this.refs.phone.firstElementChild as HTMLInputElement).value,
-        };
-        return changeData;
-    }
-    protected getStateFromProps(): void {
-        this.state={
-            values:{
-                email:'',
-                login:'',
-                first_name:'',
-                second_name:'',
-                display_name:'',
-                phone:'',
-            },
-            errors:{
-                email:'',
-                login:'',
-                first_name:'',
-                second_name:'',
-                display_name:'',
-                phone:'',
-            },
-           
-            onBlur:()=>{
-                console.log("onBlur");
-                const changeData=this.getData();
-                this.validate(changeData);
-            },
-            onSubmit:(e:Event)=>{ 
-                const changeData=this.getData();
-                this.validate(changeData);
-                console.log('/changedata', changeData);
-                e.preventDefault();                 
-            }            
-        };
-    }
-    protected render(): string {
-        const {values,errors}=this.state;
-        return `  
+      validators: {
+        email: () => {
+          const validationResult = validateEmail(this.state.values.email);
+          if (validationResult.isFailure) {
+            this.state.errors.email = validationResult.error;
+          } else {
+            this.state.errors.email = "";
+          }
+          this.setState(this.state);
+        },
+        login: () => {
+          const validationResult = validateLogin(this.state.values.login);
+          if (validationResult.isFailure) {
+            this.state.errors.login = validationResult.error;
+          } else {
+            this.state.errors.login = "";
+          }
+          this.setState(this.state);
+        },
+        first_name: () => {
+          const nextSate = { ...this.state };
+          const validationResult = validateName(this.state.values.first_name);
+          if (validationResult.isFailure) {
+            nextSate.errors.first_name = validationResult.error;
+          } else {
+            nextSate.errors.first_name = "";
+          }
+          this.setState(nextSate);
+        },
+        second_name: () => {
+          const nextSate = { ...this.state };
+          const validationResult = validateName(this.state.values.second_name);
+          if (validationResult.isFailure) {
+            nextSate.errors.second_name = validationResult.error;
+          } else {
+            nextSate.errors.second_name = "";
+          }
+          this.setState(nextSate);
+        },
+        display_name: () => {
+          const nextSate = { ...this.state };
+          const validationResult = required(this.state.values.display_name);
+          if (validationResult.isFailure) {
+            nextSate.errors.display_name = "Укажите имя в чате.";
+          } else {
+            nextSate.errors.display_name = "";
+          }
+          this.setState(nextSate);
+        },
+        phone: () => {
+          const nextSate = { ...this.state };
+          const validationResult = validatePhone(this.state.values.phone);
+          if (validationResult.isFailure) {
+            nextSate.errors.phone = validationResult.error;
+          } else {
+            nextSate.errors.phone = "";
+          }
+          this.setState(nextSate);
+        },
+      },
+    };
+  }
+  protected render(): string {
+    const { values, errors } = this.state;
+    return `  
         <div class="container">
             <div class="profile__avatar">
-                <a href="changeavatar.html">{{{ Avatar }}}</a>      
+                <a href="changeavatar.html">{{{ AvatarBlock }}}</a>      
             </div>
             <div class="profile__properies">
                 <form class="form form--vertical">
@@ -159,13 +192,13 @@ export class ChangeDataPage extends Block{
                         error="${errors.phone}"
                         className="form__field"
                     }}}                    
-                    {{{ Button 
+                    {{{ ButtonBlock 
                         text="Сохранить" 
                         mode="primary" 
                         onClick=onSubmit 
                         className="form__field"}}}       
                 </form>                
             </div>    
-        </div>`;        
-    }
+        </div>`;
+  }
 }

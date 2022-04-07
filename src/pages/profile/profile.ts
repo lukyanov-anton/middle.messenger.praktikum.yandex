@@ -1,35 +1,57 @@
+import "./profile.css";
 import { Block } from "../../core";
 
-import './profile.css';
-
-export class ProfilePage extends Block{
+export class ProfilePage extends Block {
   protected render(): string {
     return ` 
     <div class="container">
       <div class="profile__avatar">
-        <a href="changeavatar.html">{{{ Avatar }}}</a>      
+        <a href="changeavatar.html">{{{ AvatarBlock }}}</a>      
       </div>
       <div class="profile__properies">
         <div class="profile">
           <div class="profile__data">
-          {{{ Property label="Почта" value = "macho@yandex.ru"}}}
-          {{{ Property label="Логин" value = "macho"}}}
-          {{{ Property label="Имя" value = "Иван"}}}
-          {{{ Property label="Фамилия" value = "Иванов"}}}
-          {{{ Property label="Имя в чате" value = "macho"}}}
-          {{{ Property label="Телефон" value = "+7 (913) 222 111"}}}
+          {{{ PropertyBlock 
+            label="Почта" 
+            value = "macho@yandex.ru"
+          }}}
+          {{{ PropertyBlock 
+            label="Логин" 
+            value = "macho"
+          }}}
+          {{{ PropertyBlock 
+            label="Имя" 
+            value = "Иван"
+          }}}
+          {{{ PropertyBlock 
+            label="Фамилия" 
+            value = "Иванов"
+          }}}
+          {{{ PropertyBlock 
+            label="Имя в чате" 
+            value = "macho"
+          }}}
+          {{{ PropertyBlock 
+            label="Телефон" 
+            value = "+7 (913) 222 111"}}}
           </div>
           <div class="profile__controls">
             <div class="profile__controls-item">
-              {{{ Link to='changedata.html' text="Изменить данные"}}}                           
+              {{{ LinkBlock 
+                to='changedata.html' 
+                text="Изменить данные"
+              }}}                           
             </div>
             <div class="profile__controls-item">
-              {{{ Link to='changepassword.html' text="Изменить пароль"}}}              
+              {{{ LinkBlock 
+                to='changepassword.html' 
+                text="Изменить пароль"
+              }}}              
             </div>
           </div>
         </div>
       </div>    
     </div>
-        `;       
+        `;
   }
 }

@@ -1,37 +1,32 @@
-import './input.css';
-
+import "./input.css";
 import { Block } from "../../core";
 
-interface InputBlockProps{
-    type?:'text' | 'email' | 'password'| 'tel' |'file',
-    label?:string,
-    value?:string,
-    error?:string,
-    placeholder?:string,
-    name:string,    
-    className:string,
-    ref:string,
-    accept?:string,
-    onInput?:()=>void,
-    onBlur?:()=>void
+interface InputBlockProps {
+  type?: "text" | "email" | "password" | "tel" | "file";
+  label?: string;
+  value?: string;
+  error?: string;
+  placeholder?: string;
+  name: string;
+  className: string;
+  ref: string;
+  accept?: string;
 }
 
-export class InputBlock extends Block{
-    constructor({onInput,onBlur,...props}:InputBlockProps){        
-        super({...props,events:{input:onInput, blur:onBlur}});
-    }
-    protected render(): string {
-        return `
+export class InputBlock extends Block {
+  protected render(): string {
+    return `
         <div class="{{className}}">
             {{#if value}}
                 <label for='{{name}}' class="form__label">{{label}}</label>
             {{/if}}
             <input 
-                type='{{type}}'
-                name='{{name}}' 
-                class='input' 
+                id="{{name}}"
+                type="{{type}}"
+                name="{{name}}" 
+                class="input"
                 placeholder="{{placeholder}}" 
-                value="{{value}}"
+                {{#if value}}value="{{value}}"{{/if}}
                 accept="{{accept}}"
                 />          
             
@@ -40,9 +35,5 @@ export class InputBlock extends Block{
             {{/if}}
         </div>
         `;
-    }
+  }
 }
-
-/* {{#if value}}
-<label for='{{name}}' class="form__label">{{label}}</label>
-{{/if}} */
