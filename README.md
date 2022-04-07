@@ -28,8 +28,8 @@
 - [PostCSS](https://github.com/postcss/postcss)
 
 Линтинг и форматрирование: 
-- [ESLint](https://eslint.org/) ([Airbnb config](https://github.com/airbnb/javascript)), 
-- [stylelint](https://stylelint.io/) ([stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard#readme)), 
+- [ESLint](https://eslint.org/) ([eslint:recommended](https://eslint.org/docs/rules/)), 
+- [stylelint](https://stylelint.io/) ([stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard)), 
 - [Prettier](https://prettier.io/), 
 - [EditorConfig](https://editorconfig.org/)
 
