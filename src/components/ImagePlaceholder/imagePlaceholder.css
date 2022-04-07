@@ -9,14 +9,17 @@
   height: 128px;
   width: 128px;
 }
+
 .image-placeholder--34x34 {
   height: 34;
   width: 34;
 }
+
 .image-placeholder--47x47 {
   height: 47;
   width: 47;
 }
+
 .image-placeholder--rounded {
   border-radius: 9999px;
 }

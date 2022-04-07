@@ -7,7 +7,7 @@
 
 .message--in {
   background: var(--color-light-gray);
-  border-radius: 0px 20px 20px;
+  border-radius: "0px 20px 20px";
 }
 
 .message--out {

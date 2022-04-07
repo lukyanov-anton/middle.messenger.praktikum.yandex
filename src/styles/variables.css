@@ -6,9 +6,8 @@
   --color-gray: #dbdbdb;
   --color-light-gray: #f8f8f8;
   --color-medium-gray: #efefef;
-  --color-dark-gray: #999999;
+  --color-dark-gray: #999;
   --color-red: #FF2F2F;
-
   --text-color-main: var(--color-black);
   --text-size-1: 40px;
   --text-size-2: 20px;

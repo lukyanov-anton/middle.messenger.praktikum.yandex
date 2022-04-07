@@ -6,6 +6,7 @@
 *::after {
   box-sizing: border-box;
 }
+
 /* Убираем внутренние отступы */
 ul[class],
 ol[class] {
@@ -31,7 +32,7 @@ dd {
 }
 
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -40,7 +41,7 @@ html {
 body {
   min-height: 100vh;
   scroll-behavior: smooth;
-  text-rendering: optimizeSpeed;
+  text-rendering: optimizespeed;
   line-height: 1.5;
 }
 

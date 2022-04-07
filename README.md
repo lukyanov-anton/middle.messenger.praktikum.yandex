@@ -19,11 +19,19 @@
 ## Tools
 
 Сборка:
+- [Parcel](https://parceljs.org/)
 
-[Parcel](https://parceljs.org/)
-[PostCSS](https://postcss.org/)
+Типизация:
+- [TypeScript](https://www.typescriptlang.org/)
 
+Процессинг CSS:
+- [PostCSS](https://github.com/postcss/postcss)
 
+Линтинг и форматрирование: 
+- [ESLint](https://eslint.org/) ([Airbnb config](https://github.com/airbnb/javascript)), 
+- [stylelint](https://stylelint.io/) ([stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard#readme)), 
+- [Prettier](https://prettier.io/), 
+- [EditorConfig](https://editorconfig.org/)
 
 - [Ссылка на PR Sprint 1](https://github.com/lukyanov-anton/middle.messenger.praktikum.yandex/pull/3)
 - [Сайт чата на Netlify](https://vigorous-goldstine-9096e5.netlify.app/)

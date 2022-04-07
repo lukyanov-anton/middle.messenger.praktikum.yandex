@@ -14,6 +14,7 @@
   overflow: auto;
   height: 100%;
 }
+
 .chat__footer {
   border-top: 1px solid var(--color-gray);
   padding-top: 11px;
@@ -24,21 +25,25 @@
   display: flex;
   align-items: center;
 }
+
 .header__image {
   display: block;
   margin-right: 10px;
   border-radius: 9999px;
   background-color: var(--color-gray);
 }
+
 .header__title {
   flex-grow: 1;
   color: var(--color-black);
   font-weight: 600;
 }
+
 .header__controls {
   width: 30px;
 }
-.header__controls:after {
+
+.header__controls::after {
   content: '\2807';
   font-size: 30px;
 }

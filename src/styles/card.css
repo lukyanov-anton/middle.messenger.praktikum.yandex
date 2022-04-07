@@ -1,4 +1,4 @@
-@import url(./variables.css);
+@import url('./variables.css');
 
 .card {
   background: var(--color-white);
@@ -12,6 +12,7 @@
   display: flex;
   justify-content: center;
 }
+
 .card__title {
   font-size: var(--text-size-2);
 }
