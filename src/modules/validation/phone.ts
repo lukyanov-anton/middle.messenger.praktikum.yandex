@@ -1,18 +1,17 @@
 import { ValidationResult } from "./types";
 import { required } from "./common";
+import { PhoneErrors } from "./errors";
 const minPhoneLength = 10;
 const maxPhoneLength = 15;
 export const validate = (phone: string): ValidationResult => {
   if (required(phone).isFailure)
-    return ValidationResult.fail("Требуется телефон.");
+    return ValidationResult.fail(PhoneErrors.Required);
   const length = phone.length;
   if (length < minPhoneLength || length > maxPhoneLength)
     return ValidationResult.fail(
-      `Длина телефона должна быть от ${minPhoneLength} до ${maxPhoneLength} символов.`
+      PhoneErrors.MinMaxLength(minPhoneLength, maxPhoneLength)
     );
   if (!/^\+*[0-9]+$/.test(phone))
-    return ValidationResult.fail(
-      "Телефон должен состоять из цифр, может начинается с плюса."
-    );
+    return ValidationResult.fail(PhoneErrors.WrongStructure);
   return ValidationResult.ok();
 };

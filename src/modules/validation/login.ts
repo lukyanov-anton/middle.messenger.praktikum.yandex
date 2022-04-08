@@ -1,18 +1,17 @@
 import { ValidationResult } from "./types";
 import { required } from "./common";
+import { LoginErrors } from "./errors";
 const minLoginLength = 3;
 const maxLoginLength = 20;
 export const validate = (login: string): ValidationResult => {
   if (required(login).isFailure)
-    return ValidationResult.fail("Требуется логин.");
+    return ValidationResult.fail(LoginErrors.Required);
   const length = login.length;
   if (length < minLoginLength || length > maxLoginLength)
     return ValidationResult.fail(
-      `Длина логина должна быть от ${minLoginLength} до ${maxLoginLength} символов.`
+      LoginErrors.MinMaxLength(minLoginLength, maxLoginLength)
     );
   if (!/(?!^\d+$)^[\w-]+$/.test(login))
-    return ValidationResult.fail(
-      "Логин может содержать цифры, но не состоять из них, латиница, без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание)."
-    );
+    return ValidationResult.fail(LoginErrors.WrongStructure);
   return ValidationResult.ok();
 };
