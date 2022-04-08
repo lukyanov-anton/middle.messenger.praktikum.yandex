@@ -2,10 +2,6 @@ import EventBus from "./EventBus";
 import { nanoid } from "nanoid";
 import Handlebars from "handlebars";
 
-interface BlockMeta<P = any> {
-  props: P;
-}
-
 type Events = Values<typeof Block.EVENTS>;
 
 export default class Block<P = any> {
@@ -17,7 +13,6 @@ export default class Block<P = any> {
   } as const;
 
   public id = nanoid(6);
-  private readonly _meta: BlockMeta;
 
   protected _element: Nullable<HTMLElement> = null;
   protected readonly props: P;
@@ -30,10 +25,6 @@ export default class Block<P = any> {
 
   public constructor(props?: P) {
     const eventBus = new EventBus<Events>();
-
-    this._meta = {
-      props,
-    };
 
     this.getStateFromProps(props);
 
@@ -58,6 +49,7 @@ export default class Block<P = any> {
     this._element = this._createDocumentElement("div");
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getStateFromProps(props: any): void {
     this.state = {};
   }
@@ -71,6 +63,7 @@ export default class Block<P = any> {
     this.componentDidMount(props);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   componentDidMount(props: P) {}
 
   _componentDidUpdate(oldProps: P, newProps: P) {
@@ -81,6 +74,7 @@ export default class Block<P = any> {
     this._render();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   componentDidUpdate(oldProps: P, newProps: P) {
     return true;
   }
@@ -93,7 +87,7 @@ export default class Block<P = any> {
     Object.assign(this.props, nextProps);
   };
 
-  setState = (nextState: any) => {
+  setState = (nextState: Record<string, unknown>) => {
     if (!nextState) {
       return;
     }
@@ -109,12 +103,12 @@ export default class Block<P = any> {
     const fragment = this._compile();
 
     this._removeEvents();
-    const newElement = fragment.firstElementChild!;
+    const newElement = fragment.firstElementChild as Element;
 
-    this._element!.replaceWith(newElement);
+    if (this._element) this._element.replaceWith(newElement);
 
     this._element = newElement as HTMLElement;
-    this._addEvents();    
+    this._addEvents();
   }
 
   protected render(): string {
@@ -136,10 +130,8 @@ export default class Block<P = any> {
     return this.element!;
   }
 
-  _makePropsProxy(props: any): any {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
-    const self = this;
+  _makePropsProxy(props: any): P {
+    const eventBus = this.eventBus.bind(this);
 
     return new Proxy(props as unknown as object, {
       get(target: Record<string, unknown>, prop: string) {
@@ -151,7 +143,7 @@ export default class Block<P = any> {
 
         // Запускаем обновление компоненты
         // Плохой cloneDeep, в след итерации нужно заставлять добавлять cloneDeep им самим
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+        eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
         return true;
       },
       deleteProperty() {
@@ -172,7 +164,7 @@ export default class Block<P = any> {
     }
 
     Object.entries(events).forEach(([event, listener]) => {
-      this._element!.removeEventListener(event, listener);
+      if (this._element) this._element.removeEventListener(event, listener);
     });
   }
 
@@ -184,7 +176,7 @@ export default class Block<P = any> {
     }
 
     Object.entries(events).forEach(([event, listener]) => {
-      this._element!.addEventListener(event, listener);
+      if (this._element) this._element.addEventListener(event, listener);
     });
   }
 

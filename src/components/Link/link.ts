@@ -6,7 +6,7 @@ interface LinkProps {
   text: string;
 }
 
-export class LinkBlock extends Block {
+export class LinkBlock<P = LinkProps> extends Block<P> {
   protected render(): string {
     return `
         <a href='{{to}}' class='link'>{{text}}</a> 

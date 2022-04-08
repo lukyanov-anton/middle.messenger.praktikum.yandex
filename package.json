@@ -6,7 +6,7 @@
     "dev": "parcel ./src/stubPages/*.html --no-cache",
     "build": "parcel build ./src/index.html --no-source-map",
     "start": "node ./server.js",
-    "eslint": "eslint",
+    "eslint": "eslint ./src --fix --ext .js,.ts",
     "stylelint-check": "stylelint-config-prettier-check",
     "lint:css": "npx stylelint \"**/*.css\""
   },

@@ -7,7 +7,7 @@ interface PropertyProps {
   value: string;
 }
 
-export class PropertyBlock extends Block {
+export class PropertyBlock<P = PropertyProps> extends Block<P> {
   protected render(): string {
     return `
         <div class="property">

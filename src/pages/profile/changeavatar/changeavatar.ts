@@ -65,7 +65,7 @@ export class ChangeAvatarPage extends Block {
     };
   }
   protected render(): string {
-    const { values, errors } = this.state;
+    const { errors } = this.state;
     return ` 
         <div class="container">
             <div class="profile__avatar">

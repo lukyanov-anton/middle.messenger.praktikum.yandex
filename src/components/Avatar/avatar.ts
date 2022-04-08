@@ -1,10 +1,6 @@
 import "./avatar.css";
 import { Block } from "../../core";
 
-interface AvatarProps {
-  onClick: () => void;
-}
-
 export class AvatarBlock extends Block {
   protected render(): string {
     return `
