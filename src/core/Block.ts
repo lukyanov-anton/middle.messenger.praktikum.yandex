@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import EventBus, { Listener } from "./EventBus";
 import { nanoid } from "nanoid";
 import Handlebars from "handlebars";
@@ -55,7 +58,6 @@ export default class Block<P = any> {
     this._element = this._createDocumentElement("div");
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getStateFromProps(props: any): void {
     this.state = {};
   }
@@ -69,7 +71,6 @@ export default class Block<P = any> {
     this.componentDidMount(props);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   componentDidMount(props: P) {}
 
   _componentDidUpdate(oldProps: P, newProps: P) {
@@ -80,7 +81,6 @@ export default class Block<P = any> {
     this._render();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   componentDidUpdate(oldProps: P, newProps: P) {
     return true;
   }
@@ -133,6 +133,7 @@ export default class Block<P = any> {
       }, 100);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return this.element!;
   }
 
