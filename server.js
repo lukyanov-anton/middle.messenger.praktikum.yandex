@@ -7,7 +7,7 @@ const PORT = 3000;
 app.use(express.static(path.join(__dirname, "dist")));
 
 app.get("*", (req, res) => {
-  res.send("For check routing");
+  res.sendStatus(200);
 });
 
 app.listen(PORT, function () {
