@@ -1,6 +1,7 @@
 import "./newMessage.css";
 import { Block } from "../../../../../core";
 import { required } from "../../../../../modules/validation/common";
+import { ChatErrors } from "../../../../../modules/validation/errors";
 
 export class NewMessage extends Block {
   constructor() {
@@ -44,7 +45,7 @@ export class NewMessage extends Block {
   protected getStateFromProps(): void {
     this.state = {
       values: {
-        massage: "",
+        message: "",
       },
       errors: {
         message: "",
@@ -53,9 +54,9 @@ export class NewMessage extends Block {
         message: () => {
           const validationResult = required(this.state.values.message);
           if (validationResult.isFailure) {
-            this.state.errors.message = validationResult.error;
+            this.state.errors.message = ChatErrors.MessageRequired;
           } else {
-            this.state.errors.message = "Напишите сообщение";
+            this.state.errors.message = "";
           }
           this.setState(this.state);
         },
@@ -79,13 +80,11 @@ export class NewMessage extends Block {
                 placeholder="Сообщение"
                 value="${values.message}"
                 error="${errors.message}"
-                className="new-message__input" 
-                onBlur=onBlur
+                className="new-message__input"                 
             }}}
             {{{ ButtonBlock 
                 text="Ок"
-                mode="primary" 
-                onClick=onMessageSubmit
+                mode="primary"                 
                 className='new-message__button'
             }}}   
         </form>

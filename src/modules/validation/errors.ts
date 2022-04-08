@@ -24,8 +24,9 @@ export class NameErrors {
 }
 
 export class PasswordErrors {
-  static Required: "Требуется пароль.";
-  static WrongStructure: "Пароль должен содержать хотя бы одну заглавную букву и цифру.";
+  static Required = "Требуется пароль.";
+  static WrongStructure =
+    "Пароль должен содержать хотя бы одну заглавную букву и цифру.";
   static MinMaxLength: (
     minPasswordLength: number,
     maxPasswordLength: number
@@ -42,4 +43,8 @@ export class PhoneErrors {
     `Длина телефона должна быть от ${minPhoneLength} до ${maxPhoneLength} символов.`;
   static WrongStructure =
     "Телефон должен состоять из цифр, может начинается с плюса.";
+}
+
+export class ChatErrors {
+  static MessageRequired = "Напишите сообщение";
 }

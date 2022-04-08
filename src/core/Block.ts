@@ -28,13 +28,11 @@ export default class Block<P = any> {
 
   public constructor(props?: P) {
     const eventBus = new EventBus<Events>();
-
+    this.eventBus = () => eventBus;
     this.getStateFromProps(props);
 
     this.props = this._makePropsProxy(props || ({} as P));
     this.state = this._makePropsProxy(this.state);
-
-    this.eventBus = () => eventBus;
 
     this._registerEvents(eventBus);
 
@@ -137,8 +135,9 @@ export default class Block<P = any> {
     return this.element!;
   }
 
-  _makePropsProxy(props: any): P {
+  _makePropsProxy(props: any): any {
     const eventBus = this.eventBus.bind(this);
+    //const self = this;
 
     return new Proxy(props as unknown as object, {
       get(target: Record<string, unknown>, prop: string) {
