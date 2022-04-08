@@ -10,7 +10,7 @@ interface ChatBlockProps {
   messages: DailyMessages[];
 }
 
-export class ChatBlock extends Block {
+export class ChatBlock extends Block<ChatBlockProps> {
   constructor(props: ChatBlockProps) {
     const { id: chatId } = props;
     const chat = ChatsStub.find((chat) => chat.id == chatId);

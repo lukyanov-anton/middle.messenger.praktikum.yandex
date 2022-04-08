@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Block from "../core/Block";
 import Handlebars, { HelperOptions } from "handlebars";
 
-interface BlockConstructable<Props = Record<string, unknown>> {
+interface BlockConstructable<Props = any> {
   new (props: Props): Block;
 }
 

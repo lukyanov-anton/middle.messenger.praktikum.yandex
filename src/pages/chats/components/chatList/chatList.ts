@@ -17,7 +17,7 @@ export class ChatList extends Block {
       events: {
         input: (e: Event) => {
           if (e.target) {
-            console.log(e.target.value);
+            console.log((e.target as HTMLInputElement).value);
           }
         },
       },

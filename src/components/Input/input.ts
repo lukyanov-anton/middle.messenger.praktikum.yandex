@@ -13,7 +13,7 @@ interface InputBlockProps {
   accept?: string;
 }
 
-export class InputBlock<P = InputBlockProps> extends Block<P> {
+export class InputBlock extends Block<InputBlockProps> {
   protected render(): string {
     return `
         <div class="{{className}}">

@@ -8,10 +8,7 @@ interface ChatInfoProps {
   newMessageCount: number;
 }
 
-export class ChatInfo extends Block {
-  constructor(props: ChatInfoProps) {
-    super({ ...props });
-  }
+export class ChatInfo extends Block<ChatInfoProps> {
   protected render(): string {
     return `
         <div class="chat-info">

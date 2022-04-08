@@ -9,10 +9,7 @@ interface MessageProps {
   time: Date;
 }
 
-export class MessageBlock extends Block {
-  constructor(props: MessageProps) {
-    super({ ...props });
-  }
+export class MessageBlock extends Block<MessageProps> {
   protected render(): string {
     return `
         <div data-id="{{id}}" class="message message--{{direction}}">

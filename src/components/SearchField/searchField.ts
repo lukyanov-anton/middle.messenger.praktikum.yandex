@@ -8,10 +8,7 @@ interface SearchFieldProps {
   className: string;
 }
 
-export class SearchFieldBlock extends Block {
-  constructor(props: SearchFieldProps) {
-    super({ ...props });
-  }
+export class SearchFieldBlock extends Block<SearchFieldProps> {
   protected render(): string {
     return `
             <input type='text' name='search' class='search-field {{className}}'  placeholder='{{placeholder}}' value='{{value}}' input=onInput />       
