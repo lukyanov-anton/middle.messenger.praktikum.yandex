@@ -1,0 +1,24 @@
+@import url('./variables.css');
+
+.form {
+  display: flex;
+}
+
+.form--vertical {
+  flex-direction: column;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__field:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.form__label {
+  color: var(--color-dark-gray);
+  display: block;
+  font-size: var(--text-size-3);
+}

@@ -1,8 +1,6 @@
-@import url(../../css/main.css);
-@import url(../../layouts/page.css);
-@import url(../../css/card/card.css);
-@import url(../../css/form/form.css);
-@import url(../../css/link/link.css);
+@import url('../../styles/baseLayout.css');
+@import url('../../styles/card.css');
+@import url('../../styles/form.css');
 
 .signin-page {
   width: 390px;
@@ -11,6 +9,7 @@
 .signin-page__form {
   margin-bottom: 14px;
 }
+
 .signin-page__link {
   margin: 0 auto;
 }

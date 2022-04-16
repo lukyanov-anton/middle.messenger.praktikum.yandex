@@ -1,0 +1,48 @@
+.chat-info {
+  display: grid;
+  grid-template-columns: 47px auto 30px;
+  column-gap: 10px;
+  grid-template-rows: 25px auto;
+  height: 100%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  cursor: pointer;
+  color: var(--color-dark-gray);
+}
+
+.chat-info__image {
+  grid-column: 1/1;
+  grid-row: 1/3;
+  align-self: center;
+}
+
+.chat-info__title {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.chat-info__last-message {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  font-size: var(--text-size-3);
+}
+
+.chat-info__new-message-count {
+  display: flex;
+  justify-content: center;
+  grid-column: 3/4;  
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  border-radius: 9999; 
+  max-width: 24px;
+  max-height: 24px;
+  
+}
+
+.chat-info__time {
+  grid-column: 3/4;
+  grid-row: 1/2;
+  font-size: var(--text-size-3);
+}

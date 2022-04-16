@@ -1,0 +1,28 @@
+.new-message {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  height: 100%;
+}
+
+/* .new-message__file {
+} */
+
+.new-message__input {
+  flex-grow: 1;  
+}
+
+.new-message__input input {  
+  width: 100%;
+  border-radius: 30px;
+  border: "0px solid transparent";
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: var(--color-gray);
+}
+
+/* .new-message__button {
+}
+ */

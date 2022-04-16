@@ -1,0 +1,18 @@
+@import url('./variables.css');
+
+.card {
+  background: var(--color-white);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 50px;
+  box-shadow: 0 5px 10px 0 rgb(0 0 0 / 10%);
+}
+
+.card__header {
+  display: flex;
+  justify-content: center;
+}
+
+.card__title {
+  font-size: var(--text-size-2);
+}

@@ -1,7 +1,4 @@
-@import url(../../css/main.css);
-@import url(../../layouts/profile.css);
-@import url(../../css/property/property.css);
-@import url(../../css/link/link.css);
+@import url('../../styles/profileLayout.css');
 
 .profile__data {
   margin-bottom: 60px;
@@ -11,6 +8,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .profile__controls-item {
   padding: 10px 0;
 }
