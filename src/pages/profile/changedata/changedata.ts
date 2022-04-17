@@ -134,7 +134,7 @@ export class ChangeDataPage extends Block {
     return `  
         <div class="container">
             <div class="profile__avatar">
-                <a href="changeavatar.html">{{{ AvatarBlock }}}</a>      
+                <a href="/profile/changeavatar">{{{ AvatarBlock }}}</a>      
             </div>
             <div class="profile__properies">
                 <form class="form form--vertical">

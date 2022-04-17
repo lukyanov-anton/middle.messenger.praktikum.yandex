@@ -9,7 +9,7 @@ export class NotFoundPage extends Block {
                     <div class='page-404__message'>
                     </div>                    
                     {{{ LinkBlock 
-                      to="chats.html" 
+                      to="/chats" 
                       text="Назад к чатам"}}}
                 </div>                
             </main>

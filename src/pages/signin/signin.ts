@@ -8,8 +8,9 @@ import {
   validateName,
 } from "../../modules/validation";
 import { isNamedInput } from "../../utils";
+import { withRouter } from "../../core/hoc/withRouter";
 
-export class SigninPage extends Block {
+class SigninPage extends Block {
   constructor() {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
@@ -236,3 +237,4 @@ export class SigninPage extends Block {
         `;
   }
 }
+export default withRouter(SigninPage);

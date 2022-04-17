@@ -6,7 +6,7 @@ export class ProfilePage extends Block {
     return ` 
     <div class="container">
       <div class="profile__avatar">
-        <a href="changeavatar.html">{{{ AvatarBlock }}}</a>      
+        <a href="/profile/changeavatar">{{{ AvatarBlock }}}</a>      
       </div>
       <div class="profile__properies">
         <div class="profile">
@@ -38,13 +38,13 @@ export class ProfilePage extends Block {
           <div class="profile__controls">
             <div class="profile__controls-item">
               {{{ LinkBlock 
-                to='changedata.html' 
+                to='/profile/changedata' 
                 text="Изменить данные"
               }}}                           
             </div>
             <div class="profile__controls-item">
               {{{ LinkBlock 
-                to='changepassword.html' 
+                to='/profile/changepassword' 
                 text="Изменить пароль"
               }}}              
             </div>

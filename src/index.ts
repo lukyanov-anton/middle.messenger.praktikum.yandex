@@ -8,6 +8,7 @@ import ChatsPage from "./pages/chats";
 import ProfilePage from "./pages/profile";
 import ChangeDataPage from "./pages/profile/changedata";
 import ChangePasswordPage from "./pages/profile/changepassword";
+import ChangeAvatarPage from "./pages/profile/changeavatar";
 import NotFoundPage from "./pages/404";
 import InternalServerErrorPage from "./pages/500";
 import Placeholder from "./pages/chats/components/placeholder";
@@ -48,10 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
   router
     .use("/", LoginPage, { title: "Вход" })
     .use("/login", LoginPage, { title: "Вход" })
-    .use("/signin", SigninPage)
-    .use("/profile", ProfilePage)
+    .use("/signin", SigninPage, { title: "Регистрация" })
+    .use("/profile", ProfilePage, { title: "Профиль" })
     .use("/profile/changepassword", ChangePasswordPage)
     .use("/profile/changedata", ChangeDataPage)
+    .use("/profile/changeavatar", ChangeAvatarPage)
     .use("/chats", ChatsPage)
     .use("/error", InternalServerErrorPage)
     .use("*", NotFoundPage)

@@ -9,7 +9,7 @@ export class InternalServerErrorPage extends Block {
                     <div class='page-500__message'>
                     </div>  
                     {{{ LinkBlock 
-                      to='chats.html' 
+                      to='/chats' 
                       text="Назад к чатам"
                     }}}
                 </div>

@@ -1,21 +1,23 @@
 import "./chats.css";
 import { Block } from "../../core";
+import { withRouter } from "../../core/hoc/withRouter";
+import Router from "../../core/router/BrowserRouter";
 
 interface ChatsPageProps {
+  router: Router;
   selectedChatId: number | null;
   profileClick: () => void;
 }
 
-export class ChatsPage extends Block {
-  constructor() {
-    const props: ChatsPageProps = {
+class ChatsPage extends Block {
+  constructor(props: ChatsPageProps) {
+    super(props);
+    this.setProps({
       selectedChatId: 1,
       profileClick: () => {
-        console.log("Переход к профиль");
+        this.props.router.go("/profile");
       },
-    };
-
-    super(props);
+    });
   }
   protected render(): string {
     return `
@@ -48,3 +50,4 @@ export class ChatsPage extends Block {
         `;
   }
 }
+export default withRouter(ChatsPage);
