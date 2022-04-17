@@ -7,6 +7,11 @@ import Handlebars from "handlebars";
 
 type Events = Values<typeof Block.EVENTS>;
 
+export interface BlockClass2<P> extends Function {
+  new (props: P): Block<P>;
+  componentName?: string;
+}
+
 export default class Block<P = any> {
   static EVENTS = {
     INIT: "init",
@@ -25,6 +30,8 @@ export default class Block<P = any> {
 
   protected state: any = {};
   protected refs: { [key: string]: HTMLElement } = {};
+
+  public static componentName?: string;
 
   public constructor(props?: P) {
     const eventBus = new EventBus<Events>();
@@ -83,7 +90,7 @@ export default class Block<P = any> {
     return true;
   }
 
-  setProps = (nextProps: P) => {
+  setProps = (nextProps: Partial<P>) => {
     if (!nextProps) {
       return;
     }

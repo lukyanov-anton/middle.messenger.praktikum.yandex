@@ -9,7 +9,7 @@ interface ChatsPageProps {
   profileClick: () => void;
 }
 
-class ChatsPage extends Block {
+class ChatsPage extends Block<ChatsPageProps> {
   constructor(props: ChatsPageProps) {
     super(props);
     this.setProps({

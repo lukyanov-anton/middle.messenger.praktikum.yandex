@@ -38,6 +38,13 @@ class LoginPage extends Block {
       },
     });
   }
+
+  componentDidMount() {
+    if (this.props.store.getState().user) {
+      this.props.router.go("/profile");
+    }
+  }
+
   validate() {
     Object.values(this.state.validators).forEach((value) => {
       (value as () => void)();
