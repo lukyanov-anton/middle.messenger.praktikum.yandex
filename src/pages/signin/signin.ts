@@ -7,6 +7,7 @@ import {
   validateEmail,
   validateName,
 } from "../../modules/validation";
+import { isNamedInput } from "../../utils";
 
 export class SigninPage extends Block {
   constructor() {
@@ -17,9 +18,8 @@ export class SigninPage extends Block {
       }
     };
     const onBlur = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      if (target) {
-        this.state.validators[target.name]();
+      if (isNamedInput(e.target)) {
+        this.state.validators[e.target.name]();
       }
     };
     const onFocus = (e: Event) => {
@@ -225,7 +225,9 @@ export class SigninPage extends Block {
                             className="form__field"
                         }}}
                         <div class="signin-page__link">                  
-                            {{{ LinkBlock to='login.html' text="Войти"}}}
+                            {{{ LinkBlock 
+                              to='/login' 
+                              text="Войти"}}}
                         </div>
                     </form> 
                 </div>    

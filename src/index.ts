@@ -1,5 +1,7 @@
 import "./styles/app.css";
-import { renderDOM, registerComponent, registerDateHelper } from "./helpers";
+import { registerComponent, registerDateHelper } from "./helpers";
+import Router from "./core/router/BrowserRouter";
+
 import LoginPage from "./pages/login";
 import SigninPage from "./pages/signin";
 import ChatsPage from "./pages/chats";
@@ -40,42 +42,18 @@ registerComponent(AvatarBlock);
 registerComponent(PropertyBlock);
 
 document.addEventListener("DOMContentLoaded", () => {
-  const hash = document.location.hash;
-  switch (hash) {
-    case "#login": {
-      renderDOM("#app", LoginPage);
-      break;
-    }
-    case "#signin": {
-      renderDOM("#app", SigninPage);
-      break;
-    }
-    case "#chats": {
-      renderDOM("#app", ChatsPage);
-      break;
-    }
-    case "#profile": {
-      renderDOM("#app", ProfilePage);
-      break;
-    }
-    case "#profile/changepassword": {
-      renderDOM("#app", ChangePasswordPage);
-      break;
-    }
-    case "#profile/changedata": {
-      renderDOM("#app", ChangeDataPage);
-      break;
-    }
-    case "#404": {
-      renderDOM("#app", NotFoundPage);
-      break;
-    }
-    case "#500": {
-      renderDOM("#app", InternalServerErrorPage);
-      break;
-    }
+  const router = new Router("#app");
+  window.router = router;
 
-    default:
-      renderDOM("#app", LoginPage);
-  }
+  router
+    .use("/", LoginPage, { title: "Вход" })
+    .use("/login", LoginPage, { title: "Вход" })
+    .use("/signin", SigninPage)
+    .use("/profile", ProfilePage)
+    .use("/profile/changepassword", ChangePasswordPage)
+    .use("/profile/changedata", ChangeDataPage)
+    .use("/chats", ChatsPage)
+    .use("/error", InternalServerErrorPage)
+    .use("*", NotFoundPage)
+    .start();
 });

@@ -1,8 +1,10 @@
 import "./login.css";
 import { Block } from "../../core";
 import { validatePassword, validateLogin } from "../../modules/validation";
+import { withRouter } from "../../core/hoc/withRouter";
+import { isNamedInput } from "../../utils";
 
-export class LoginPage extends Block {
+class LoginPage extends Block {
   constructor() {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
@@ -11,9 +13,8 @@ export class LoginPage extends Block {
       }
     };
     const onBlur = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      if (target) {
-        this.state.validators[target.name]();
+      if (isNamedInput(e.target)) {
+        this.state.validators[e.target.name]();
       }
     };
     const onFocus = (e: Event) => {
@@ -113,7 +114,7 @@ export class LoginPage extends Block {
                         }}}       
                         <div class="login-page__link">
                             {{{ LinkBlock 
-                                to='./signin.html' 
+                                to='/signin' 
                                 text="Ещё не зарегистрированы?"
                             }}}
                         </div>
@@ -124,3 +125,5 @@ export class LoginPage extends Block {
         `;
   }
 }
+
+export default withRouter(LoginPage);
