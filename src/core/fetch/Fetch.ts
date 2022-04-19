@@ -1,43 +1,49 @@
 import { IFetchOptions, METHODS } from "./types";
 import { queryStringify } from "./utils";
 
-export class HTTPTransport<T> {
+export class HTTPTransport {
   private _baseApi: string;
 
   constructor(baseApi = "") {
     this._baseApi = baseApi;
   }
-  get = (url: string, options: IFetchOptions<T> = {}) => {
-    return this.request(
+  get<T, U = unknown>(url: string, options: IFetchOptions<T> = {}): Promise<U> {
+    return this.request<T, U>(
       `${url}${queryStringify(options.data)}`,
       { ...options },
       METHODS.GET,
       options.timeout
     );
-  };
+  }
 
-  put = (url: string, options: IFetchOptions<T> = {}) => {
+  put<T, U = unknown>(url: string, options: IFetchOptions<T> = {}): Promise<U> {
     return this.request(url, { ...options }, METHODS.PUT, options.timeout);
-  };
+  }
 
-  post = (url: string, options: IFetchOptions<T> = {}) => {
+  post<T, U = unknown>(
+    url: string,
+    options: IFetchOptions<T> = {}
+  ): Promise<U> {
     return this.request(url, { ...options }, METHODS.POST, options.timeout);
-  };
+  }
 
-  delete = (url: string, options: IFetchOptions<T> = {}) => {
+  delete<T, U = unknown>(
+    url: string,
+    options: IFetchOptions<T> = {}
+  ): Promise<U> {
     return this.request(url, { ...options }, METHODS.DELETE, options.timeout);
-  };
+  }
 
-  request = (
+  private request<T, U>(
     url: string,
     options: IFetchOptions<T>,
     method: METHODS,
     timeout = 5000
-  ) => {
+  ): Promise<U> {
     const { headers = {}, data } = options;
-    let fullUrl = `${process.env.API_ENDPOINT}/${this._baseApi}${url}`;
+    let fullUrl = `${process.env.API_ENDPOINT}/${this._baseApi}/${url}`;
     if (method === METHODS.GET && data) {
-      fullUrl += queryStringify(data);
+      fullUrl += queryStringify<T>(data);
     }
 
     return new Promise((resolve, reject) => {
@@ -48,7 +54,20 @@ export class HTTPTransport<T> {
       );
 
       xhr.onload = () => {
-        resolve(xhr);
+        const { response, status } = xhr;
+
+        let responseData;
+        try {
+          responseData = JSON.parse(response);
+        } catch (err) {
+          responseData = response;
+        }
+
+        if (status === 200 || (status >= 400 && status < 500)) {
+          resolve(responseData);
+        } else {
+          reject(responseData);
+        }
       };
       xhr.onabort = reject;
       xhr.onerror = reject;
@@ -58,8 +77,8 @@ export class HTTPTransport<T> {
       if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
-        xhr.send(data as unknown as FormData);
+        xhr.send(JSON.stringify(data));
       }
     });
-  };
+  }
 }

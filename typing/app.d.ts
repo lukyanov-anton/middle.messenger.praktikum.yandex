@@ -13,6 +13,7 @@ declare global {
   }
 
   export type AppState = {
+    appIsInited: boolean;
     page: Pages | null;
     isLoading: boolean;
     loginFormError: string | null;

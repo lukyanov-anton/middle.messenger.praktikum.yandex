@@ -1,11 +1,20 @@
 import "./login.css";
-import { Block } from "../../core";
+import { Block, Store } from "../../core";
 import { validatePassword, validateLogin } from "../../modules/validation";
-import { withRouter } from "../../core/hoc/withRouter";
+import { withStore, withRouter } from "../../core";
 import { isNamedInput } from "../../utils";
+import { login } from "../../controllers/auth";
+import { Router } from "../../core/router";
+import { ValidationResult } from "../../modules/validation/types";
+
+type LoginPageProps = {
+  router: Router;
+  store: Store<AppState>;
+  formError?: () => string | null;
+};
 
 class LoginPage extends Block {
-  constructor() {
+  constructor(props: LoginPageProps) {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
       if (target) {
@@ -25,16 +34,25 @@ class LoginPage extends Block {
       }
     };
     const onSubmit = (e: Event) => {
-      this.validate();
-      console.log("/login", this.state.values);
+      if (this.validate()) {
+        login(this.state.values);
+      }
       e.preventDefault();
     };
     super({
+      ...props,
       events: {
         input: onChange,
         focusin: onFocus,
         focusout: onBlur,
         submit: onSubmit,
+      },
+    });
+
+    this.setProps({
+      formError: () => {
+        console.log("FORMERROR", this.props.store.getState().loginFormError);
+        return this.props.store.getState().loginFormError;
       },
     });
   }
@@ -45,9 +63,14 @@ class LoginPage extends Block {
     }
   }
 
-  validate() {
-    Object.values(this.state.validators).forEach((value) => {
+  validate(): boolean {
+    /*     Object.values(this.state.validators).forEach((value) => {
       (value as () => void)();
+    }); */
+    return Object.values(
+      this.state.validators as () => ValidationResult[]
+    ).reduce((prev: () => ValidationResult, cur: () => ValidationResult) => {
+      return prev().isSuccess && cur().isSuccess;
     });
   }
   protected getStateFromProps(): void {
@@ -61,7 +84,7 @@ class LoginPage extends Block {
         password: "",
       },
       validators: {
-        login: () => {
+        login: (): ValidationResult => {
           const validationResult = validateLogin(this.state.values.login);
           if (validationResult.isFailure) {
             this.state.errors.login = validationResult.error;
@@ -69,8 +92,9 @@ class LoginPage extends Block {
             this.state.errors.login = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
-        password: () => {
+        password: (): ValidationResult => {
           const nextSate = { ...this.state };
           const validationResult = validatePassword(this.state.values.password);
           if (validationResult.isFailure) {
@@ -79,6 +103,7 @@ class LoginPage extends Block {
             nextSate.errors.password = "";
           }
           this.setState(nextSate);
+          return validationResult;
         },
       },
     };
@@ -125,6 +150,7 @@ class LoginPage extends Block {
                                 text="Ещё не зарегистрированы?"
                             }}}
                         </div>
+                        {{{ErrorBlock value=formError}}}
                     </form>
                 </div>    
             </div>
@@ -133,4 +159,4 @@ class LoginPage extends Block {
   }
 }
 
-export default withRouter(LoginPage);
+export default withRouter(withStore(LoginPage));

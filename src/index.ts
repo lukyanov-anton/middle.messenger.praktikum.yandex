@@ -1,6 +1,5 @@
 import "./styles/app.css";
 import { registerComponent, registerDateHelper } from "./helpers";
-import Router from "./core/router/BrowserRouter";
 
 import LoginPage from "./pages/login";
 import SigninPage from "./pages/signin";
@@ -25,6 +24,11 @@ import ButtonBlock from "./components/button";
 import ImagePlaceholderBlock from "./components/imagePlaceholder";
 import AvatarBlock from "./components/avatar";
 import PropertyBlock from "./components/property";
+import ErrorBlock from "./components/error";
+
+import { AppStore } from "./store";
+import { Router } from "./core/router";
+import { initApp } from "./controllers/initApp";
 
 registerDateHelper();
 registerComponent(LinkBlock);
@@ -41,6 +45,7 @@ registerComponent(MessageBlock);
 registerComponent(NewMessage);
 registerComponent(AvatarBlock);
 registerComponent(PropertyBlock);
+registerComponent(ErrorBlock);
 
 document.addEventListener("DOMContentLoaded", () => {
   const router = new Router("#app");
@@ -59,3 +64,5 @@ document.addEventListener("DOMContentLoaded", () => {
     .use("*", NotFoundPage)
     .start();
 });
+
+AppStore.dispatch(initApp);

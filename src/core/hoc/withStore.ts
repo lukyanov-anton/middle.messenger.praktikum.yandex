@@ -33,7 +33,7 @@ export function withStore<P extends WithStateProps>(
 
     componentWillUnmount() {
       super.componentWillUnmount();
-      AppStore.off("changed", this.__onChangeStoreCallback);
+      AppStore.off(StoreEvents.Updated, this.__onChangeStoreCallback);
     }
   } as BlockClass2<Omit<P, "store">>;
 }

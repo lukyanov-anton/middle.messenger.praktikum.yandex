@@ -4,6 +4,17 @@ export enum StoreEvents {
   Updated = "updated",
 }
 
+export type Dispatch<TState> = (
+  nextStateOrAction: Partial<TState> | Action<TState>,
+  payload?: any
+) => void;
+
+export type Action<TState> = (
+  dispatch: Dispatch<TState>,
+  state: TState,
+  payload: any
+) => void;
+
 class Store<TState extends Record<string, unknown>> extends EventBus {
   private state: TState = {} as TState;
 
@@ -22,11 +33,13 @@ class Store<TState extends Record<string, unknown>> extends EventBus {
     this.state = { ...this.state, ...nextSate };
     this.emit(StoreEvents.Updated, prevState, nextSate);
   }
+
+  dispatch(nextStateOrAction: Partial<TState> | Action<TState>, payload?: any) {
+    if (typeof nextStateOrAction === "function") {
+      nextStateOrAction(this.dispatch.bind(this), this.state, payload);
+    } else {
+      this.set({ ...this.state, ...nextStateOrAction });
+    }
+  }
 }
 export default Store;
-/* export default new Store<AppState>({
-  page: null,
-  isLoading: false,
-  loginFormError: null,
-  user: null,
-}); */

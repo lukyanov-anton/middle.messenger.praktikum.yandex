@@ -1,6 +1,7 @@
-import { Store } from "../core";
+import { Store, StoreEvents } from "../core";
 
 export const defaultState: AppState = {
+  appIsInited: false,
   page: null,
   isLoading: true,
   loginFormError: null,
@@ -8,3 +9,13 @@ export const defaultState: AppState = {
 };
 
 export const AppStore = new Store<AppState>(defaultState);
+
+AppStore.on(StoreEvents.Updated, (prevState, nextState) => {
+  if (process.env.DEBUG) {
+    console.log(
+      "%cstore updated",
+      "background: #222; color: #bada55",
+      nextState
+    );
+  }
+});
