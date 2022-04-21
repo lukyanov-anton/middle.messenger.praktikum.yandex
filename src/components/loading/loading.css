@@ -1,0 +1,8 @@
+.loading{
+
+}
+
+.loading__content{
+  font-size: var(--text-size-4);
+color: var(--color-black);
+}

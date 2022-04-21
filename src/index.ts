@@ -25,6 +25,7 @@ import ImagePlaceholderBlock from "./components/imagePlaceholder";
 import AvatarBlock from "./components/avatar";
 import PropertyBlock from "./components/property";
 import ErrorBlock from "./components/error";
+import LoadingBlock from "./components/loading";
 
 import { AppStore } from "./store";
 import { Router } from "./core/router";
@@ -46,6 +47,7 @@ registerComponent(NewMessage);
 registerComponent(AvatarBlock);
 registerComponent(PropertyBlock);
 registerComponent(ErrorBlock);
+registerComponent(LoadingBlock);
 
 document.addEventListener("DOMContentLoaded", () => {
   const router = new Router("#app");

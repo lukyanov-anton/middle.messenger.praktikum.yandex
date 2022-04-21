@@ -11,6 +11,7 @@ type LoginPageProps = {
   router: Router;
   store: Store<AppState>;
   formError?: () => string | null;
+  onLogout?: () => void;
 };
 
 class LoginPage extends Block {
@@ -39,6 +40,7 @@ class LoginPage extends Block {
       }
       e.preventDefault();
     };
+
     super({
       ...props,
       events: {
@@ -51,7 +53,6 @@ class LoginPage extends Block {
 
     this.setProps({
       formError: () => {
-        console.log("FORMERROR", this.props.store.getState().loginFormError);
         return this.props.store.getState().loginFormError;
       },
     });
@@ -64,9 +65,6 @@ class LoginPage extends Block {
   }
 
   validate(): boolean {
-    /*     Object.values(this.state.validators).forEach((value) => {
-      (value as () => void)();
-    }); */
     return Object.values(
       this.state.validators as () => ValidationResult[]
     ).reduce((prev: () => ValidationResult, cur: () => ValidationResult) => {
@@ -116,7 +114,8 @@ class LoginPage extends Block {
                 <header class="card__header">
                 <p class="card__title">Вход</p>
                 </header>
-                <div class="card__content">                
+                <div class="card__content">
+                    {{#if isLoading}}{{{LoadingBlock }}}{{/if}}                    
                     <form class="form form--vertical login-page__form">
                         {{{ InputBlock 
                             label="Логин" 
@@ -143,7 +142,7 @@ class LoginPage extends Block {
                             mode="primary" 
                             onClick=onSubmit
                             className="form__field"
-                        }}}       
+                        }}}                           
                         <div class="login-page__link">
                             {{{ LinkBlock 
                                 to='/signin' 

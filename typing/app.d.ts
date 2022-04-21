@@ -25,6 +25,15 @@ declare global {
     login: string;
     firstName: string;
   };
+
+  export type RegisterData = {
+    firstName: string;
+    secondName: string;
+    login: string;
+    email: string;
+    password: string;
+    phone: string;
+  };
 }
 
 export {};

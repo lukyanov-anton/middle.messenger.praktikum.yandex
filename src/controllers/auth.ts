@@ -1,5 +1,5 @@
 import { authApi } from "../api/authApi";
-import { UserDto } from "../api/types";
+import { RegisterDataDto, UserDto } from "../api/types";
 import { AppStore } from "../store";
 import { apiHasError, transformUser } from "../utils";
 
@@ -39,4 +39,12 @@ export const logout = async () => {
   AppStore.dispatch({ isLoading: false, user: null });
 
   window.router.go("/");
+};
+
+export const register = async (data: RegisterDataDto) => {
+  AppStore.dispatch({ isLoading: true });
+  await authApi.register(data);
+  const responseUser = await authApi.me();
+  AppStore.dispatch({ user: transformUser(responseUser as UserDto) });
+  window.router.go("/profile");
 };

@@ -1,7 +1,23 @@
 import "./profile.css";
 import { Block } from "../../core";
+import { logout } from "../../controllers/auth";
 
+type ProfilePageProps = {
+  onLogout?: () => void;
+};
 export class ProfilePage extends Block {
+  constructor(props: ProfilePageProps) {
+    const onLogout = (e: Event) => {
+      logout();
+      e.preventDefault();
+    };
+
+    super({ ...props });
+
+    this.setProps({
+      onLogout: onLogout,
+    });
+  }
   protected render(): string {
     return ` 
     <div class="container">
@@ -48,6 +64,13 @@ export class ProfilePage extends Block {
                 text="Изменить пароль"
               }}}              
             </div>
+            <div class="profile__controls-item">
+            {{{ ButtonBlock               
+              text="Выйти"
+              mode="text" 
+              onClick=onLogout
+            }}}              
+          </div>
           </div>
         </div>
       </div>    

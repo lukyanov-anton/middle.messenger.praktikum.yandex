@@ -4,6 +4,14 @@ type LoginRequestData = {
   login: string;
   password: string;
 };
+type RegisterRequestData = {
+  first_name: string;
+  second_name: string;
+  login: string;
+  email: string;
+  password: string;
+  phone: string;
+};
 
 type LoginResponseData = Record<string, unknown> | ApiError;
 
@@ -18,4 +26,10 @@ export const authApi = {
   me: () => apiInstance.get<UserDto | ApiError>("user"),
 
   logout: () => apiInstance.post("logout"),
+
+  register: (data: RegisterRequestData) =>
+    apiInstance.post("signup", {
+      data,
+      headers: { "Content-Type": "application/json" },
+    }),
 };

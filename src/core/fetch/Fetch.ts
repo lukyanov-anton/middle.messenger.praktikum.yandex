@@ -73,6 +73,7 @@ export class HTTPTransport {
       xhr.onerror = reject;
       xhr.ontimeout = reject;
       xhr.timeout = timeout;
+      xhr.withCredentials = true;
 
       if (method === METHODS.GET || !data) {
         xhr.send();

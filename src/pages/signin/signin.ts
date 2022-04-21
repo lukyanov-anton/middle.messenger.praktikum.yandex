@@ -9,6 +9,8 @@ import {
 } from "../../modules/validation";
 import { isNamedInput } from "../../utils";
 import { withRouter } from "../../core/hoc/withRouter";
+import { ValidationResult } from "../../modules/validation/types";
+import { register } from "../../controllers/auth";
 
 class SigninPage extends Block {
   constructor() {
@@ -30,8 +32,9 @@ class SigninPage extends Block {
       }
     };
     const onSubmit = (e: Event) => {
-      this.validate();
-      console.log("/signin", this.state.values);
+      if (this.validate()) {
+        register(this.state.values);
+      }
       e.preventDefault();
     };
     super({
@@ -43,10 +46,12 @@ class SigninPage extends Block {
       },
     });
   }
-  validate() {
-    Object.values(this.state.validators).forEach((value) => {
-      (value as () => void)();
-    });
+  validate(): boolean {
+    return Object.values(
+      this.state.validators as () => ValidationResult[]
+    ).reduce((prev: boolean, cur: () => ValidationResult) => {
+      return prev && cur().isSuccess;
+    }, true);
   }
   protected getStateFromProps(): void {
     this.state = {
@@ -77,6 +82,7 @@ class SigninPage extends Block {
             this.state.errors.email = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
         login: () => {
           const validationResult = validateLogin(this.state.values.login);
@@ -86,6 +92,7 @@ class SigninPage extends Block {
             this.state.errors.login = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
         first_name: () => {
           const validationResult = validateName(this.state.values.first_name);
@@ -95,6 +102,7 @@ class SigninPage extends Block {
             this.state.errors.first_name = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
         second_name: () => {
           const validationResult = validateName(this.state.values.second_name);
@@ -104,6 +112,7 @@ class SigninPage extends Block {
             this.state.errors.second_name = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
         phone: () => {
           const validationResult = validatePhone(this.state.values.phone);
@@ -113,6 +122,7 @@ class SigninPage extends Block {
             this.state.errors.phone = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
         password: () => {
           const nextSate = { ...this.state };
@@ -123,6 +133,7 @@ class SigninPage extends Block {
             nextSate.errors.password = "";
           }
           this.setState(nextSate);
+          return validationResult;
         },
         password_confirm: () => {
           const nextSate = { ...this.state };
@@ -135,6 +146,7 @@ class SigninPage extends Block {
             nextSate.errors.password_confirm = "";
           }
           this.setState(nextSate);
+          return validationResult;
         },
       },
     };
