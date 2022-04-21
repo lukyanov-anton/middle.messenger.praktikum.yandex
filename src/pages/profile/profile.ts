@@ -1,11 +1,13 @@
 import "./profile.css";
 import { Block } from "../../core";
 import { logout } from "../../controllers/auth";
+import { withUser } from "../../core/hoc";
 
 type ProfilePageProps = {
+  user: User | null;
   onLogout?: () => void;
 };
-export class ProfilePage extends Block {
+class ProfilePage extends Block {
   constructor(props: ProfilePageProps) {
     const onLogout = (e: Event) => {
       logout();
@@ -29,27 +31,28 @@ export class ProfilePage extends Block {
           <div class="profile__data">
           {{{ PropertyBlock 
             label="Почта" 
-            value = "macho@yandex.ru"
+            value = user.email
           }}}
           {{{ PropertyBlock 
             label="Логин" 
-            value = "macho"
+            value = user.login
           }}}
           {{{ PropertyBlock 
             label="Имя" 
-            value = "Иван"
+            value = user.firstName
           }}}
           {{{ PropertyBlock 
             label="Фамилия" 
-            value = "Иванов"
+            value = user.secondName
           }}}
           {{{ PropertyBlock 
             label="Имя в чате" 
-            value = "macho"
+            value = user.firstName
           }}}
           {{{ PropertyBlock 
             label="Телефон" 
-            value = "+7 (913) 222 111"}}}
+            value = user.phone
+          }}}
           </div>
           <div class="profile__controls">
             <div class="profile__controls-item">
@@ -78,3 +81,5 @@ export class ProfilePage extends Block {
         `;
   }
 }
+
+export default withUser(ProfilePage);

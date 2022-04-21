@@ -14,13 +14,13 @@ export const login = async (loginData: LoginData) => {
   const response = await authApi.login(loginData);
 
   if (apiHasError(response)) {
-    AppStore.dispatch({ isLoading: false, loginFormError: response.reason });
+    AppStore.dispatch({ isLoading: false, formError: response.reason });
     return;
   }
 
   const responseUser = await authApi.me();
 
-  AppStore.dispatch({ isLoading: false, loginFormError: null });
+  AppStore.dispatch({ isLoading: false, formError: null });
 
   if (apiHasError(responseUser)) {
     logout();

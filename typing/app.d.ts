@@ -16,14 +16,18 @@ declare global {
     appIsInited: boolean;
     page: Pages | null;
     isLoading: boolean;
-    loginFormError: string | null;
+    formError: string | null;
     user: User | null;
   };
 
   export type User = {
     id: number;
-    login: string;
     firstName: string;
+    secondName: string;
+    displayName: string;
+    login: string;
+    email: string;
+    phone: string;
   };
 
   export type RegisterData = {

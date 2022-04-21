@@ -4,7 +4,7 @@ export const defaultState: AppState = {
   appIsInited: false,
   page: null,
   isLoading: true,
-  loginFormError: null,
+  formError: null,
   user: null,
 };
 

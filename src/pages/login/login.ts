@@ -53,7 +53,7 @@ class LoginPage extends Block {
 
     this.setProps({
       formError: () => {
-        return this.props.store.getState().loginFormError;
+        return this.props.store.getState().formError;
       },
     });
   }
