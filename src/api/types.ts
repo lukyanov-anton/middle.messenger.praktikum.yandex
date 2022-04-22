@@ -20,3 +20,8 @@ export type RegisterDataDto = {
   password: string;
   phone: string;
 };
+
+export type ChangePasswordDataDto = {
+  oldPassword: string;
+  newPassword: string;
+};
