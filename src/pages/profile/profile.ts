@@ -47,7 +47,7 @@ class ProfilePage extends Block {
           }}}
           {{{ PropertyBlock 
             label="Имя в чате" 
-            value = user.firstName
+            value = user.displayName
           }}}
           {{{ PropertyBlock 
             label="Телефон" 

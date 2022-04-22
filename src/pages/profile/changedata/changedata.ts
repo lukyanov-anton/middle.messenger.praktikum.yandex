@@ -7,6 +7,8 @@ import {
   validatePhone,
 } from "../../../modules/validation";
 import { required } from "../../../modules/validation/common";
+import { ValidationResult } from "../../../modules/validation/types";
+import { update } from "../../../controllers/user";
 
 export class ChangeDataPage extends Block {
   constructor() {
@@ -29,8 +31,9 @@ export class ChangeDataPage extends Block {
       }
     };
     const onSubmit = (e: Event) => {
-      this.validate();
-      console.log("/changedata", this.state.values);
+      if (this.validate()) {
+        update(this.state.values);
+      }
       e.preventDefault();
     };
     super({
@@ -42,12 +45,13 @@ export class ChangeDataPage extends Block {
       },
     });
   }
-  validate() {
-    Object.values(this.state.validators).forEach((value) => {
-      (value as () => void)();
-    });
+  validate(): boolean {
+    return Object.values(
+      this.state.validators as () => ValidationResult[]
+    ).reduce((prev: boolean, cur: () => ValidationResult) => {
+      return prev && cur().isSuccess;
+    }, true);
   }
-
   protected getStateFromProps(): void {
     this.state = {
       values: {
@@ -76,6 +80,7 @@ export class ChangeDataPage extends Block {
             this.state.errors.email = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
         login: () => {
           const validationResult = validateLogin(this.state.values.login);
@@ -85,6 +90,7 @@ export class ChangeDataPage extends Block {
             this.state.errors.login = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
         first_name: () => {
           const nextSate = { ...this.state };
@@ -95,6 +101,7 @@ export class ChangeDataPage extends Block {
             nextSate.errors.first_name = "";
           }
           this.setState(nextSate);
+          return validationResult;
         },
         second_name: () => {
           const nextSate = { ...this.state };
@@ -105,6 +112,7 @@ export class ChangeDataPage extends Block {
             nextSate.errors.second_name = "";
           }
           this.setState(nextSate);
+          return validationResult;
         },
         display_name: () => {
           const nextSate = { ...this.state };
@@ -115,6 +123,7 @@ export class ChangeDataPage extends Block {
             nextSate.errors.display_name = "";
           }
           this.setState(nextSate);
+          return validationResult;
         },
         phone: () => {
           const nextSate = { ...this.state };
@@ -125,6 +134,7 @@ export class ChangeDataPage extends Block {
             nextSate.errors.phone = "";
           }
           this.setState(nextSate);
+          return validationResult;
         },
       },
     };
