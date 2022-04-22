@@ -8,6 +8,15 @@ type ChangePasswordData = {
   newPassword: string;
 };
 
+type ChangeProfileData = {
+  first_name: string;
+  second_name: string;
+  display_name: string;
+  login: string;
+  email: string;
+  phone: string;
+};
+
 export const update = async (profileData: UserDto) => {
   AppStore.dispatch({ isLoading: true });
 
@@ -32,6 +41,21 @@ export const changePassword = async (
   AppStore.dispatch({ isLoading: true });
 
   const response = await userApi.changePassword(changePasswordData);
+
+  if (apiHasError(response)) {
+    AppStore.dispatch({ isLoading: false, formError: response.reason });
+    return;
+  }
+
+  AppStore.dispatch({ isLoading: false });
+
+  window.router.go("/profile");
+};
+
+export const changeProfile = async (changeProfileData: ChangeProfileData) => {
+  AppStore.dispatch({ isLoading: true });
+
+  const response = await userApi.changePassword(changeProfileData);
 
   if (apiHasError(response)) {
     AppStore.dispatch({ isLoading: false, formError: response.reason });
