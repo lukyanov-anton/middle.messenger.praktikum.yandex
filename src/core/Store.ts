@@ -10,6 +10,7 @@ export type Dispatch<TState> = (
 ) => void;
 
 export type Action<TState> = (
+  id: number,
   dispatch: Dispatch<TState>,
   state: TState,
   payload: any

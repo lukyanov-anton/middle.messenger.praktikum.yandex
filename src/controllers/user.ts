@@ -1,5 +1,5 @@
 import { UserDto } from "../api/types";
-import { userApi } from "../api/user";
+import { userApi } from "../api/userApi";
 import { AppStore } from "../store";
 import { apiHasError, transformUser } from "../utils";
 
@@ -8,13 +8,8 @@ type ChangePasswordData = {
   newPassword: string;
 };
 
-type ChangeProfileData = {
-  first_name: string;
-  second_name: string;
-  display_name: string;
-  login: string;
-  email: string;
-  phone: string;
+type ChangeAvatarData = {
+  avatar: File;
 };
 
 export const update = async (profileData: UserDto) => {
@@ -52,10 +47,12 @@ export const changePassword = async (
   window.router.go("/profile");
 };
 
-export const changeProfile = async (changeProfileData: ChangeProfileData) => {
+export const changeAvatar = async (changeAvatarData: ChangeAvatarData) => {
+  const formData = new FormData();
+  formData.append("avatar", changeAvatarData.avatar);
   AppStore.dispatch({ isLoading: true });
 
-  const response = await userApi.changePassword(changeProfileData);
+  const response = await userApi.changeAvatar(formData);
 
   if (apiHasError(response)) {
     AppStore.dispatch({ isLoading: false, formError: response.reason });

@@ -18,6 +18,7 @@ declare global {
     isLoading: boolean;
     formError: string | null;
     user: User | null;
+    chats: Chat[] | null;
   };
 
   export type User = {
@@ -28,6 +29,7 @@ declare global {
     login: string;
     email: string;
     phone: string;
+    avatar: string;
   };
 
   export type RegisterData = {
@@ -37,6 +39,18 @@ declare global {
     email: string;
     password: string;
     phone: string;
+  };
+  export type Chat = {
+    id: number;
+    title: string;
+    avatar: string;
+    unreadCount: number;
+    lastMessage: Message;
+  };
+  export type Message = {
+    user: User<Omit<User, "id">>;
+    time: Date;
+    content: string;
   };
 }
 

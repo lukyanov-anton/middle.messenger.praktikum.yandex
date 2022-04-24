@@ -17,6 +17,10 @@ type ChangePasswordRequestData = {
 
 type ChangeProfileResponseData = UserDto | ApiError;
 
+type ChangeAvatarRequestData = FormData;
+
+type ChangeAvatarResponseData = UserDto | ApiError;
+
 const apiInstance = new HTTPTransport("user");
 
 export const userApi = {
@@ -34,4 +38,12 @@ export const userApi = {
       data,
       headers: { "Content-Type": "application/json" },
     }),
+  changeAvatar: (data: ChangeAvatarRequestData) =>
+    apiInstance.put<ChangeAvatarRequestData, ChangeAvatarResponseData>(
+      "profile/avatar",
+      {
+        data,
+        //headers: { "Content-Type": "multipart/form-data" },
+      }
+    ),
 };

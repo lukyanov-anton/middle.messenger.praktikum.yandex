@@ -30,6 +30,7 @@ import LoadingBlock from "./components/loading";
 import { AppStore } from "./store";
 import { Router } from "./core/router";
 import { initApp } from "./controllers/initApp";
+import { StoreEvents } from "./core";
 
 registerDateHelper();
 registerComponent(LinkBlock);
@@ -51,6 +52,7 @@ registerComponent(LoadingBlock);
 
 document.addEventListener("DOMContentLoaded", () => {
   const router = new Router("#app");
+
   window.router = router;
 
   router
@@ -63,8 +65,17 @@ document.addEventListener("DOMContentLoaded", () => {
     .use("/profile/changeavatar", ChangeAvatarPage)
     .use("/chats", ChatsPage)
     .use("/error", InternalServerErrorPage)
-    .use("*", NotFoundPage)
-    .start();
+    .use("*", NotFoundPage);
+  //.start();
+
+  AppStore.on(
+    StoreEvents.Updated,
+    (prevState: AppState, nextState: AppState) => {
+      if (!prevState.appIsInited && nextState.appIsInited) {
+        router.start();
+      }
+    }
+  );
 });
 
 AppStore.dispatch(initApp);

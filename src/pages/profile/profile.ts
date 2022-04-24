@@ -24,7 +24,7 @@ class ProfilePage extends Block {
     return ` 
     <div class="container">
       <div class="profile__avatar">
-        <a href="/profile/changeavatar">{{{ AvatarBlock }}}</a>      
+        <a href="/profile/changeavatar">{{{ AvatarBlock src=user.avatar }}}</a>      
       </div>
       <div class="profile__properies">
         <div class="profile">

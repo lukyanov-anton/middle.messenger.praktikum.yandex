@@ -78,7 +78,8 @@ export class HTTPTransport {
       if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
-        xhr.send(JSON.stringify(data));
+        if (data instanceof FormData) xhr.send(data as unknown as FormData);
+        else xhr.send(JSON.stringify(data));
       }
     });
   }

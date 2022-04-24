@@ -10,6 +10,7 @@ export type UserDto = {
   display_name: string;
   email: string;
   phone: string;
+  avatar: string;
 };
 
 export type RegisterDataDto = {
@@ -24,4 +25,26 @@ export type RegisterDataDto = {
 export type ChangePasswordDataDto = {
   oldPassword: string;
   newPassword: string;
+};
+
+export type ChatDto = {
+  id: number;
+  title: string;
+  avatar: string;
+  unread_count: number;
+  last_message: MessageDto;
+};
+
+export type MessageDto = {
+  /* user: {
+    first_name: string;
+    second_name: string;
+    avatar: string;
+    email: string;
+    login: string;
+    phone: string;
+  }; */
+  user: UserDto;
+  time: Date;
+  content: string;
 };

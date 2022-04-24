@@ -6,11 +6,12 @@ export const defaultState: AppState = {
   isLoading: true,
   formError: null,
   user: null,
+  chats: null,
 };
 
 export const AppStore = new Store<AppState>(defaultState);
 
-AppStore.on(StoreEvents.Updated, (prevState, nextState) => {
+/* AppStore.on(StoreEvents.Updated, (prevState, nextState) => {
   if (process.env.DEBUG) {
     console.log(
       "%cstore updated",
@@ -18,4 +19,4 @@ AppStore.on(StoreEvents.Updated, (prevState, nextState) => {
       nextState
     );
   }
-});
+}); */

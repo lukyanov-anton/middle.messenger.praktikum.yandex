@@ -1,19 +1,21 @@
 import "./chatList.css";
 import { Block } from "../../../../core";
 import { ChatInfo } from "../../../../models/chat";
-import { ChatInfosStub } from "../../../../models/chat/stub";
+//import { ChatInfosStub } from "../../../../models/chat/stub";
 
 interface ChatListProps {
-  items: ChatInfo[];
+  items?: ChatInfo[];
   searchString: string;
   searchInput: () => void;
 }
 
 export class ChatList extends Block {
   constructor(props: ChatListProps) {
+    console.log(props.items);
+
     super({
       ...props,
-      items: ChatInfosStub,
+      //items: ChatInfosStub,
       events: {
         input: (e: Event) => {
           if (e.target) {
