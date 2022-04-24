@@ -19,6 +19,8 @@ declare global {
     formError: string | null;
     user: User | null;
     chats: Chat[] | null;
+    selectedChatId: number | null;
+    showAddUserDialog: boolean;
   };
 
   export type User = {

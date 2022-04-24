@@ -21,6 +21,12 @@ type ChangeAvatarRequestData = FormData;
 
 type ChangeAvatarResponseData = UserDto | ApiError;
 
+type SearchByLoginRequestData = {
+  login: string;
+};
+
+type SearchByLoginResponseData = UserDto[] | ApiError;
+
 const apiInstance = new HTTPTransport("user");
 
 export const userApi = {
@@ -43,7 +49,14 @@ export const userApi = {
       "profile/avatar",
       {
         data,
-        //headers: { "Content-Type": "multipart/form-data" },
+      }
+    ),
+  searchByLogin: (data: SearchByLoginRequestData) =>
+    apiInstance.post<SearchByLoginRequestData, SearchByLoginResponseData>(
+      "search",
+      {
+        data,
+        headers: { "Content-Type": "application/json" },
       }
     ),
 };

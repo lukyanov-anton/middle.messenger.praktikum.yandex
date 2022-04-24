@@ -5,6 +5,7 @@ import LoginPage from "./pages/login";
 import SigninPage from "./pages/signin";
 import ChatsPage from "./pages/chats";
 import ChatCreatePage from "./pages/chats/create";
+
 import ProfilePage from "./pages/profile";
 import ChangeDataPage from "./pages/profile/changedata";
 import ChangePasswordPage from "./pages/profile/changepassword";
@@ -27,6 +28,7 @@ import AvatarBlock from "./components/avatar";
 import PropertyBlock from "./components/property";
 import ErrorBlock from "./components/error";
 import LoadingBlock from "./components/loading";
+import AddUserToChatBlock from "./pages/chats/components/chat/addUser";
 
 import { AppStore } from "./store";
 import { Router } from "./core/router";
@@ -50,6 +52,7 @@ registerComponent(AvatarBlock);
 registerComponent(PropertyBlock);
 registerComponent(ErrorBlock);
 registerComponent(LoadingBlock);
+registerComponent(AddUserToChatBlock);
 
 document.addEventListener("DOMContentLoaded", () => {
   const router = new Router("#app");
@@ -66,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .use("/profile/changeavatar", ChangeAvatarPage)
     .use("/chats", ChatsPage)
     .use("/chats/add", ChatCreatePage)
+
     .use("/error", InternalServerErrorPage)
     .use("*", NotFoundPage);
   //.start();

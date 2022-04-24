@@ -7,12 +7,11 @@ interface ChatListProps {
   items?: ChatInfo[];
   searchString: string;
   searchInput: () => void;
+  selectedChatId?: number;
 }
 
 export class ChatList extends Block {
   constructor(props: ChatListProps) {
-    console.log(props.items);
-
     super({
       ...props,
       //items: ChatInfosStub,

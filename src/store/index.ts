@@ -7,11 +7,13 @@ export const defaultState: AppState = {
   formError: null,
   user: null,
   chats: null,
+  selectedChatId: null,
+  showAddUserDialog: false,
 };
 
 export const AppStore = new Store<AppState>(defaultState);
 
-/* AppStore.on(StoreEvents.Updated, (prevState, nextState) => {
+AppStore.on(StoreEvents.Updated, (prevState, nextState) => {
   if (process.env.DEBUG) {
     console.log(
       "%cstore updated",
@@ -19,4 +21,4 @@ export const AppStore = new Store<AppState>(defaultState);
       nextState
     );
   }
-}); */
+});

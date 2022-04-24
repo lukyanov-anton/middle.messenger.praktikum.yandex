@@ -1,7 +1,6 @@
 import { chatsApi } from "../api/chatsApi";
 import { ChatDto } from "../api/types";
 
-import { Action, Dispatch } from "../core/Store";
 import { AppStore } from "../store";
 import { apiHasError, transformChats } from "../utils";
 

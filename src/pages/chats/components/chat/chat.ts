@@ -6,8 +6,12 @@ import { ChatsStub } from "../../../../models/chat/stub";
 interface ChatBlockProps {
   id: number;
   title: string;
-  image: string;
+  avatar: string;
   messages: DailyMessages[];
+  addUserUrl: string;
+  showDialog: boolean;
+  addUserClick: () => void;
+  cancelAddUserClick: () => void;
 }
 
 export class ChatBlock extends Block<ChatBlockProps> {
@@ -15,6 +19,16 @@ export class ChatBlock extends Block<ChatBlockProps> {
     const { id: chatId } = props;
     const chat = ChatsStub.find((chat) => chat.id == chatId);
     super({ ...props, ...chat });
+    this.setProps({
+      addUserUrl: "chats/" + chatId + "/adduser",
+      showDialog: false,
+      addUserClick: () => {
+        this.props.showDialog = true;
+      },
+      cancelAddUserClick: () => {
+        this.props.showDialog = false;
+      },
+    });
   }
   protected render(): string {
     return `
@@ -23,7 +37,17 @@ export class ChatBlock extends Block<ChatBlockProps> {
                 <div class="header__image">
                     {{{ImagePlaceholderBlock }}}
                 </div>                
-                <h1 class="header__title">{{title}}</h1>
+                <h1 class="header__title">{{title}}</h1>                     
+                {{{ LinkBlock 
+                  to=addUserUrl
+                  text="+Добавить пользователя"
+                }}}  
+                {{{ ButtonBlock 
+                  text="Добавить пользователя"
+                  onClick=addUserClick
+                  mode="text" 
+                  className="button--text"
+                }}}         
                 <div class="header__controls"></div>
             </header>
             <div class="chat__message-ribbon">
@@ -34,6 +58,9 @@ export class ChatBlock extends Block<ChatBlockProps> {
             <footer class="chat__footer">            
                 {{{ NewMessage }}}
             </footer>
+            {{#if showDialog}}           
+              {{{ AddUserToChatBlock chatId=id}}}
+            {{/if}}
         </div>
         `;
   }
