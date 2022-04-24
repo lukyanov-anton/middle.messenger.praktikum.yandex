@@ -8,10 +8,12 @@ interface ChatBlockProps {
   title: string;
   avatar: string;
   messages: DailyMessages[];
-  addUserUrl: string;
-  showDialog: boolean;
+  showAddUserDialog: boolean;
+  showRemoveUserDialog: boolean;
   addUserClick: () => void;
   cancelAddUserClick: () => void;
+  removeUserClick: () => void;
+  cancelRemoveUserClick: () => void;
 }
 
 export class ChatBlock extends Block<ChatBlockProps> {
@@ -20,13 +22,21 @@ export class ChatBlock extends Block<ChatBlockProps> {
     const chat = ChatsStub.find((chat) => chat.id == chatId);
     super({ ...props, ...chat });
     this.setProps({
-      addUserUrl: "chats/" + chatId + "/adduser",
-      showDialog: false,
+      showAddUserDialog: false,
+      showRemoveUserDialog: false,
       addUserClick: () => {
-        this.props.showDialog = true;
+        this.props.showAddUserDialog = !this.props.showAddUserDialog;
+        this.props.showRemoveUserDialog = false;
       },
       cancelAddUserClick: () => {
-        this.props.showDialog = false;
+        this.props.showAddUserDialog = false;
+      },
+      removeUserClick: () => {
+        this.props.showRemoveUserDialog = !this.props.showRemoveUserDialog;
+        this.props.showAddUserDialog = false;
+      },
+      cancelRemoveUserClick: () => {
+        this.props.showRemoveUserDialog = false;
       },
     });
   }
@@ -37,16 +47,18 @@ export class ChatBlock extends Block<ChatBlockProps> {
                 <div class="header__image">
                     {{{ImagePlaceholderBlock }}}
                 </div>                
-                <h1 class="header__title">{{title}}</h1>                     
-                {{{ LinkBlock 
-                  to=addUserUrl
-                  text="+Добавить пользователя"
-                }}}  
+                <h1 class="header__title">{{title}}</h1>
                 {{{ ButtonBlock 
                   text="Добавить пользователя"
                   onClick=addUserClick
                   mode="text" 
-                  className="button--text"
+                  className="button--text header__button"
+                }}}
+                {{{ ButtonBlock 
+                  text="Удалить пользователя"
+                  onClick=removeUserClick
+                  mode="text" 
+                  className="button--text header__button"
                 }}}         
                 <div class="header__controls"></div>
             </header>
@@ -58,8 +70,11 @@ export class ChatBlock extends Block<ChatBlockProps> {
             <footer class="chat__footer">            
                 {{{ NewMessage }}}
             </footer>
-            {{#if showDialog}}           
+            {{#if showAddUserDialog}}           
               {{{ AddUserToChatBlock chatId=id}}}
+            {{/if}}
+            {{#if showRemoveUserDialog}}           
+              {{{ RemoveUserFromChatBlock chatId=id}}}
             {{/if}}
         </div>
         `;

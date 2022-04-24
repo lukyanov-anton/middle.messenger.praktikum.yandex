@@ -1,4 +1,5 @@
 import { chatsApi } from "../api/chatsApi";
+import { UserDto } from "../api/types";
 
 import { userApi } from "../api/userApi";
 
@@ -27,15 +28,31 @@ export const addUserToChat = async (login: string, chatId: number) => {
   }
 };
 
-export const deleteUserFromChat = async (chatId: number, userId: number) => {
+export const removeUserFromChat = async (login: string, chatId: number) => {
   AppStore.dispatch({ isLoading: true });
 
-  const response = await chatsApi.addUser({ chatId, users: [userId] });
-
-  if (apiHasError(response)) {
-    AppStore.dispatch({ isLoading: false, formError: response.reason });
+  const responseChatUsers = await chatsApi.getChatUsers(chatId);
+  if (apiHasError(responseChatUsers)) {
+    AppStore.dispatch({
+      isLoading: false,
+      formError: responseChatUsers.reason,
+    });
     return;
   }
+  const chatUserIds = responseChatUsers
+    .filter((user) => user.login === login)
+    .map((user) => user.id);
 
-  window.router.go("/chats");
+  if (chatUserIds.length > 0) {
+    const response = await chatsApi.removeUser({
+      chatId,
+      users: chatUserIds,
+    });
+
+    if (apiHasError(response)) {
+      AppStore.dispatch({ isLoading: false, formError: response.reason });
+      return;
+    }
+    window.router.go("/chats");
+  }
 };

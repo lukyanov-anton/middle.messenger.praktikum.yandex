@@ -8,7 +8,6 @@ export const defaultState: AppState = {
   user: null,
   chats: null,
   selectedChatId: null,
-  showAddUserDialog: false,
 };
 
 export const AppStore = new Store<AppState>(defaultState);

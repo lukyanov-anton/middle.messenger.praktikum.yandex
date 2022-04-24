@@ -15,7 +15,7 @@ class ChatsPage extends Block {
   constructor(props: ChatsPageProps) {
     super(props);
     this.setProps({
-      selectedChatId: 297,
+      selectedChatId: 296,
       profileClick: () => {
         this.props.router.go("/profile");
       },
@@ -50,10 +50,7 @@ class ChatsPage extends Block {
                 </div>                
             </section>
             <section class="chats__right-panel">
-                {{#if selectedChatId }}
-                    {{#if store.state.showAddUserDialog}}
-                      {{{ AddUserBlock chatId=selectedChatId}}}
-                    {{/if}}
+                {{#if selectedChatId }}                   
                     {{{ ChatBlock id=selectedChatId title="Citilink" }}}
                 {{else}}
                     {{{ Placeholder }}}   

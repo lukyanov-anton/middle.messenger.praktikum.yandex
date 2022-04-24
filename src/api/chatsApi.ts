@@ -1,5 +1,5 @@
 import { HTTPTransport } from "../core/fetch";
-import { ApiError, ChatDto } from "./types";
+import { ApiError, ChatDto, UserDto } from "./types";
 
 type ChatsRequestData = {
   offset?: number;
@@ -22,6 +22,8 @@ type ChatUserRequestData = {
 
 type ChatUserResponseData = Record<string, unknown> | ApiError;
 
+type GetChatUsersResponseData = UserDto[] | ApiError;
+
 const apiInstance = new HTTPTransport("chats");
 
 export const chatsApi = {
@@ -42,9 +44,11 @@ export const chatsApi = {
       data,
       headers: { "Content-Type": "application/json" },
     }),
-  deleteUser: (data: ChatUserRequestData) =>
-    apiInstance.delete<ChatUserRequestData, ChatUserResponseData>("", {
+  removeUser: (data: ChatUserRequestData) =>
+    apiInstance.delete<ChatUserRequestData, ChatUserResponseData>("users", {
       data,
       headers: { "Content-Type": "application/json" },
     }),
+  getChatUsers: (chatId: number) =>
+    apiInstance.get<number, GetChatUsersResponseData>(`${chatId}/users`, {}),
 };

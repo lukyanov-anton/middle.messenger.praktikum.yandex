@@ -1,15 +1,15 @@
-import "./addUser.css";
+import "./removeUser.css";
 import { Block } from "../../../../../core";
-import { addUserToChat } from "../../../../../controllers/chat";
+import { removeUserFromChat } from "../../../../../controllers/chat";
 import { ValidationResult } from "../../../../../modules/validation/types";
 import { required } from "../../../../../modules/validation/common";
 
-interface AddUserToChatProps {
+interface RemoveUserFromChatProps {
   chatId: number;
 }
 
-export class AddUserToChatBlock extends Block {
-  constructor(props: AddUserToChatProps) {
+export class RemoveUserFromChatBlock extends Block {
+  constructor(props: RemoveUserFromChatProps) {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
       if (target) {
@@ -18,7 +18,7 @@ export class AddUserToChatBlock extends Block {
     };
     const onSubmit = (e: Event) => {
       if (this.validate()) {
-        addUserToChat(this.state.values.login, this.props.chatId);
+        removeUserFromChat(this.state.values.login, this.props.chatId);
       }
       e.preventDefault();
     };
@@ -66,7 +66,7 @@ export class AddUserToChatBlock extends Block {
     return `  
         <dialog open class="dialog">           
             <div>
-                <h2>Добавить пользователя</h2>
+                <h2>Удалить пользователя</h2>
                 <form class="form form--vertical">
                     {{{ InputBlock
                         placeholder="Логин" 
@@ -77,7 +77,7 @@ export class AddUserToChatBlock extends Block {
                         className="form__field"
                     }}}
                     {{{ ButtonBlock 
-                        text="Добавить" 
+                        text="Удалить" 
                         mode="primary" 
                         onClick=onSubmit
                         className="form__field"

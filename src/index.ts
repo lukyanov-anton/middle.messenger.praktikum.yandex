@@ -29,6 +29,7 @@ import PropertyBlock from "./components/property";
 import ErrorBlock from "./components/error";
 import LoadingBlock from "./components/loading";
 import AddUserToChatBlock from "./pages/chats/components/chat/addUser";
+import RemoveUserFromChatBlock from "./pages/chats/components/chat/removeUser";
 
 import { AppStore } from "./store";
 import { Router } from "./core/router";
@@ -53,6 +54,7 @@ registerComponent(PropertyBlock);
 registerComponent(ErrorBlock);
 registerComponent(LoadingBlock);
 registerComponent(AddUserToChatBlock);
+registerComponent(RemoveUserFromChatBlock);
 
 document.addEventListener("DOMContentLoaded", () => {
   const router = new Router("#app");

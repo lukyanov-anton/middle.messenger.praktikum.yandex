@@ -30,6 +30,6 @@
 } */
 
 .button--arrow-right::after {
-  content: '';
-  background-image: url('../../../static/svg/chevron.svg');
+  content: "";
+  background-image: url("../../../static/svg/chevron.svg");
 }
