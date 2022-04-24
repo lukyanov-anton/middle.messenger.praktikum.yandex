@@ -1,8 +1,8 @@
-.loading{
-
+.loading {
+  display: block;
 }
 
-.loading__content{
+.loading__content {
   font-size: var(--text-size-4);
-color: var(--color-black);
+  color: var(--color-black);
 }

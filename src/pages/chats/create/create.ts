@@ -1,4 +1,3 @@
-import "./create.css";
 import { Block } from "../../../core";
 
 import { ValidationResult } from "../../../modules/validation/types";
@@ -75,7 +74,7 @@ export class ChatCreatePage extends Block {
     const { values, errors } = this.state;
     return `  
         <div class="container">           
-            <div class="profile__properies">
+            <div>
                 <form class="form form--vertical">
                     {{{ InputBlock
                         placeholder="Название чата" 
