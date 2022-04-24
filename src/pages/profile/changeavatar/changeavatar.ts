@@ -16,18 +16,7 @@ class ChangeAvatarPage extends Block {
         this.state.values[target.name] = target.files[0];
       }
     };
-    const onBlur = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      if (target) {
-        this.state.validators[target.name]();
-      }
-    };
-    const onFocus = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      if (target) {
-        this.state.errors[target.name] = "";
-      }
-    };
+
     const onSubmit = (e: Event) => {
       if (this.validate()) {
         changeAvatar(this.state.values);
@@ -37,10 +26,7 @@ class ChangeAvatarPage extends Block {
     super({
       ...props,
       events: {
-        // input: onChange,
         change: onChange,
-        /*focusin: onFocus,
-        focusout: onBlur */
         submit: onSubmit,
       },
     });

@@ -7,6 +7,9 @@ declare global {
   export type Values<T extends Record<string, unknown>> = T[Keys<T>];
 
   export type Indexed = { [key: string]: any };
+  type PlainObject<T = unknown> = {
+    [k in string]: T;
+  };
 
   export interface Window {
     router: Router;

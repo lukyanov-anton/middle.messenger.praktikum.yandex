@@ -1,13 +1,18 @@
 import { renderDOM } from "../../helpers";
-import Block from "../Block";
-import { BlockClass, RouteProps } from "./types";
+import Block, { BlockClass2 } from "../Block";
+import { RouteProps } from "./types";
 
-class Route {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+class Route<P = any> {
   private _pathname: string;
-  private readonly _blockClass: BlockClass;
+  private readonly _blockClass: BlockClass2<P>;
   private _block: Block | null = null;
   private _props: RouteProps | null = null;
-  constructor(pathname: string, blockClass: BlockClass, props?: RouteProps) {
+  constructor(
+    pathname: string,
+    blockClass: BlockClass2<P>,
+    props?: RouteProps
+  ) {
     this._pathname = pathname;
     this._blockClass = blockClass;
     this._block = null;
@@ -46,8 +51,9 @@ class Route {
   }
 
   setTitle() {
-    // @ts-ignore
-    document.title = this._props!.title;
+    if (this._props && this._props.title) {
+      document.title = this._props.title;
+    }
   }
 }
 export default Route;

@@ -8,7 +8,7 @@ import Handlebars from "handlebars";
 type Events = Values<typeof Block.EVENTS>;
 
 export interface BlockClass2<P> extends Function {
-  new (props: P): Block<P>;
+  new (props?: P): Block<P>;
   componentName?: string;
 }
 

@@ -6,14 +6,13 @@ export enum StoreEvents {
 
 export type Dispatch<TState> = (
   nextStateOrAction: Partial<TState> | Action<TState>,
-  payload?: any
+  payload?: PlainObject
 ) => void;
 
 export type Action<TState> = (
-  //id: number,
   dispatch: Dispatch<TState>,
   state: TState,
-  payload: any
+  payload: PlainObject
 ) => void;
 
 class Store<TState extends Record<string, unknown>> extends EventBus {
@@ -35,7 +34,10 @@ class Store<TState extends Record<string, unknown>> extends EventBus {
     this.emit(StoreEvents.Updated, prevState, nextSate);
   }
 
-  dispatch(nextStateOrAction: Partial<TState> | Action<TState>, payload?: any) {
+  dispatch(
+    nextStateOrAction: Partial<TState> | Action<TState>,
+    payload?: PlainObject
+  ) {
     if (typeof nextStateOrAction === "function") {
       nextStateOrAction(this.dispatch.bind(this), this.state, payload);
     } else {

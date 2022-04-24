@@ -1,6 +1,5 @@
 import Block from "../Block";
 import Route from "./Route";
-import { RouteProps } from "./types";
 
 export default class Router {
   private static __instance: Router;

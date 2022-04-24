@@ -1,5 +1,4 @@
 import { chatsApi } from "../api/chatsApi";
-import { UserDto } from "../api/types";
 
 import { userApi } from "../api/userApi";
 
