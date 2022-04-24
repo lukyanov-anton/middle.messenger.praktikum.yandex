@@ -13,12 +13,14 @@ export const transformUser = (data: UserDto): User => {
   };
 };
 
-export const transformMessage = (data: MessageDto): Message => {
-  return {
-    user: transformUser(data.user),
-    time: data.time,
-    content: data.content,
-  };
+export const transformMessage = (data?: MessageDto): Message | null => {
+  return data
+    ? {
+        user: transformUser(data.user),
+        time: data.time,
+        content: data.content,
+      }
+    : null;
 };
 
 export const transformChats = (data: ChatDto[]): Chat[] => {

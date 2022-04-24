@@ -30,9 +30,9 @@ export type ChangePasswordDataDto = {
 export type ChatDto = {
   id: number;
   title: string;
-  avatar: string;
+  avatar?: string;
   unread_count: number;
-  last_message: MessageDto;
+  last_message?: MessageDto;
 };
 
 export type MessageDto = {

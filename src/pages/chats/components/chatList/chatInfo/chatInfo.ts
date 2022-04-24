@@ -3,9 +3,10 @@ import { Block } from "../../../../../core";
 
 interface ChatInfoProps {
   title: string;
-  lastMessage: string;
-  lastMessageDate: Date;
-  newMessageCount: number;
+  lastMessage?: Message;
+
+  unreadCount: number;
+  avatar?: string;
 }
 
 export class ChatInfo extends Block<ChatInfoProps> {
@@ -17,13 +18,15 @@ export class ChatInfo extends Block<ChatInfoProps> {
             </div>            
             <div class="chat-info__title">
                 {{title}}
-            </div>            
+            </div>  
+            {{#if lastMessage}}          
             <div class="chat-info__last-message">
-                {{lastMessage}}
-            </div>
+                {{lastMessage.content}}
+            </div>            
+            <time class="chat-info__time">{{timeFormat lastMessage.time}}</time>
+            <span class="chat-info__new-message-count">{{unreadCount}}</span>
+            {{/if}}
             
-            <time class="chat-info__time">{{timeFormat lastMessageDate}}</time>
-            <span class="chat-info__new-message-count">{{newMessageCount}}</span>
         </div>
         `;
   }

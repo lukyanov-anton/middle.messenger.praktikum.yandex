@@ -4,6 +4,7 @@ import { registerComponent, registerDateHelper } from "./helpers";
 import LoginPage from "./pages/login";
 import SigninPage from "./pages/signin";
 import ChatsPage from "./pages/chats";
+import ChatCreatePage from "./pages/chats/create";
 import ProfilePage from "./pages/profile";
 import ChangeDataPage from "./pages/profile/changedata";
 import ChangePasswordPage from "./pages/profile/changepassword";
@@ -64,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .use("/profile/changedata", ChangeDataPage)
     .use("/profile/changeavatar", ChangeAvatarPage)
     .use("/chats", ChatsPage)
+    .use("/chats/add", ChatCreatePage)
     .use("/error", InternalServerErrorPage)
     .use("*", NotFoundPage);
   //.start();

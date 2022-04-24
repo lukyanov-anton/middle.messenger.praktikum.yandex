@@ -25,12 +25,17 @@ class ChatsPage extends Block {
     }
   }
   protected render(): string {
+    console.log("ZZZ");
     return `
         <main>
         <div class="chats">
             <section class="chats__left-panel">
                 <div class="left-panel">
                     <div class="left-panel__header">
+                    {{{LinkBlock 
+                      to="/chats/add"
+                      text="Новый чат"
+                    }}}
                         <div class="left-panel__profile">
                             {{{ ButtonBlock 
                                 text="Профиль >" 
@@ -41,7 +46,7 @@ class ChatsPage extends Block {
                         </div>
                     </div>
                     <div class="left-panel__content">
-                        {{{ ChatList items=store.chats}}}
+                        {{{ ChatList items=store.state.chats}}}
                     </div>
                 </div>                
             </section>
