@@ -50,7 +50,10 @@ class ChatsPage extends Block {
                       </div>
                     </div>
                     <div class="left-panel__content">
-                        {{{ ChatList items=store.state.chats onChatSelect=onChatSelect}}}
+                        {{{ ChatList 
+                          items=store.state.chats 
+                          onChatSelect=onChatSelect 
+                          selectedChat=store.state.selectedChat}}}
                     </div>
                 </div>                
             </section>

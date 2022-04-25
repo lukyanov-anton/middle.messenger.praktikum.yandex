@@ -1,5 +1,9 @@
 import "./styles/app.css";
-import { registerComponent, registerDateHelper } from "./helpers";
+import {
+  registerComponent,
+  registerDateHelper,
+  registerIfHelper,
+} from "./helpers";
 
 import LoginPage from "./pages/login";
 import SigninPage from "./pages/signin";
@@ -37,6 +41,7 @@ import { initApp } from "./controllers/initApp";
 import { StoreEvents } from "./core";
 
 registerDateHelper();
+registerIfHelper();
 registerComponent(LinkBlock);
 registerComponent(InputBlock);
 registerComponent(ButtonBlock);

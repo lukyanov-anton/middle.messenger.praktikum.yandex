@@ -7,19 +7,24 @@ interface ChatListProps {
   searchString: string;
   searchInput: () => void;
   onChatSelect: (chat: Chat) => void;
+  selectedChat: Chat;
 }
 
 export class ChatList extends Block {
   constructor(props: ChatListProps) {
     super({
       ...props,
-
       events: {
         input: (e: Event) => {
           if (e.target) {
             console.log((e.target as HTMLInputElement).value);
           }
         },
+      },
+    });
+    this.setProps({
+      isSelectedChat: (id: number) => {
+        return this.props.selectedChat.id === id;
       },
     });
   }
@@ -32,16 +37,16 @@ export class ChatList extends Block {
                 className="chat-list__search"
             }}}
             {{#each items}}
-                <div class="chat-list__item">
-                    {{{ ChatInfo 
-                        title=this.title 
-                        lastMessage=this.lastMessage 
-                        lastMessageDate=this.lastMessageDate 
-                        newMessageCount=this.newMessageCount
+                {{#ifEquals ../selectedChat.id this.id}}
+                  <div class="chat-list__item chat-list__item--selected">
+                {{else}}
+                  <div class="chat-list__item">
+                {{/ifEquals}}
+                   {{{ ChatInfo                         
                         chat=this 
                         onChatSelect=../onChatSelect
                     }}}
-                </div>
+                  </div>
             {{/each}}
         </div>
         `;
