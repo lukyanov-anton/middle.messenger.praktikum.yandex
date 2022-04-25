@@ -1,4 +1,4 @@
-import Block from "../Block";
+import Block, { BlockClass2 } from "../Block";
 import Route from "./Route";
 
 export default class Router {
@@ -21,7 +21,7 @@ export default class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: typeof Block, props?: PlainObject) {
+  use(pathname: string, block: BlockClass2, props?: PlainObject) {
     const route = new Route(pathname, block, {
       rootQuery: this._rootQuery,
       ...props,

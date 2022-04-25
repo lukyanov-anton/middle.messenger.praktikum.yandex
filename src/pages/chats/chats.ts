@@ -20,8 +20,11 @@ class ChatsPage extends Block {
         this.props.router.go("/profile");
       },
     });
+  }
+
+  componentDidMount(props: any): void {
     if (!this.props.store.getState().chats) {
-      getChats();
+      this.props.store.dispatch(getChats);
     }
   }
   protected render(): string {
