@@ -2,14 +2,21 @@ import "./chatInfo.css";
 import { Block } from "../../../../../core";
 
 interface ChatInfoProps {
-  title: string;
-  lastMessage?: Message;
-
-  unreadCount: number;
-  avatar?: string;
+  chat: Chat;
+  onChatSelect: (chat: Chat) => void;
 }
 
-export class ChatInfo extends Block<ChatInfoProps> {
+export class ChatInfo extends Block {
+  constructor(props: ChatInfoProps) {
+    super({
+      ...props,
+      events: {
+        click: () => {
+          this.props.onChatSelect(this.props.chat);
+        },
+      },
+    });
+  }
   protected render(): string {
     return `
         <div class="chat-info">
@@ -17,14 +24,14 @@ export class ChatInfo extends Block<ChatInfoProps> {
                 {{{ImagePlaceholderBlock className="image-placeholder--47x47"}}}
             </div>            
             <div class="chat-info__title">
-                {{title}}
+                {{chat.title}}
             </div>  
-            {{#if lastMessage}}          
+            {{#if chat.lastMessage}}          
             <div class="chat-info__last-message">
-                {{lastMessage.content}}
+                {{chat.lastMessage.content}}
             </div>            
-            <time class="chat-info__time">{{timeFormat lastMessage.time}}</time>
-            <span class="chat-info__new-message-count">{{unreadCount}}</span>
+            <time class="chat-info__time">{{timeFormat chat.lastMessage.time}}</time>
+            <span class="chat-info__new-message-count">{{chat.unreadCount}}</span>
             {{/if}}
             
         </div>

@@ -31,7 +31,7 @@ export const getChats = async (dispatch: Dispatch<AppState>) => {
     return;
   }
 
-  AppStore.dispatch({
+  dispatch({
     isLoading: false,
     chats: transformChats(response as ChatDto[]),
   });
@@ -47,7 +47,7 @@ export const createChat = async (title: string) => {
     return;
   }
 
-  await getChats();
+  await getChats(AppStore.dispatch);
 
   window.router.go("/chats");
 };

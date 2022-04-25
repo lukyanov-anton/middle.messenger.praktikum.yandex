@@ -1,12 +1,9 @@
 import "./chat.css";
 import { Block } from "../../../../core";
 import { DailyMessages } from "../../../../models/chat";
-import { ChatsStub } from "../../../../models/chat/stub";
 
 interface ChatBlockProps {
-  id: number;
-  title: string;
-  avatar: string;
+  chat: Chat;
   messages: DailyMessages[];
   showAddUserDialog: boolean;
   showRemoveUserDialog: boolean;
@@ -18,9 +15,7 @@ interface ChatBlockProps {
 
 export class ChatBlock extends Block<ChatBlockProps> {
   constructor(props: ChatBlockProps) {
-    const { id: chatId } = props;
-    const chat = ChatsStub.find((chat) => chat.id == chatId);
-    super({ ...props, ...chat });
+    super(props);
     this.setProps({
       showAddUserDialog: false,
       showRemoveUserDialog: false,
@@ -47,7 +42,7 @@ export class ChatBlock extends Block<ChatBlockProps> {
                 <div class="header__image">
                     {{{ImagePlaceholderBlock }}}
                 </div>                
-                <h1 class="header__title">{{title}}</h1>
+                <h1 class="header__title">{{chat.title}}</h1>
                 {{{ ButtonBlock 
                   text="Добавить пользователя"
                   onClick=addUserClick

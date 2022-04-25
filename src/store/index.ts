@@ -7,7 +7,7 @@ export const defaultState: AppState = {
   formError: null,
   user: null,
   chats: null,
-  selectedChatId: null,
+  selectedChat: null,
 };
 
 export const AppStore = new Store<AppState>(defaultState);

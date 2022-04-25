@@ -1,20 +1,19 @@
 import "./chatList.css";
 import { Block } from "../../../../core";
 import { ChatInfo } from "../../../../models/chat";
-//import { ChatInfosStub } from "../../../../models/chat/stub";
 
 interface ChatListProps {
   items?: ChatInfo[];
   searchString: string;
   searchInput: () => void;
-  selectedChatId?: number;
+  onChatSelect: (chat: Chat) => void;
 }
 
 export class ChatList extends Block {
   constructor(props: ChatListProps) {
     super({
       ...props,
-      //items: ChatInfosStub,
+
       events: {
         input: (e: Event) => {
           if (e.target) {
@@ -38,7 +37,9 @@ export class ChatList extends Block {
                         title=this.title 
                         lastMessage=this.lastMessage 
                         lastMessageDate=this.lastMessageDate 
-                        newMessageCount=this.newMessageCount 
+                        newMessageCount=this.newMessageCount
+                        chat=this 
+                        onChatSelect=../onChatSelect
                     }}}
                 </div>
             {{/each}}

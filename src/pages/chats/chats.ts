@@ -7,17 +7,19 @@ import { getChats } from "../../controllers/chats";
 interface ChatsPageProps {
   router: Router;
   store: Store<AppState>;
-  selectedChatId: number | null;
   profileClick: () => void;
+  onChatSelect: (chat: Chat) => void;
 }
 
 class ChatsPage extends Block {
   constructor(props: ChatsPageProps) {
     super(props);
     this.setProps({
-      selectedChatId: 296,
       profileClick: () => {
         this.props.router.go("/profile");
+      },
+      onChatSelect: (chat: Chat) => {
+        this.props.store.dispatch({ selectedChat: chat });
       },
     });
   }
@@ -48,13 +50,13 @@ class ChatsPage extends Block {
                       </div>
                     </div>
                     <div class="left-panel__content">
-                        {{{ ChatList items=store.state.chats}}}
+                        {{{ ChatList items=store.state.chats onChatSelect=onChatSelect}}}
                     </div>
                 </div>                
             </section>
             <section class="chats__right-panel">
-                {{#if selectedChatId }}                   
-                    {{{ ChatBlock id=selectedChatId title="Citilink" }}}
+                {{#if store.state.selectedChat }}                   
+                    {{{ ChatBlock id=selectedChatId title="Citilink" chat=store.state.selectedChat }}}
                 {{else}}
                     {{{ Placeholder }}}   
                 {{/if}}

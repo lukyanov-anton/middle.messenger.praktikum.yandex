@@ -22,7 +22,7 @@ declare global {
     formError: string | null;
     user: User | null;
     chats: Chat[] | null;
-    selectedChatId: number | null;
+    selectedChat: Chat | null;
   };
 
   export type User = {
