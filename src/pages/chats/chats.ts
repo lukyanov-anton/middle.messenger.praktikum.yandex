@@ -24,9 +24,9 @@ class ChatsPage extends Block {
     });
   }
 
-  componentDidMount(props: any): void {
+  async componentDidMount(props: any) {
     if (!this.props.store.getState().chats) {
-      this.props.store.dispatch(getChats);
+      await getChats();
     }
   }
   protected render(): string {

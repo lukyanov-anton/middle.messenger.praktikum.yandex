@@ -12,7 +12,7 @@ export class ChatCreatePage extends Block {
         this.state.values[target.name] = target.value;
       }
     };
-    const onBlur = (e: Event) => {
+    /* const onBlur = (e: Event) => {
       const target = e.target as HTMLInputElement;
       if (target) {
         this.state.validators[target.name]();
@@ -23,18 +23,18 @@ export class ChatCreatePage extends Block {
       if (target) {
         this.state.errors[target.name] = "";
       }
-    };
-    const onSubmit = (e: Event) => {
+    }; */
+    const onSubmit = async (e: Event) => {
       if (this.validate()) {
-        createChat(this.state.values.title);
+        await createChat(this.state.values.title);
       }
       e.preventDefault();
     };
     super({
       events: {
         input: onChange,
-        focusin: onFocus,
-        focusout: onBlur,
+        /* focusin: onFocus,
+        focusout: onBlur, */
         submit: onSubmit,
       },
     });
