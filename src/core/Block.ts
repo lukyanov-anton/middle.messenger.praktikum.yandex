@@ -90,7 +90,7 @@ export default class Block<P = any> {
   }
 
   _componentDidMount(props: P) {
-    // this._checkInDom();
+    this._checkInDom();
     this.componentDidMount(props);
   }
 
