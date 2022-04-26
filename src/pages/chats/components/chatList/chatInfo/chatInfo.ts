@@ -31,7 +31,9 @@ export class ChatInfo extends Block {
                 {{chat.lastMessage.content}}
             </div>            
             <time class="chat-info__time">{{timeFormat chat.lastMessage.time}}</time>
-            <span class="chat-info__new-message-count">{{chat.unreadCount}}</span>
+            {{#if chat.unreadCount }}
+              <span class="chat-info__new-message-count">{{chat.unreadCount}}</span>
+            {{/if}}
             {{/if}}
             
         </div>

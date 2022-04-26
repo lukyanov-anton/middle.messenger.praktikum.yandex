@@ -17,7 +17,7 @@ export const transformMessage = (data?: MessageDto): Message | null => {
   return data
     ? {
         user: transformUser(data.user),
-        time: data.time,
+        time: new Date(data.time),
         content: data.content,
       }
     : null;

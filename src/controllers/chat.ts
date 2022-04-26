@@ -1,7 +1,6 @@
 import { chatsApi } from "../api/chatsApi";
-
+import ChatWebSocket from "../api/chatsWebSocket";
 import { userApi } from "../api/userApi";
-
 import { AppStore } from "../store";
 import { apiHasError } from "../utils";
 
@@ -54,4 +53,51 @@ export const removeUserFromChat = async (login: string, chatId: number) => {
     }
     window.router.go("/chats");
   }
+};
+
+export const connectToChat = async (chatId: number, userId: number) => {
+  const tokenResult = await chatsApi.getToken(chatId);
+  if (apiHasError(tokenResult)) {
+    AppStore.dispatch({ isLoading: false, formError: tokenResult.reason });
+    return;
+  }
+  const wsFactory = new ChatWebSocket();
+  try {
+    const ws = wsFactory.create({ chatId, userId, token: tokenResult.token });
+    ws.addEventListener("open", () => {
+      console.log("Соединение установлено");
+
+      ws.send(
+        JSON.stringify({
+          content: "Моё первое сообщение миру!",
+          type: "message",
+        })
+      );
+    });
+    ws.addEventListener("message", () => _onMessage);
+    ws.addEventListener("error", () => _onSocketError);
+    ws.addEventListener("close", () => _onSocketClose);
+  } catch (err) {
+    console.log("Не удалось подключится к чату.", err);
+    setTimeout(connectToChat, 1000, chatId, userId);
+  }
+};
+
+const _onMessage = (event: MessageEvent, chatId: number) => {
+  try {
+    const message = event.data;
+  } catch {}
+};
+const _onSocketError = (event: MessageEvent, chatId: number) => {
+  alert(`Ошибка соединения. \n${event}`);
+  console.log(`Ошибка соединения с чтатом ${chatId}.`, event);
+};
+const _onSocketClose = (event: CloseEvent) => {
+  if (event.wasClean) {
+    console.log("Соединение закрыто чисто");
+  } else {
+    console.log("Обрыв соединения");
+  }
+
+  console.log(`Код: ${event.code} | Причина: ${event.reason}`);
 };

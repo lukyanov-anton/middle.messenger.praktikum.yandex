@@ -36,14 +36,6 @@ export type ChatDto = {
 };
 
 export type MessageDto = {
-  /* user: {
-    first_name: string;
-    second_name: string;
-    avatar: string;
-    email: string;
-    login: string;
-    phone: string;
-  }; */
   user: UserDto;
   time: Date;
   content: string;
