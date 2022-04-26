@@ -24,6 +24,8 @@ type ChatUserResponseData = Record<string, unknown> | ApiError;
 
 type GetChatUsersResponseData = UserDto[] | ApiError;
 
+type GetChatTokenResponseData = { token: string } | ApiError;
+
 const apiInstance = new HTTPTransport("chats");
 
 export const chatsApi = {
@@ -51,4 +53,6 @@ export const chatsApi = {
     }),
   getChatUsers: (chatId: number) =>
     apiInstance.get<number, GetChatUsersResponseData>(`${chatId}/users`, {}),
+  getToken: (chatId: number) =>
+    apiInstance.post<number, GetChatTokenResponseData>(`token/${chatId}`, {}),
 };

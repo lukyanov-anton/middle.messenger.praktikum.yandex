@@ -3,6 +3,7 @@ import { Block, Store, withStore, withUser } from "../../core";
 import { withRouter } from "../../core/hoc/withRouter";
 import Router from "../../core/router/BrowserRouter";
 import { getChats } from "../../controllers/chats";
+import { connectToChat } from "../../controllers/chat";
 
 interface ChatsPageProps {
   router: Router;
@@ -18,8 +19,10 @@ class ChatsPage extends Block {
       profileClick: () => {
         this.props.router.go("/profile");
       },
-      onChatSelect: (chat: Chat) => {
+      onChatSelect: async (chat: Chat) => {
         this.props.store.dispatch({ selectedChat: chat });
+        await connectToChat(chat.id, this.props.user.id);
+        await connectToChat(chat.id, this.props.user.id);
       },
     });
   }
@@ -59,7 +62,7 @@ class ChatsPage extends Block {
             </section>
             <section class="chats__right-panel">
                 {{#if store.state.selectedChat }}                   
-                    {{{ ChatBlock id=selectedChatId title="Citilink" chat=store.state.selectedChat }}}
+                    {{{ ChatBlock chat=store.state.selectedChat }}}
                 {{else}}
                     {{{ Placeholder }}}   
                 {{/if}}
