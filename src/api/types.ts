@@ -40,3 +40,12 @@ export type MessageDto = {
   time: Date;
   content: string;
 };
+
+export type ChatMessageDto = {
+  id: number;
+  is_read: boolean;
+  content: string;
+  user_id: number;
+  chat_id: number;
+  time: Date;
+};

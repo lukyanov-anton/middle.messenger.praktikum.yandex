@@ -22,7 +22,6 @@ class ChatsPage extends Block {
       onChatSelect: async (chat: Chat) => {
         this.props.store.dispatch({ selectedChat: chat });
         await connectToChat(chat.id, this.props.user.id);
-        await connectToChat(chat.id, this.props.user.id);
       },
     });
   }
@@ -62,7 +61,7 @@ class ChatsPage extends Block {
             </section>
             <section class="chats__right-panel">
                 {{#if store.state.selectedChat }}                   
-                    {{{ ChatBlock chat=store.state.selectedChat }}}
+                    {{{ ChatBlock chat=store.state.selectedChat messages=store.state.selectedChatMessages}}}
                 {{else}}
                     {{{ Placeholder }}}   
                 {{/if}}

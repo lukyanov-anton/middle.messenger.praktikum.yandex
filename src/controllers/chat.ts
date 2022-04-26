@@ -2,7 +2,7 @@ import { chatsApi } from "../api/chatsApi";
 import ChatWebSocket from "../api/chatsWebSocket";
 import { userApi } from "../api/userApi";
 import { AppStore } from "../store";
-import { apiHasError } from "../utils";
+import { apiHasError, transformChatMessage } from "../utils";
 
 export const addUserToChat = async (login: string, chatId: number) => {
   AppStore.dispatch({ isLoading: true });
@@ -67,12 +67,13 @@ export const connectToChat = async (chatId: number, userId: number) => {
     ws.addEventListener("open", () => {
       console.log("Соединение установлено");
 
-      ws.send(
+      /*  ws.send(
         JSON.stringify({
           content: "Моё первое сообщение миру!",
           type: "message",
         })
-      );
+      ); */
+      getMessages(ws);
     });
     ws.addEventListener("message", () => _onMessage);
     ws.addEventListener("error", () => _onSocketError);
@@ -83,10 +84,18 @@ export const connectToChat = async (chatId: number, userId: number) => {
   }
 };
 
-const _onMessage = (event: MessageEvent, chatId: number) => {
+const _onMessage = (event: MessageEvent) => {
   try {
-    const message = event.data;
-  } catch {}
+    const message = transformChatMessage(event.data);
+    AppStore.dispatch({
+      selectedChatMessages: [
+        ...(AppStore.getState().selectedChatMessages || []),
+        message,
+      ],
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 const _onSocketError = (event: MessageEvent, chatId: number) => {
   alert(`Ошибка соединения. \n${event}`);
@@ -100,4 +109,13 @@ const _onSocketClose = (event: CloseEvent) => {
   }
 
   console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+};
+
+const getMessages = (ws: WebSocket) => {
+  ws.send(
+    JSON.stringify({
+      content: "0",
+      type: "get old",
+    })
+  );
 };

@@ -1,4 +1,4 @@
-import { Store, StoreEvents } from "../core";
+import { Store } from "../core";
 
 export const defaultState: AppState = {
   appIsInited: false,
@@ -8,16 +8,7 @@ export const defaultState: AppState = {
   user: null,
   chats: null,
   selectedChat: null,
+  selectedChatMessages: null,
 };
 
 export const AppStore = new Store<AppState>(defaultState);
-
-AppStore.on(StoreEvents.Updated, (prevState, nextState) => {
-  if (process.env.DEBUG) {
-    console.log(
-      "%cstore updated",
-      "background: #222; color: #bada55",
-      nextState
-    );
-  }
-});

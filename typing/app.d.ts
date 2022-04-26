@@ -23,6 +23,7 @@ declare global {
     user: User | null;
     chats: Chat[] | null;
     selectedChat: Chat | null;
+    selectedChatMessages: ChatMessage[] | null;
   };
 
   export type User = {
@@ -55,6 +56,26 @@ declare global {
     user: User<Omit<User, "id">>;
     time: Date;
     content: string;
+  };
+
+  export enum MessageDirection {
+    In = "in",
+    Out = "out",
+  }
+
+  export type DailyMessages = {
+    date: Date;
+    messages: ChatMessage[];
+  };
+
+  export type ChatMessage = {
+    id: number;
+    isRead: boolean;
+    content: string;
+    userId: number;
+    chatId: number;
+    direction: MessageDirection;
+    time: Date;
   };
 }
 

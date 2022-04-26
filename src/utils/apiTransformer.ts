@@ -1,4 +1,4 @@
-import { ChatDto, MessageDto, UserDto } from "../api/types";
+import { ChatDto, ChatMessageDto, MessageDto, UserDto } from "../api/types";
 
 export const transformUser = (data: UserDto): User => {
   return {
@@ -33,4 +33,14 @@ export const transformChats = (data: ChatDto[]): Chat[] => {
       avatar: `${process.env.API_ENDPOINT}/resources/${dto.avatar}`,
     } as Chat;
   });
+};
+
+export const transformChatMessage = (data: ChatMessageDto): ChatMessage => {
+  return {
+    id: data.id,
+    isRead: data.is_read,
+    content: data.content,
+    userId: data.user_id,
+    chatId: data.chat_id,
+  } as ChatMessage;
 };
