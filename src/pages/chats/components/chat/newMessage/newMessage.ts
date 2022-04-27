@@ -28,8 +28,11 @@ export class NewMessage extends Block {
     const onSubmit = (e: Event) => {
       if (this.validate()) {
         sendMessageToChat(this.props.chatId, this.state.values.message);
-        this.state.values.message = "";
-        this.setState(this.state);
+        //this.state.values.message = "";
+        //this.setState(this.state);
+        this.setState({
+          values: { message: "" },
+        });
       }
 
       e.preventDefault();
