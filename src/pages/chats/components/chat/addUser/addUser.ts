@@ -9,6 +9,7 @@ interface AddUserToChatProps {
 }
 
 export class AddUserToChatBlock extends Block {
+  static componentName = "AddUserToChatBlock";
   constructor(props: AddUserToChatProps) {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;

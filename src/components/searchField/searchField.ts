@@ -9,6 +9,7 @@ interface SearchFieldProps {
 }
 
 export class SearchFieldBlock extends Block<SearchFieldProps> {
+  static componentName = "SearchFieldBlock";
   protected render(): string {
     return `
             <input type='text' name='search' class='search-field {{className}}'  placeholder='{{placeholder}}' value='{{value}}' input=onInput />       

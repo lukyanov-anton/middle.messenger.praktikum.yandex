@@ -9,6 +9,7 @@ interface MessageProps {
 }
 
 export class MessageBlock extends Block<MessageProps> {
+  static componentName = "MessageBlock";
   protected render(): string {
     return `
         <div data-id="{{id}}" class="message message--{{direction}}">

@@ -1,9 +1,8 @@
 import "./chatList.css";
 import { Block } from "../../../../core";
-import { ChatInfo } from "../../../../models/chat";
 
 interface ChatListProps {
-  items?: ChatInfo[];
+  items?: Chat[];
   searchString: string;
   searchInput: () => void;
   onChatSelect: (chat: Chat) => void;
@@ -11,6 +10,7 @@ interface ChatListProps {
 }
 
 export class ChatList extends Block {
+  static componentName = "ChatList";
   constructor(props: ChatListProps) {
     super({
       ...props,

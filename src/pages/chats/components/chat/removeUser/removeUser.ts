@@ -9,6 +9,7 @@ interface RemoveUserFromChatProps {
 }
 
 export class RemoveUserFromChatBlock extends Block {
+  static componentName = "RemoveUserFromChatBlock";
   constructor(props: RemoveUserFromChatProps) {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;

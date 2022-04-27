@@ -5,6 +5,7 @@ interface ImagePlaceholderProps {
   className: string;
 }
 export class ImagePlaceholderBlock extends Block {
+  static componentName = "ImagePlaceholderBlock";
   constructor(props: ImagePlaceholderProps) {
     super({ ...props });
   }

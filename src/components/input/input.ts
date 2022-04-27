@@ -14,6 +14,7 @@ interface InputBlockProps {
 }
 
 export class InputBlock extends Block<InputBlockProps> {
+  static componentName = "InputBlock";
   protected render(): string {
     return `
         <div class="{{className}}">

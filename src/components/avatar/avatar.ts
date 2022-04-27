@@ -5,6 +5,7 @@ interface AvatarBlockProps {
   src?: string;
 }
 export class AvatarBlock extends Block<AvatarBlockProps> {
+  static componentName = "AvatarBlock";
   protected render(): string {
     return `
         <figure class="avatar avatar--128x128">

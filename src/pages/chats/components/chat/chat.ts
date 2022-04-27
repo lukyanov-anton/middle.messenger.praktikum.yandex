@@ -13,6 +13,7 @@ interface ChatBlockProps {
 }
 
 export class ChatBlock extends Block<ChatBlockProps> {
+  static componentName = "ChatBlock";
   constructor(props: ChatBlockProps) {
     super(props);
     this.setProps({

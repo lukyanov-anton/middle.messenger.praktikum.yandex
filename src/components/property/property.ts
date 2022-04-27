@@ -8,6 +8,7 @@ interface PropertyProps {
 }
 
 export class PropertyBlock<P = PropertyProps> extends Block<P> {
+  static componentName = "PropertyBlock";
   protected render(): string {
     return `
         <div class="property">

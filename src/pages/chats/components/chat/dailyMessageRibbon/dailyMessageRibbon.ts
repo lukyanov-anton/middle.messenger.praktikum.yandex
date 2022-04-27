@@ -7,6 +7,7 @@ interface DailyMessageRibbonProps {
 }
 
 export class DailyMessageRibbonBlock extends Block<DailyMessageRibbonProps> {
+  static componentName = "DailyMessageRibbonBlock";
   protected render(): string {
     return `
         <div data-date="{{{dateFormat date}}}" class="daily-message-ribbon">  

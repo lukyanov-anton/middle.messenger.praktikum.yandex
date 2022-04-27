@@ -10,6 +10,7 @@ interface NewMessageProps {
 }
 
 export class NewMessage extends Block {
+  static componentName = "NewMessage";
   constructor(props: NewMessageProps) {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;

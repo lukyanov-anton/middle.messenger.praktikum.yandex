@@ -7,6 +7,7 @@ interface LinkProps {
 }
 
 export class LinkBlock extends Block {
+  static componentName = "LinkBlock";
   constructor(props: LinkProps) {
     const onClick = (e: MouseEvent) => {
       window.router.go(this.props.to);
