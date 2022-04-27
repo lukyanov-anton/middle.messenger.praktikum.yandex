@@ -5,7 +5,7 @@ import { apiHasError, transformUser } from "../utils";
 
 export async function initApp(dispatch: Dispatch<AppState>) {
   try {
-    const response = await authApi.me();
+    const response = await authApi.getCurrentUser();
 
     if (apiHasError(response)) {
       console.error(response.reason);

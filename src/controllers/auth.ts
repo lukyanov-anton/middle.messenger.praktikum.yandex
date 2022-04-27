@@ -18,7 +18,7 @@ export const login = async (loginData: LoginData) => {
     return;
   }
 
-  const responseUser = await authApi.me();
+  const responseUser = await authApi.getCurrentUser();
 
   AppStore.dispatch({ isLoading: false, formError: null });
 
@@ -44,7 +44,7 @@ export const logout = async () => {
 export const register = async (data: RegisterDataDto) => {
   AppStore.dispatch({ isLoading: true });
   await authApi.register(data);
-  const responseUser = await authApi.me();
+  const responseUser = await authApi.getCurrentUser();
   AppStore.dispatch({ user: transformUser(responseUser as UserDto) });
   window.router.go("/profile");
 };

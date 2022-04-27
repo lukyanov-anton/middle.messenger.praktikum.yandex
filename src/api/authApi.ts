@@ -1,9 +1,12 @@
 import { HTTPTransport } from "../core/fetch";
+
 import { ApiError, UserDto } from "./types";
+
 type LoginRequestData = {
   login: string;
   password: string;
 };
+
 type RegisterRequestData = {
   first_name: string;
   second_name: string;
@@ -16,6 +19,7 @@ type RegisterRequestData = {
 type LoginResponseData = Record<string, unknown> | ApiError;
 
 const apiInstance = new HTTPTransport("auth");
+
 export const authApi = {
   login: (data: LoginRequestData) =>
     apiInstance.post<LoginResponseData>("signin", {
@@ -23,7 +27,7 @@ export const authApi = {
       headers: { "Content-Type": "application/json" },
     }),
 
-  me: () => apiInstance.get<UserDto | ApiError>("user"),
+  getCurrentUser: () => apiInstance.get<UserDto | ApiError>("user"),
 
   logout: () => apiInstance.post("logout"),
 
