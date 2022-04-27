@@ -1,5 +1,5 @@
 import { chatsApi } from "../api/chatsApi";
-import ChatWebSocket from "../api/chatsWebSocket";
+import ChatWebSocketFactory from "../api/chatsWebSocket";
 import { userApi } from "../api/userApi";
 import { AppStore } from "../store";
 import { apiHasError, transformChatMessage } from "../utils";
@@ -64,7 +64,7 @@ export const connectToChat = async (chatId: number, userId: number) => {
     AppStore.dispatch({ isLoading: false, formError: tokenResult.reason });
     return;
   }
-  const wsFactory = new ChatWebSocket();
+  const wsFactory = new ChatWebSocketFactory();
   try {
     const ws = wsFactory.create({ chatId, userId, token: tokenResult.token });
     ws.addEventListener("open", () => {
