@@ -68,6 +68,12 @@ class ProfilePage extends Block {
               }}}              
             </div>
             <div class="profile__controls-item">
+              {{{ LinkBlock 
+                to='/chats' 
+                text="Перейти к чатам"
+              }}}              
+            </div>
+            <div class="profile__controls-item">
             {{{ ButtonBlock               
               text="Выйти"
               mode="text" 
