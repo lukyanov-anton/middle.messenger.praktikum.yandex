@@ -33,6 +33,11 @@
 - [Prettier](https://prettier.io/), 
 - [EditorConfig](https://editorconfig.org/)
 
+- `npm run dev` — старт проекта в режиме разработки,
+- `npm run build` — сборка для production,
+- `npm run eslint` — запуск eslint
+- `npm run lint:css` — запуск stylelint
+
 - [Ссылка на PR Sprint 1](https://github.com/lukyanov-anton/middle.messenger.praktikum.yandex/pull/3)
 - [Ссылка на PR Sprint 2](https://github.com/lukyanov-anton/middle.messenger.praktikum.yandex/pull/4)
 - [Сайт чата на Netlify](https://vigorous-goldstine-9096e5.netlify.app/)
