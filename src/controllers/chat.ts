@@ -16,9 +16,10 @@ export const addUserToChat = async (login: string, chatId: number) => {
     return;
   }
   if (responseUser.length > 0) {
+    const firstMatchUser = responseUser[0];
     const response = await chatsApi.addUser({
       chatId,
-      users: [responseUser[0].id],
+      users: [firstMatchUser.id],
     });
     if (apiHasError(response)) {
       AppStore.dispatch({ isLoading: false, formError: response.reason });
