@@ -20,18 +20,26 @@ export class ChatBlock extends Block<ChatBlockProps> {
       showAddUserDialog: false,
       showRemoveUserDialog: false,
       addUserClick: () => {
-        this.props.showAddUserDialog = !this.props.showAddUserDialog;
-        this.props.showRemoveUserDialog = false;
+        this.setProps({
+          showAddUserDialog: !this.props.showAddUserDialog,
+          showRemoveUserDialog: false,
+        });
       },
       cancelAddUserClick: () => {
-        this.props.showAddUserDialog = false;
+        this.setProps({
+          showAddUserDialog: false,
+        });
       },
       removeUserClick: () => {
-        this.props.showRemoveUserDialog = !this.props.showRemoveUserDialog;
-        this.props.showAddUserDialog = false;
+        this.setProps({
+          showRemoveUserDialog: !this.props.showRemoveUserDialog,
+          showAddUserDialog: false,
+        });
       },
       cancelRemoveUserClick: () => {
-        this.props.showRemoveUserDialog = false;
+        this.setProps({
+          showRemoveUserDialog: false,
+        });
       },
     });
   }
