@@ -1,6 +1,5 @@
 import "./message.css";
 import { Block } from "../../../../../core";
-import { MessageDirection } from "../../../../../models/chat";
 
 interface MessageProps {
   id: number;

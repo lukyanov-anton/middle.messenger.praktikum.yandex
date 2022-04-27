@@ -4,6 +4,8 @@ import { userApi } from "../api/userApi";
 import { AppStore } from "../store";
 import { apiHasError, transformChatMessage } from "../utils";
 
+const activeChats: Record<string, WebSocket | null> = {};
+
 export const addUserToChat = async (login: string, chatId: number) => {
   AppStore.dispatch({ isLoading: true });
 
@@ -65,41 +67,64 @@ export const connectToChat = async (chatId: number, userId: number) => {
   try {
     const ws = wsFactory.create({ chatId, userId, token: tokenResult.token });
     ws.addEventListener("open", () => {
+      activeChats[chatId] = ws;
       console.log("Соединение установлено");
-
-      /*  ws.send(
-        JSON.stringify({
-          content: "Моё первое сообщение миру!",
-          type: "message",
-        })
-      ); */
       getMessages(ws);
     });
-    ws.addEventListener("message", () => _onMessage);
-    ws.addEventListener("error", () => _onSocketError);
-    ws.addEventListener("close", () => _onSocketClose);
+    ws.addEventListener("message", _onMessage.bind(this, userId));
+    ws.addEventListener("error", _onSocketError);
+    ws.addEventListener("close", _onSocketClose);
   } catch (err) {
     console.log("Не удалось подключится к чату.", err);
     setTimeout(connectToChat, 1000, chatId, userId);
   }
 };
 
-const _onMessage = (event: MessageEvent) => {
+export const sendMessageToChat = (chatId: number, message: string) => {
+  const ws = activeChats[chatId];
+  if (ws) {
+    ws.send(
+      JSON.stringify({
+        content: message,
+        type: "message",
+      })
+    );
+  } else {
+    alert("Соединение с чатом не установлено");
+  }
+};
+
+const _onMessage = (userId: number, event: MessageEvent) => {
   try {
-    const message = transformChatMessage(event.data);
+    const data = JSON.parse(event.data);
+    let messages: DailyMessages[] = [];
+    if (Array.isArray(data)) {
+      messages = [
+        {
+          date: new Date(),
+          messages: data.map((obj) => transformChatMessage(obj, userId)),
+        },
+      ];
+    } else {
+      messages = [
+        {
+          date: new Date(),
+          messages: [transformChatMessage(data, userId)],
+        },
+      ];
+    }
     AppStore.dispatch({
       selectedChatMessages: [
         ...(AppStore.getState().selectedChatMessages || []),
-        message,
+        ...messages,
       ],
     });
   } catch (err) {
     console.log(err);
   }
 };
-const _onSocketError = (event: MessageEvent, chatId: number) => {
+const _onSocketError = (event: Event) => {
   alert(`Ошибка соединения. \n${event}`);
-  console.log(`Ошибка соединения с чтатом ${chatId}.`, event);
 };
 const _onSocketClose = (event: CloseEvent) => {
   if (event.wasClean) {
@@ -109,6 +134,7 @@ const _onSocketClose = (event: CloseEvent) => {
   }
 
   console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+  //activeChats[chatId]=null;
 };
 
 const getMessages = (ws: WebSocket) => {

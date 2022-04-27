@@ -6,7 +6,9 @@ export default function registerDateHelper() {
     return date.toLocaleDateString("ru-RU", options);
   });
   Handlebars.registerHelper("timeFormat", function (date) {
-    const options = { hour: "numeric", minute: "numeric" };
-    return date.toLocaleTimeString("ru-RU", options);
+    if (date) {
+      const options = { hour: "numeric", minute: "numeric" };
+      return date.toLocaleTimeString("ru-RU", options);
+    } else return date;
   });
 }

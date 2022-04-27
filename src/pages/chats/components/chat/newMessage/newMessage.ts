@@ -2,21 +2,22 @@ import "./newMessage.css";
 import { Block } from "../../../../../core";
 import { required } from "../../../../../modules/validation/common";
 import { ChatErrors } from "../../../../../modules/validation/errors";
+import { ValidationResult } from "../../../../../modules/validation/types";
+import { sendMessageToChat } from "../../../../../controllers/chat";
+
+interface NewMessageProps {
+  chatId: number;
+}
 
 export class NewMessage extends Block {
-  constructor() {
+  constructor(props: NewMessageProps) {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
       if (target) {
         this.state.values[target.name] = target.value;
       }
     };
-    const onBlur = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      if (target) {
-        this.state.validators[target.name]();
-      }
-    };
+
     const onFocus = (e: Event) => {
       const target = e.target as HTMLInputElement;
       if (target) {
@@ -24,23 +25,29 @@ export class NewMessage extends Block {
       }
     };
     const onSubmit = (e: Event) => {
-      this.validate();
-      console.log("/newmessage", this.state.values);
+      if (this.validate()) {
+        sendMessageToChat(this.props.chatId, this.state.values.message);
+        this.state.values.message = "";
+        this.setState(this.state);
+      }
+
       e.preventDefault();
     };
     super({
+      ...props,
       events: {
         input: onChange,
         focusin: onFocus,
-        focusout: onBlur,
         submit: onSubmit,
       },
     });
   }
-  validate() {
-    Object.values(this.state.validators).forEach((value) => {
-      (value as () => void)();
-    });
+  validate(): boolean {
+    return Object.values(
+      this.state.validators as () => ValidationResult[]
+    ).reduce((prev: boolean, cur: () => ValidationResult) => {
+      return prev && cur().isSuccess;
+    }, true);
   }
   protected getStateFromProps(): void {
     this.state = {
@@ -59,6 +66,7 @@ export class NewMessage extends Block {
             this.state.errors.message = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
       },
     };
@@ -86,6 +94,7 @@ export class NewMessage extends Block {
                 text="Ок"
                 mode="primary"                 
                 className='new-message__button'
+                onClick=onSendMessage
             }}}   
         </form>
         `;

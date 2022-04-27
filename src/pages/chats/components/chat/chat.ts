@@ -1,6 +1,5 @@
 import "./chat.css";
 import { Block } from "../../../../core";
-import { DailyMessages } from "../../../../models/chat";
 
 interface ChatBlockProps {
   chat: Chat;
@@ -63,13 +62,13 @@ export class ChatBlock extends Block<ChatBlockProps> {
                 {{/each}}               
             </div>
             <footer class="chat__footer">            
-                {{{ NewMessage }}}
+                {{{ NewMessage chatId=chat.id}}}
             </footer>
             {{#if showAddUserDialog}}           
-              {{{ AddUserToChatBlock chatId=id}}}
+              {{{ AddUserToChatBlock chatId=chat.id}}}
             {{/if}}
             {{#if showRemoveUserDialog}}           
-              {{{ RemoveUserFromChatBlock chatId=id}}}
+              {{{ RemoveUserFromChatBlock chatId=chat.id}}}
             {{/if}}
         </div>
         `;

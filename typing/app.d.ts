@@ -23,7 +23,7 @@ declare global {
     user: User | null;
     chats: Chat[] | null;
     selectedChat: Chat | null;
-    selectedChatMessages: ChatMessage[] | null;
+    selectedChatMessages: DailyMessages[] | null;
   };
 
   export type User = {

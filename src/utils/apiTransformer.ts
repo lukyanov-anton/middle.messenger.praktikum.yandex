@@ -35,12 +35,16 @@ export const transformChats = (data: ChatDto[]): Chat[] => {
   });
 };
 
-export const transformChatMessage = (data: ChatMessageDto): ChatMessage => {
+export const transformChatMessage = (
+  data: ChatMessageDto,
+  userId: number
+): ChatMessage => {
   return {
     id: data.id,
     isRead: data.is_read,
     content: data.content,
     userId: data.user_id,
     chatId: data.chat_id,
+    direction: data.user_id === userId ? "out" : "in",
   } as ChatMessage;
 };
