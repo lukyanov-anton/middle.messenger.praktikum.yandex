@@ -76,10 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .use("/profile/changeavatar", ChangeAvatarPage)
     .use("/chats", ChatsPage)
     .use("/chats/add", ChatCreatePage)
-
     .use("/error", InternalServerErrorPage)
     .use("*", NotFoundPage);
-  //.start();
 
   AppStore.on(StoreEvents.Updated, (prevState, nextState) => {
     if (
