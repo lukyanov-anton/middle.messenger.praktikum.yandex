@@ -23,7 +23,6 @@ export class ChatCreatePage extends Block {
     super({
       events: {
         input: onChange,
-
         submit: onSubmit,
       },
     });
