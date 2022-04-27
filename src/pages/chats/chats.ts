@@ -26,7 +26,7 @@ class ChatsPage extends Block {
     });
   }
 
-  async componentDidMount(props: any) {
+  async componentDidMount() {
     if (!this.props.store.getState().chats) {
       await getChats();
     }

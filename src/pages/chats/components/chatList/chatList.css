@@ -13,6 +13,7 @@
   height: 72px;
   border-top: 1px solid var(--color-gray);
 }
+
 .chat-list__item--selected {
   background-color: var(--color-light-blue);
   margin-right: -10px;

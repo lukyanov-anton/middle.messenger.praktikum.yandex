@@ -1,4 +1,4 @@
-import Block, { BlockClass2 } from "../Block";
+import { BlockClass2 } from "../Block";
 import Route from "./Route";
 
 export default class Router {
