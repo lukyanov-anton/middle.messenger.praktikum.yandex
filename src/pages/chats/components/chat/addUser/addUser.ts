@@ -34,9 +34,15 @@ export class AddUserToChatBlock extends Block {
   validate(): boolean {
     return Object.values(
       this.state.validators as () => ValidationResult[]
-    ).reduce((prev: boolean, cur: () => ValidationResult) => {
-      return prev && cur().isSuccess;
-    }, true);
+    ).reduce(
+      (
+        previusValidationResult: boolean,
+        currentValidationResult: () => ValidationResult
+      ) => {
+        return previusValidationResult && currentValidationResult().isSuccess;
+      },
+      true
+    );
   }
   protected getStateFromProps(): void {
     this.state = {
