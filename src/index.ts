@@ -81,14 +81,14 @@ document.addEventListener("DOMContentLoaded", () => {
     .use("*", NotFoundPage);
   //.start();
 
-  AppStore.on(
-    StoreEvents.Updated,
-    (prevState: AppState, nextState: AppState) => {
-      if (!prevState.appIsInited && nextState.appIsInited) {
-        router.start();
-      }
+  AppStore.on(StoreEvents.Updated, (prevState, nextState) => {
+    if (
+      !(prevState as AppState).appIsInited &&
+      (nextState as AppState).appIsInited
+    ) {
+      router.start();
     }
-  );
+  });
 });
 
 AppStore.dispatch(initApp);

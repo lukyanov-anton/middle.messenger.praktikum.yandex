@@ -8,6 +8,7 @@ type ProfilePageProps = {
   onLogout?: () => void;
 };
 class ProfilePage extends Block {
+  static componentName = "ProfilePage";
   constructor(props: ProfilePageProps) {
     const onLogout = (e: Event) => {
       logout();

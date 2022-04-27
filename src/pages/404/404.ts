@@ -2,6 +2,7 @@ import "./404.css";
 import { Block } from "../../core";
 
 export class NotFoundPage extends Block {
+  static componentName = "NotFoundPage";
   protected render(): string {
     return `   
             <main class="container"> 

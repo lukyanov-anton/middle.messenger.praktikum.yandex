@@ -2,6 +2,7 @@ import "./500.css";
 import { Block } from "../../core";
 
 export class InternalServerErrorPage extends Block {
+  static componentName = "InternalServerErrorPage";
   protected render(): string {
     return `   
             <main class="container"> 

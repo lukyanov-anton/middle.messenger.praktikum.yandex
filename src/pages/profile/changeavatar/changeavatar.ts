@@ -9,6 +9,7 @@ type ProfilePageProps = {
   user: User | null;
 };
 class ChangeAvatarPage extends Block {
+  static componentName = "ChangeAvatarPage";
   constructor(props: ProfilePageProps) {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;

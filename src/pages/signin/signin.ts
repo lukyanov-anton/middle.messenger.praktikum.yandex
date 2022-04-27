@@ -13,6 +13,7 @@ import { ValidationResult } from "../../modules/validation/types";
 import { register } from "../../controllers/auth";
 
 class SigninPage extends Block {
+  static componentName = "SigninPage";
   constructor() {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;

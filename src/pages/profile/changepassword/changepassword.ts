@@ -5,6 +5,7 @@ import { changePassword } from "../../../controllers/user";
 import { ValidationResult } from "../../../modules/validation/types";
 
 export class ChangePasswordPage extends Block {
+  static componentName = "ChangePasswordPage";
   constructor() {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;

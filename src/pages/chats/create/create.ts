@@ -5,6 +5,7 @@ import { required } from "../../../modules/validation/common";
 import { createChat } from "../../../controllers/chats";
 
 export class ChatCreatePage extends Block {
+  static componentName = "ChatCreatePage";
   constructor() {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
@@ -12,18 +13,7 @@ export class ChatCreatePage extends Block {
         this.state.values[target.name] = target.value;
       }
     };
-    /* const onBlur = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      if (target) {
-        this.state.validators[target.name]();
-      }
-    };
-    const onFocus = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      if (target) {
-        this.state.errors[target.name] = "";
-      }
-    }; */
+
     const onSubmit = async (e: Event) => {
       if (this.validate()) {
         await createChat(this.state.values.title);
@@ -33,8 +23,7 @@ export class ChatCreatePage extends Block {
     super({
       events: {
         input: onChange,
-        /* focusin: onFocus,
-        focusout: onBlur, */
+
         submit: onSubmit,
       },
     });

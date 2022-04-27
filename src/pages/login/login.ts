@@ -15,6 +15,7 @@ type LoginPageProps = {
 };
 
 class LoginPage extends Block {
+  static componentName = "LoginPage";
   constructor(props: LoginPageProps) {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;

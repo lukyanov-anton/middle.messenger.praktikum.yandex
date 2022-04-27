@@ -35,12 +35,6 @@
   "dependencies": {
     "handlebars": "4.7.7",
     "nanoid": "3.3.1"
-  },
-  "targets": {
-    "default": {
-      "engines": {
-        "browsers": ">= 50%"
-      }
-    }
-  }
+  }, 
+  "browserslist": "> 0.5%, last 2 versions, not dead"
 }

@@ -11,6 +11,7 @@ import { ValidationResult } from "../../../modules/validation/types";
 import { update } from "../../../controllers/user";
 
 export class ChangeDataPage extends Block {
+  static componentName = "ChangeDataPage";
   constructor() {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
