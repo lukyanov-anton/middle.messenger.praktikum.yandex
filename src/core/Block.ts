@@ -51,7 +51,7 @@ export default class Block<P = any> {
    * Хелпер, который проверяет, находится ли элемент в DOM дереве
    * И есть нет, триггерит событие COMPONENT_WILL_UNMOUNT
    */
-  _checkInDom() {
+  private _checkInDom() {
     const elementInDOM = document.body.contains(this._element);
 
     if (elementInDOM) {
