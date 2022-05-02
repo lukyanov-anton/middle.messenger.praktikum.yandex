@@ -1,46 +1,43 @@
 import "./changeavatar.css";
 import { Block } from "../../../core";
 import { required } from "../../../modules/validation/common";
+import { ValidationResult } from "../../../modules/validation/types";
+import { changeAvatar } from "../../../controllers/user";
+import { withUser } from "../../../core/hoc";
 
-export class ChangeAvatarPage extends Block {
-  constructor() {
+type ProfilePageProps = {
+  user: User | null;
+};
+class ChangeAvatarPage extends Block {
+  static componentName = "ChangeAvatarPage";
+  constructor(props: ProfilePageProps) {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
-      if (target) {
-        this.state.values[target.name] = target.value;
+      if (target && target.files?.length) {
+        this.state.values[target.name] = target.files[0];
       }
     };
-    const onBlur = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      if (target) {
-        this.state.validators[target.name]();
-      }
-    };
-    const onFocus = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      if (target) {
-        this.state.errors[target.name] = "";
-      }
-    };
+
     const onSubmit = (e: Event) => {
-      this.validate();
-      console.log("/changeavatar", this.state.values);
+      if (this.validate()) {
+        changeAvatar(this.state.values);
+      }
       e.preventDefault();
     };
     super({
+      ...props,
       events: {
-        input: onChange,
         change: onChange,
-        focusin: onFocus,
-        focusout: onBlur,
         submit: onSubmit,
       },
     });
   }
-  validate() {
-    Object.values(this.state.validators).forEach((value) => {
-      (value as () => void)();
-    });
+  validate(): boolean {
+    return Object.values(
+      this.state.validators as () => ValidationResult[]
+    ).reduce((prev: boolean, cur: () => ValidationResult) => {
+      return prev && cur().isSuccess;
+    }, true);
   }
 
   protected getStateFromProps(): void {
@@ -55,28 +52,30 @@ export class ChangeAvatarPage extends Block {
         avatar: () => {
           const validationResult = required(this.state.values.avatar);
           if (validationResult.isFailure) {
-            this.state.errors.avatar = "Задайте автатар.";
+            this.state.errors.avatar = "Задайте аватар.";
           } else {
             this.state.errors.avatar = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
       },
     };
   }
   protected render(): string {
-    const { errors } = this.state;
+    const { values, errors } = this.state;
     return ` 
         <div class="container">
             <div class="profile__avatar">
-                {{{ AvatarBlock }}}
+                {{{ AvatarBlock src=user.avatar }}}
             </div>
             <div class="profile__properies">
-              <form class="form form--vertical">
+              <form class="form form--vertical" enctype="multipart/form-data">
                   {{{ InputBlock                      
                       name="avatar"                     
                       type="file"
-                      accept=".png"                      
+                      accept=".png"
+                      value="${values.avatar}"             
                       error="${errors.avatar}"
                       className="form__field"
                   }}}                 
@@ -92,3 +91,5 @@ export class ChangeAvatarPage extends Block {
         `;
   }
 }
+
+export default withUser(ChangeAvatarPage);

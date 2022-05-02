@@ -1,0 +1,7 @@
+.dialog {
+  margin-top: calc(50vh - 100px);
+  background: var(--color-white);
+  box-shadow: 0 0 6px rgb(0 0 0 / 14%);
+  border-radius: 12px;
+  border: none;
+}

@@ -1,1 +1,1 @@
-export {ChangeAvatarPage as default} from './changeavatar'
+export { default as default } from "./changeavatar";

@@ -2,13 +2,22 @@ import "./chatInfo.css";
 import { Block } from "../../../../../core";
 
 interface ChatInfoProps {
-  title: string;
-  lastMessage: string;
-  lastMessageDate: Date;
-  newMessageCount: number;
+  chat: Chat;
+  onChatSelect: (chat: Chat) => void;
 }
 
-export class ChatInfo extends Block<ChatInfoProps> {
+export class ChatInfo extends Block {
+  static componentName = "ChatInfo";
+  constructor(props: ChatInfoProps) {
+    super({
+      ...props,
+      events: {
+        click: () => {
+          this.props.onChatSelect(this.props.chat);
+        },
+      },
+    });
+  }
   protected render(): string {
     return `
         <div class="chat-info">
@@ -16,14 +25,18 @@ export class ChatInfo extends Block<ChatInfoProps> {
                 {{{ImagePlaceholderBlock className="image-placeholder--47x47"}}}
             </div>            
             <div class="chat-info__title">
-                {{title}}
-            </div>            
+                {{chat.title}}
+            </div>  
+            {{#if chat.lastMessage}}          
             <div class="chat-info__last-message">
-                {{lastMessage}}
-            </div>
+                {{chat.lastMessage.content}}
+            </div>            
+            <time class="chat-info__time">{{timeFormat chat.lastMessage.time}}</time>
+            {{#if chat.unreadCount }}
+              <span class="chat-info__new-message-count">{{chat.unreadCount}}</span>
+            {{/if}}
+            {{/if}}
             
-            <time class="chat-info__time">{{timeFormat lastMessageDate}}</time>
-            <span class="chat-info__new-message-count">{{newMessageCount}}</span>
         </div>
         `;
   }

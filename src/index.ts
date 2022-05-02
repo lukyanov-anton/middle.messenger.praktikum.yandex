@@ -1,11 +1,19 @@
 import "./styles/app.css";
-import { renderDOM, registerComponent, registerDateHelper } from "./helpers";
+import {
+  registerComponent,
+  registerDateHelper,
+  registerIfHelper,
+} from "./helpers";
+
 import LoginPage from "./pages/login";
 import SigninPage from "./pages/signin";
 import ChatsPage from "./pages/chats";
+import ChatCreatePage from "./pages/chats/create";
+
 import ProfilePage from "./pages/profile";
 import ChangeDataPage from "./pages/profile/changedata";
 import ChangePasswordPage from "./pages/profile/changepassword";
+import ChangeAvatarPage from "./pages/profile/changeavatar";
 import NotFoundPage from "./pages/404";
 import InternalServerErrorPage from "./pages/500";
 import Placeholder from "./pages/chats/components/placeholder";
@@ -22,8 +30,18 @@ import ButtonBlock from "./components/button";
 import ImagePlaceholderBlock from "./components/imagePlaceholder";
 import AvatarBlock from "./components/avatar";
 import PropertyBlock from "./components/property";
+import ErrorBlock from "./components/error";
+import LoadingBlock from "./components/loading";
+import AddUserToChatBlock from "./pages/chats/components/chat/addUser";
+import RemoveUserFromChatBlock from "./pages/chats/components/chat/removeUser";
+
+import { AppStore } from "./store";
+import { Router } from "./core/router";
+import { initApp } from "./controllers/initApp";
+import { StoreEvents } from "./core";
 
 registerDateHelper();
+registerIfHelper();
 registerComponent(LinkBlock);
 registerComponent(InputBlock);
 registerComponent(ButtonBlock);
@@ -38,44 +56,37 @@ registerComponent(MessageBlock);
 registerComponent(NewMessage);
 registerComponent(AvatarBlock);
 registerComponent(PropertyBlock);
+registerComponent(ErrorBlock);
+registerComponent(LoadingBlock);
+registerComponent(AddUserToChatBlock);
+registerComponent(RemoveUserFromChatBlock);
 
 document.addEventListener("DOMContentLoaded", () => {
-  const hash = document.location.hash;
-  switch (hash) {
-    case "#login": {
-      renderDOM("#app", LoginPage);
-      break;
-    }
-    case "#signin": {
-      renderDOM("#app", SigninPage);
-      break;
-    }
-    case "#chats": {
-      renderDOM("#app", ChatsPage);
-      break;
-    }
-    case "#profile": {
-      renderDOM("#app", ProfilePage);
-      break;
-    }
-    case "#profile/changepassword": {
-      renderDOM("#app", ChangePasswordPage);
-      break;
-    }
-    case "#profile/changedata": {
-      renderDOM("#app", ChangeDataPage);
-      break;
-    }
-    case "#404": {
-      renderDOM("#app", NotFoundPage);
-      break;
-    }
-    case "#500": {
-      renderDOM("#app", InternalServerErrorPage);
-      break;
-    }
+  const router = new Router("#app");
 
-    default:
-      renderDOM("#app", LoginPage);
-  }
+  window.router = router;
+
+  router
+    .use("/", LoginPage, { title: "Вход" })
+    .use("/login", LoginPage, { title: "Вход" })
+    .use("/signin", SigninPage, { title: "Регистрация" })
+    .use("/profile", ProfilePage, { title: "Профиль" })
+    .use("/profile/changepassword", ChangePasswordPage)
+    .use("/profile/changedata", ChangeDataPage)
+    .use("/profile/changeavatar", ChangeAvatarPage)
+    .use("/chats", ChatsPage)
+    .use("/chats/add", ChatCreatePage)
+    .use("/error", InternalServerErrorPage)
+    .use("*", NotFoundPage);
+
+  AppStore.on(StoreEvents.Updated, (prevState, nextState) => {
+    if (
+      !(prevState as AppState).appIsInited &&
+      (nextState as AppState).appIsInited
+    ) {
+      router.start();
+    }
+  });
 });
+
+AppStore.dispatch(initApp);

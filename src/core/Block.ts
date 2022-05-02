@@ -7,11 +7,17 @@ import Handlebars from "handlebars";
 
 type Events = Values<typeof Block.EVENTS>;
 
+export interface BlockClass2<P> extends Function {
+  new (props?: P): Block<P>;
+  componentName?: string;
+}
+
 export default class Block<P = any> {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
     FLOW_CDU: "flow:component-did-update",
+    FLOW_CWU: "flow:component-will-unmount",
     FLOW_RENDER: "flow:render",
   } as const;
 
@@ -26,6 +32,8 @@ export default class Block<P = any> {
   protected state: any = {};
   protected refs: { [key: string]: HTMLElement } = {};
 
+  public static componentName?: string;
+
   public constructor(props?: P) {
     const eventBus = new EventBus<Events>();
     this.eventBus = () => eventBus;
@@ -39,6 +47,21 @@ export default class Block<P = any> {
     eventBus.emit(Block.EVENTS.INIT, this.props);
   }
 
+  /**
+   * Хелпер, который проверяет, находится ли элемент в DOM дереве
+   * И есть нет, триггерит событие COMPONENT_WILL_UNMOUNT
+   */
+  private _checkInDom() {
+    const elementInDOM = document.body.contains(this._element);
+
+    if (elementInDOM) {
+      setTimeout(() => this._checkInDom(), 1000);
+      return;
+    }
+
+    this.eventBus().emit(Block.EVENTS.FLOW_CWU, this.props);
+  }
+
   _registerEvents(eventBus: EventBus<Events>) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(
@@ -50,6 +73,7 @@ export default class Block<P = any> {
       this._componentDidUpdate.bind(this) as Listener<unknown[]>
     );
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
   }
 
   _createResources() {
@@ -66,10 +90,17 @@ export default class Block<P = any> {
   }
 
   _componentDidMount(props: P) {
+    this._checkInDom();
     this.componentDidMount(props);
   }
 
   componentDidMount(props: P) {}
+
+  _componentWillUnmount() {
+    this.eventBus().destroy();
+    this.componentWillUnmount();
+  }
+  componentWillUnmount() {}
 
   _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps);
@@ -83,7 +114,7 @@ export default class Block<P = any> {
     return true;
   }
 
-  setProps = (nextProps: P) => {
+  setProps = (nextProps: Partial<P>) => {
     if (!nextProps) {
       return;
     }
@@ -232,5 +263,6 @@ export default class Block<P = any> {
 
   hide() {
     this.getContent().style.display = "none";
+    //this.eventBus().destroy();
   }
 }

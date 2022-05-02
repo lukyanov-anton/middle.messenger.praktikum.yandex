@@ -4,11 +4,12 @@ import Handlebars, { HelperOptions } from "handlebars";
 
 interface BlockConstructable<Props = any> {
   new (props: Props): Block;
+  componentName?: string;
 }
 
 export default function registerComponent(Component: BlockConstructable) {
   Handlebars.registerHelper(
-    Component.name,
+    Component.componentName || Component.name,
     function ({ hash: { ref, ...hash }, data }: HelperOptions) {
       if (!data.root.children) {
         data.root.children = {};

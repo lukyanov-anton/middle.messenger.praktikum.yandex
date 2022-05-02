@@ -1,8 +1,11 @@
 import "./changepassword.css";
 import { Block } from "../../../core";
 import { validatePassword } from "../../../modules/validation";
+import { changePassword } from "../../../controllers/user";
+import { ValidationResult } from "../../../modules/validation/types";
 
 export class ChangePasswordPage extends Block {
+  static componentName = "ChangePasswordPage";
   constructor() {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
@@ -23,8 +26,9 @@ export class ChangePasswordPage extends Block {
       }
     };
     const onSubmit = (e: Event) => {
-      this.validate();
-      console.log("/changepassword", this.state.values);
+      if (this.validate()) {
+        changePassword(this.state.values);
+      }
       e.preventDefault();
     };
     super({
@@ -36,10 +40,12 @@ export class ChangePasswordPage extends Block {
       },
     });
   }
-  validate() {
-    Object.values(this.state.validators).forEach((value) => {
-      (value as () => void)();
-    });
+  validate(): boolean {
+    return Object.values(
+      this.state.validators as () => ValidationResult[]
+    ).reduce((prev: boolean, cur: () => ValidationResult) => {
+      return prev && cur().isSuccess;
+    }, true);
   }
   protected getStateFromProps(): void {
     this.state = {
@@ -65,6 +71,7 @@ export class ChangePasswordPage extends Block {
             nextSate.errors.oldPassword = "";
           }
           this.setState(nextSate);
+          return validationResult;
         },
         newPassword: () => {
           const nextSate = { ...this.state };
@@ -77,6 +84,7 @@ export class ChangePasswordPage extends Block {
             nextSate.errors.newPassword = "";
           }
           this.setState(nextSate);
+          return validationResult;
         },
         confirmNewPassword: () => {
           const nextSate = { ...this.state };
@@ -89,6 +97,7 @@ export class ChangePasswordPage extends Block {
             nextSate.errors.confirmNewPassword = "";
           }
           this.setState(nextSate);
+          return validationResult;
         },
       },
     };
@@ -99,7 +108,7 @@ export class ChangePasswordPage extends Block {
     return `  
         <div class="container">
             <div class="profile__avatar">
-                <a href="changeavatar.html">{{{ AvatarBlock }}}</a>      
+                <a href="/profile/changeavatar">{{{ AvatarBlock }}}</a>      
             </div>
             <div class="profile__properies">
                 <form class="form form--vertical">

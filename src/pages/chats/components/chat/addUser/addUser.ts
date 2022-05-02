@@ -1,0 +1,96 @@
+import "./addUser.css";
+import { Block } from "../../../../../core";
+import { addUserToChat } from "../../../../../controllers/chat";
+import { ValidationResult } from "../../../../../modules/validation/types";
+import { required } from "../../../../../modules/validation/common";
+
+interface AddUserToChatProps {
+  chatId: number;
+}
+
+export class AddUserToChatBlock extends Block {
+  static componentName = "AddUserToChatBlock";
+  constructor(props: AddUserToChatProps) {
+    const onChange = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (target) {
+        this.state.values[target.name] = target.value;
+      }
+    };
+    const onSubmit = (e: Event) => {
+      if (this.validate()) {
+        addUserToChat(this.state.values.login, this.props.chatId);
+      }
+      e.preventDefault();
+    };
+    super({
+      ...props,
+      events: {
+        input: onChange,
+        submit: onSubmit,
+      },
+    });
+  }
+  validate(): boolean {
+    return Object.values(
+      this.state.validators as () => ValidationResult[]
+    ).reduce(
+      (
+        previusValidationResult: boolean,
+        currentValidationResult: () => ValidationResult
+      ) => {
+        return previusValidationResult && currentValidationResult().isSuccess;
+      },
+      true
+    );
+  }
+  protected getStateFromProps(): void {
+    this.state = {
+      values: {
+        login: "",
+      },
+      errors: {
+        login: "",
+      },
+      validators: {
+        login: () => {
+          const nextSate = { ...this.state };
+          const validationResult = required(this.state.values.login);
+          if (validationResult.isFailure) {
+            nextSate.errors.login = validationResult.error;
+          } else {
+            nextSate.errors.login = "";
+          }
+          this.setState(nextSate);
+          return validationResult;
+        },
+      },
+    };
+  }
+
+  protected render(): string {
+    const { values, errors } = this.state;
+    return `  
+        <dialog open class="dialog">           
+            <div>
+                <h2>Добавить пользователя</h2>
+                <form class="form form--vertical">
+                    {{{ InputBlock
+                        placeholder="Логин" 
+                        name="login"
+                        type="text"
+                        value="${values.login}"
+                        error="${errors.login}"
+                        className="form__field"
+                    }}}
+                    {{{ ButtonBlock 
+                        text="Добавить" 
+                        mode="primary" 
+                        onClick=onSubmit
+                        className="form__field"
+                    }}}       
+                </form>          
+            </div>    
+        </dialog>`;
+  }
+}

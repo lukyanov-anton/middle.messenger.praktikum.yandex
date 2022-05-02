@@ -1,20 +1,47 @@
 import "./chat.css";
 import { Block } from "../../../../core";
-import { DailyMessages } from "../../../../models/chat";
-import { ChatsStub } from "../../../../models/chat/stub";
 
 interface ChatBlockProps {
-  id: number;
-  title: string;
-  image: string;
+  chat: Chat;
   messages: DailyMessages[];
+  showAddUserDialog: boolean;
+  showRemoveUserDialog: boolean;
+  addUserClick: () => void;
+  cancelAddUserClick: () => void;
+  removeUserClick: () => void;
+  cancelRemoveUserClick: () => void;
 }
 
 export class ChatBlock extends Block<ChatBlockProps> {
+  static componentName = "ChatBlock";
   constructor(props: ChatBlockProps) {
-    const { id: chatId } = props;
-    const chat = ChatsStub.find((chat) => chat.id == chatId);
-    super({ ...props, ...chat });
+    super(props);
+    this.setProps({
+      showAddUserDialog: false,
+      showRemoveUserDialog: false,
+      addUserClick: () => {
+        this.setProps({
+          showAddUserDialog: !this.props.showAddUserDialog,
+          showRemoveUserDialog: false,
+        });
+      },
+      cancelAddUserClick: () => {
+        this.setProps({
+          showAddUserDialog: false,
+        });
+      },
+      removeUserClick: () => {
+        this.setProps({
+          showRemoveUserDialog: !this.props.showRemoveUserDialog,
+          showAddUserDialog: false,
+        });
+      },
+      cancelRemoveUserClick: () => {
+        this.setProps({
+          showRemoveUserDialog: false,
+        });
+      },
+    });
   }
   protected render(): string {
     return `
@@ -23,7 +50,19 @@ export class ChatBlock extends Block<ChatBlockProps> {
                 <div class="header__image">
                     {{{ImagePlaceholderBlock }}}
                 </div>                
-                <h1 class="header__title">{{title}}</h1>
+                <h1 class="header__title">{{chat.title}}</h1>
+                {{{ ButtonBlock 
+                  text="Добавить пользователя"
+                  onClick=addUserClick
+                  mode="text" 
+                  className="button--text header__button"
+                }}}
+                {{{ ButtonBlock 
+                  text="Удалить пользователя"
+                  onClick=removeUserClick
+                  mode="text" 
+                  className="button--text header__button"
+                }}}         
                 <div class="header__controls"></div>
             </header>
             <div class="chat__message-ribbon">
@@ -32,8 +71,14 @@ export class ChatBlock extends Block<ChatBlockProps> {
                 {{/each}}               
             </div>
             <footer class="chat__footer">            
-                {{{ NewMessage }}}
+                {{{ NewMessage chatId=chat.id}}}
             </footer>
+            {{#if showAddUserDialog}}           
+              {{{ AddUserToChatBlock chatId=chat.id}}}
+            {{/if}}
+            {{#if showRemoveUserDialog}}           
+              {{{ RemoveUserFromChatBlock chatId=chat.id}}}
+            {{/if}}
         </div>
         `;
   }

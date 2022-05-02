@@ -2,6 +2,7 @@ import "./404.css";
 import { Block } from "../../core";
 
 export class NotFoundPage extends Block {
+  static componentName = "NotFoundPage";
   protected render(): string {
     return `   
             <main class="container"> 
@@ -9,7 +10,7 @@ export class NotFoundPage extends Block {
                     <div class='page-404__message'>
                     </div>                    
                     {{{ LinkBlock 
-                      to="chats.html" 
+                      to="/chats" 
                       text="Назад к чатам"}}}
                 </div>                
             </main>

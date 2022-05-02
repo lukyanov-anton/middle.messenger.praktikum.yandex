@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "parcel ./src/stubPages/*.html  --no-cache",
-    "build": "parcel build ./src/stubPages/*.html --no-cache",
+    "dev": "parcel ./src/index.html  --no-cache",
+    "build": "parcel build ./src/index.html --no-cache",
     "start": "node ./server.js",
     "eslint": "eslint ./src --fix --ext .js,.ts",
     "stylelint-check": "stylelint-config-prettier-check",
@@ -21,7 +21,7 @@
     "@typescript-eslint/parser": "5.17.0",
     "eslint": "8.12.0",
     "express": "4.17.3",
-    "parcel": "2.4.0",
+    "parcel": "2.5.0",
     "postcss-import": "12.0.1",
     "stylelint": "14.6.1",
     "stylelint-config-prettier": "9.0.3",
@@ -29,10 +29,12 @@
     "typescript": "4.6.3"
   },
   "engines": {
-    "node": "15.8.0"
+    "node": "16.13.2",
+    "npm": "8.1.2"
   },
   "dependencies": {
     "handlebars": "4.7.7",
     "nanoid": "3.3.1"
-  }
+  }, 
+  "browserslist": "> 0.5%, last 2 versions, not dead"
 }

@@ -1,6 +1,5 @@
 import "./message.css";
 import { Block } from "../../../../../core";
-import { MessageDirection } from "../../../../../models/chat";
 
 interface MessageProps {
   id: number;
@@ -10,6 +9,7 @@ interface MessageProps {
 }
 
 export class MessageBlock extends Block<MessageProps> {
+  static componentName = "MessageBlock";
   protected render(): string {
     return `
         <div data-id="{{id}}" class="message message--{{direction}}">

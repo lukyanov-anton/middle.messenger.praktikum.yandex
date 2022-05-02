@@ -10,6 +10,7 @@
   max-width: 400px;
   height: 100%;
   border-right: 1px solid var(--color-gray);
+  overflow-y: auto;
 }
 
 .chats__right-panel {

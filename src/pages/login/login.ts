@@ -1,9 +1,22 @@
 import "./login.css";
-import { Block } from "../../core";
+import { Block, Store } from "../../core";
 import { validatePassword, validateLogin } from "../../modules/validation";
+import { withStore, withRouter } from "../../core";
+import { isNamedInput } from "../../utils";
+import { login } from "../../controllers/auth";
+import { Router } from "../../core/router";
+import { ValidationResult } from "../../modules/validation/types";
 
-export class LoginPage extends Block {
-  constructor() {
+type LoginPageProps = {
+  router: Router;
+  store: Store<AppState>;
+  formError?: () => string | null;
+  onLogout?: () => void;
+};
+
+class LoginPage extends Block {
+  static componentName = "LoginPage";
+  constructor(props: LoginPageProps) {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
       if (target) {
@@ -11,9 +24,8 @@ export class LoginPage extends Block {
       }
     };
     const onBlur = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      if (target) {
-        this.state.validators[target.name]();
+      if (isNamedInput(e.target)) {
+        this.state.validators[e.target.name]();
       }
     };
     const onFocus = (e: Event) => {
@@ -24,11 +36,14 @@ export class LoginPage extends Block {
       }
     };
     const onSubmit = (e: Event) => {
-      this.validate();
-      console.log("/login", this.state.values);
+      if (this.validate()) {
+        login(this.state.values);
+      }
       e.preventDefault();
     };
+
     super({
+      ...props,
       events: {
         input: onChange,
         focusin: onFocus,
@@ -36,10 +51,25 @@ export class LoginPage extends Block {
         submit: onSubmit,
       },
     });
+
+    this.setProps({
+      formError: () => {
+        return this.props.store.getState().formError;
+      },
+    });
   }
-  validate() {
-    Object.values(this.state.validators).forEach((value) => {
-      (value as () => void)();
+
+  componentDidMount() {
+    if (this.props.store.getState().user) {
+      this.props.router.go("/profile");
+    }
+  }
+
+  validate(): boolean {
+    return Object.values(
+      this.state.validators as () => ValidationResult[]
+    ).reduce((prev: () => ValidationResult, cur: () => ValidationResult) => {
+      return prev().isSuccess && cur().isSuccess;
     });
   }
   protected getStateFromProps(): void {
@@ -53,7 +83,7 @@ export class LoginPage extends Block {
         password: "",
       },
       validators: {
-        login: () => {
+        login: (): ValidationResult => {
           const validationResult = validateLogin(this.state.values.login);
           if (validationResult.isFailure) {
             this.state.errors.login = validationResult.error;
@@ -61,8 +91,9 @@ export class LoginPage extends Block {
             this.state.errors.login = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
-        password: () => {
+        password: (): ValidationResult => {
           const nextSate = { ...this.state };
           const validationResult = validatePassword(this.state.values.password);
           if (validationResult.isFailure) {
@@ -71,6 +102,7 @@ export class LoginPage extends Block {
             nextSate.errors.password = "";
           }
           this.setState(nextSate);
+          return validationResult;
         },
       },
     };
@@ -83,7 +115,8 @@ export class LoginPage extends Block {
                 <header class="card__header">
                 <p class="card__title">Вход</p>
                 </header>
-                <div class="card__content">                
+                <div class="card__content">
+                    {{#if isLoading}}{{{LoadingBlock }}}{{/if}}                    
                     <form class="form form--vertical login-page__form">
                         {{{ InputBlock 
                             label="Логин" 
@@ -110,13 +143,14 @@ export class LoginPage extends Block {
                             mode="primary" 
                             onClick=onSubmit
                             className="form__field"
-                        }}}       
+                        }}}                           
                         <div class="login-page__link">
                             {{{ LinkBlock 
-                                to='./signin.html' 
+                                to='/signin' 
                                 text="Ещё не зарегистрированы?"
                             }}}
                         </div>
+                        {{{ErrorBlock value=formError}}}
                     </form>
                 </div>    
             </div>
@@ -124,3 +158,5 @@ export class LoginPage extends Block {
         `;
   }
 }
+
+export default withRouter(withStore(LoginPage));

@@ -7,8 +7,13 @@ import {
   validateEmail,
   validateName,
 } from "../../modules/validation";
+import { isNamedInput } from "../../utils";
+import { withRouter } from "../../core/hoc/withRouter";
+import { ValidationResult } from "../../modules/validation/types";
+import { register } from "../../controllers/auth";
 
-export class SigninPage extends Block {
+class SigninPage extends Block {
+  static componentName = "SigninPage";
   constructor() {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
@@ -17,9 +22,8 @@ export class SigninPage extends Block {
       }
     };
     const onBlur = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      if (target) {
-        this.state.validators[target.name]();
+      if (isNamedInput(e.target)) {
+        this.state.validators[e.target.name]();
       }
     };
     const onFocus = (e: Event) => {
@@ -29,8 +33,9 @@ export class SigninPage extends Block {
       }
     };
     const onSubmit = (e: Event) => {
-      this.validate();
-      console.log("/signin", this.state.values);
+      if (this.validate()) {
+        register(this.state.values);
+      }
       e.preventDefault();
     };
     super({
@@ -42,10 +47,12 @@ export class SigninPage extends Block {
       },
     });
   }
-  validate() {
-    Object.values(this.state.validators).forEach((value) => {
-      (value as () => void)();
-    });
+  validate(): boolean {
+    return Object.values(
+      this.state.validators as () => ValidationResult[]
+    ).reduce((prev: boolean, cur: () => ValidationResult) => {
+      return prev && cur().isSuccess;
+    }, true);
   }
   protected getStateFromProps(): void {
     this.state = {
@@ -76,6 +83,7 @@ export class SigninPage extends Block {
             this.state.errors.email = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
         login: () => {
           const validationResult = validateLogin(this.state.values.login);
@@ -85,6 +93,7 @@ export class SigninPage extends Block {
             this.state.errors.login = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
         first_name: () => {
           const validationResult = validateName(this.state.values.first_name);
@@ -94,6 +103,7 @@ export class SigninPage extends Block {
             this.state.errors.first_name = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
         second_name: () => {
           const validationResult = validateName(this.state.values.second_name);
@@ -103,6 +113,7 @@ export class SigninPage extends Block {
             this.state.errors.second_name = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
         phone: () => {
           const validationResult = validatePhone(this.state.values.phone);
@@ -112,6 +123,7 @@ export class SigninPage extends Block {
             this.state.errors.phone = "";
           }
           this.setState(this.state);
+          return validationResult;
         },
         password: () => {
           const nextSate = { ...this.state };
@@ -122,6 +134,7 @@ export class SigninPage extends Block {
             nextSate.errors.password = "";
           }
           this.setState(nextSate);
+          return validationResult;
         },
         password_confirm: () => {
           const nextSate = { ...this.state };
@@ -134,6 +147,7 @@ export class SigninPage extends Block {
             nextSate.errors.password_confirm = "";
           }
           this.setState(nextSate);
+          return validationResult;
         },
       },
     };
@@ -225,7 +239,9 @@ export class SigninPage extends Block {
                             className="form__field"
                         }}}
                         <div class="signin-page__link">                  
-                            {{{ LinkBlock to='login.html' text="Войти"}}}
+                            {{{ LinkBlock 
+                              to='/login' 
+                              text="Войти"}}}
                         </div>
                     </form> 
                 </div>    
@@ -234,3 +250,4 @@ export class SigninPage extends Block {
         `;
   }
 }
+export default withRouter(SigninPage);

@@ -39,11 +39,15 @@
   font-weight: 600;
 }
 
+.header__button {
+  margin-right: 7px;
+}
+
 .header__controls {
   width: 30px;
 }
 
 .header__controls::after {
-  content: '\2807';
+  content: "\2807";
   font-size: 30px;
 }
