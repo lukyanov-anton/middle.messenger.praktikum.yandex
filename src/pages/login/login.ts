@@ -14,7 +14,7 @@ type LoginPageProps = {
   onLogout?: () => void;
 };
 
-class LoginPage extends Block {
+export class LoginPage extends Block<LoginPageProps> {
   static componentName = "LoginPage";
   constructor(props: LoginPageProps) {
     const onChange = (e: Event) => {
@@ -42,8 +42,17 @@ class LoginPage extends Block {
       e.preventDefault();
     };
 
-    super({
+    /* super({
       ...props,
+      events: {
+        input: onChange,
+        focusin: onFocus,
+        focusout: onBlur,
+        submit: onSubmit,
+      }
+    }); */
+    super(props);
+    this.setState({
       events: {
         input: onChange,
         focusin: onFocus,

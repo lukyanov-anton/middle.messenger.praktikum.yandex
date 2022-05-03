@@ -2,10 +2,7 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
-    "typeRoots": [
-      "node_modules/@types",
-      "typing/app.d.ts"
-    ],
+    "typeRoots": ["node_modules/@types", "typing/app.d.ts"],
     "declaration": false,
     "sourceMap": true,
     "outDir": "dist",
@@ -16,6 +13,8 @@
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "removeComments": true,
+    "noEmitOnError": false
   }
 }

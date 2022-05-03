@@ -20,9 +20,10 @@ export default function isEqual(lhs: PlainObject, rhs: PlainObject): boolean {
     return false;
   }
   for (const [key, value] of Object.entries(lhs)) {
-    const rightValue = rhs[key];
+    const rightValue = rhs[key] as unknown;
     if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
-      if (isEqual(value, rightValue)) {
+      //todo это касяк в теории, пока чтобы не ругался typescript привел к типу PlainObject
+      if (isEqual(value as PlainObject, rightValue as PlainObject)) {
         continue;
       }
       return false;

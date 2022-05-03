@@ -1,4 +1,4 @@
-import { Block } from "../core";
+/* import { Block } from "../core";
 
 export enum Pages {
   Login = "login",
@@ -13,3 +13,4 @@ const map: Record<Pages, typeof Block> = {
 export const getPageComponent = (page: Pages): typeof Block => {
   return map[page];
 };
+ */
