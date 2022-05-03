@@ -12,6 +12,12 @@ type LoginPageProps = {
   store: Store<AppState>;
   formError?: () => string | null;
   onLogout?: () => void;
+  events: {
+    input: (e: Event) => void;
+    focusin: (e: Event) => void;
+    focusout: (e: Event) => void;
+    submit: (e: Event) => void;
+  };
 };
 
 export class LoginPage extends Block<LoginPageProps> {
@@ -42,17 +48,8 @@ export class LoginPage extends Block<LoginPageProps> {
       e.preventDefault();
     };
 
-    /* super({
+    super({
       ...props,
-      events: {
-        input: onChange,
-        focusin: onFocus,
-        focusout: onBlur,
-        submit: onSubmit,
-      }
-    }); */
-    super(props);
-    this.setState({
       events: {
         input: onChange,
         focusin: onFocus,

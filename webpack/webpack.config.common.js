@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { EnvironmentPlugin } = require("webpack");
 
 const rootPath = path.resolve(__dirname, "..");
 const srcPath = path.resolve(__dirname, "..", "src");
@@ -60,6 +61,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(srcPath, "index.html"),
       filename: path.resolve(distPath, "index.html"),
+    }),
+    new EnvironmentPlugin({
+      API_ENDPOINT: "https://ya-praktikum.tech/api/v2",
+      WS_CHAT_ENDPOINT: "wss://ya-praktikum.tech/ws/chats",
     }),
   ],
 };
