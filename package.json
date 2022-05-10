@@ -55,5 +55,8 @@
     "hooks": {
       "pre-commit": "npm run all lint:css eslint"
     }
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   }
 }

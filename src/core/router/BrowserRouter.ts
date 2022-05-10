@@ -72,7 +72,7 @@ export default class Router {
     const notfoundRoute = this.routes.find((route) => route.match("*"));
     if (notfoundRoute) return notfoundRoute;
     throw new Error(
-      `Route for path '${pathname}' not fount and catch rout not register.`
+      `Route for path '${pathname}' not found and catch rout not register.`
     );
   }
 }
