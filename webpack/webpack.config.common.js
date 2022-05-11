@@ -48,9 +48,9 @@ module.exports = {
         use: [
           {
             loader: "ts-loader",
-            /*  options: {
+            options: {
               configFile: path.resolve(rootPath, "tsconfig.json"),
-            }, */
+            },
           },
         ],
         exclude: /(node_modules)/,
