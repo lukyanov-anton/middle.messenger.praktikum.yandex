@@ -100,17 +100,29 @@ const _onMessage = (userId: number, event: MessageEvent) => {
     const data = JSON.parse(event.data);
     let messages: DailyMessages[] = [];
     if (Array.isArray(data)) {
-      messages = [
+      const dailyMessages = data
+        .map((obj) => transformChatMessage(obj, userId))
+        .reduce((acc: Record<string, ChatMessage[]>, msg) => {
+          (acc[msg.time.toDateString()] =
+            acc[msg.time.toDateString()] || []).push(msg);
+          return acc;
+        }, {});
+      messages = Object.entries(dailyMessages).map(([day, msgs]) => ({
+        date: new Date(day),
+        messages: msgs,
+      }));
+      /* messages = [
         {
           date: new Date(),
           messages: data.map((obj) => transformChatMessage(obj, userId)),
         },
-      ];
+      ]; */
     } else {
+      const msg = transformChatMessage(data, userId);
       messages = [
         {
-          date: new Date(),
-          messages: [transformChatMessage(data, userId)],
+          date: msg.time,
+          messages: [msg],
         },
       ];
     }
