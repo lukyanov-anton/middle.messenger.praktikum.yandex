@@ -1,5 +1,5 @@
 import "./changedata.css";
-import { Block } from "../../../core";
+import { Block, withUser } from "../../../core";
 import {
   validateEmail,
   validateLogin,
@@ -10,9 +10,12 @@ import { required } from "../../../modules/validation/common";
 import { ValidationResult } from "../../../modules/validation/types";
 import { update } from "../../../controllers/user";
 
-export class ChangeDataPage extends Block {
+type ChangeDataPageProps = {
+  user: User | null;
+};
+class ChangeDataPage extends Block {
   static componentName = "ChangeDataPage";
-  constructor() {
+  constructor(props: ChangeDataPageProps) {
     const onChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
       if (target) {
@@ -38,6 +41,7 @@ export class ChangeDataPage extends Block {
       e.preventDefault();
     };
     super({
+      ...props,
       events: {
         input: onChange,
         focusin: onFocus,
@@ -53,15 +57,15 @@ export class ChangeDataPage extends Block {
       return prev && cur().isSuccess;
     }, true);
   }
-  protected getStateFromProps(): void {
+  protected getStateFromProps(props: ChangeDataPageProps): void {
     this.state = {
       values: {
-        email: "",
-        login: "",
-        first_name: "",
-        second_name: "",
-        display_name: "",
-        phone: "",
+        email: props.user?.email,
+        login: props.user?.login,
+        first_name: props.user?.firstName,
+        second_name: props.user?.secondName,
+        display_name: props.user?.displayName,
+        phone: props.user?.phone,
       },
       errors: {
         email: "",
@@ -213,3 +217,4 @@ export class ChangeDataPage extends Block {
         </div>`;
   }
 }
+export default withUser(ChangeDataPage);
