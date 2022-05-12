@@ -46,5 +46,6 @@ export const transformChatMessage = (
     userId: data.user_id,
     chatId: data.chat_id,
     direction: data.user_id === userId ? "out" : "in",
+    time: new Date(data.time),
   } as ChatMessage;
 };

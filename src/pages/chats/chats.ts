@@ -23,7 +23,10 @@ class ChatsPage extends Block<ChatsPageProps> {
       },
       onChatSelect: async (chat: Chat) => {
         if (this.props.user !== null) {
-          this.props.store.dispatch({ selectedChat: chat });
+          this.props.store.dispatch({
+            selectedChat: chat,
+            selectedChatMessages: null,
+          });
           await connectToChat(chat.id, this.props.user.id);
         }
       },
