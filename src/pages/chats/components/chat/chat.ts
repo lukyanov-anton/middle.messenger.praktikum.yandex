@@ -74,10 +74,16 @@ export class ChatBlock extends Block<ChatBlockProps> {
                 {{{ NewMessage chatId=chat.id}}}
             </footer>
             {{#if showAddUserDialog}}           
-              {{{ AddUserToChatBlock chatId=chat.id}}}
+              {{{ AddUserToChatBlock 
+                chatId=chat.id
+                onCancel=cancelAddUserClick
+              }}}
             {{/if}}
             {{#if showRemoveUserDialog}}           
-              {{{ RemoveUserFromChatBlock chatId=chat.id}}}
+              {{{ RemoveUserFromChatBlock 
+                  chatId=chat.id
+                  onCancel=cancelRemoveUserClick
+              }}}
             {{/if}}
         </div>
         `;
