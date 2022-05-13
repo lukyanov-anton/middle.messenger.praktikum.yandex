@@ -45,7 +45,7 @@
     "webpack-merge": "5.8.0"
   },
   "engines": {
-    "node": "16.15.0"
+    "node": "12.22.12"
   },
   "dependencies": {
     "handlebars": "4.7.7",
