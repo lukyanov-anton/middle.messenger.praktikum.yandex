@@ -59,6 +59,4 @@
 - [Ссылка на PR Sprint 1](https://github.com/lukyanov-anton/middle.messenger.praktikum.yandex/pull/3)
 - [Ссылка на PR Sprint 2](https://github.com/lukyanov-anton/middle.messenger.praktikum.yandex/pull/4)
 - [Ссылка на PR Sprint 3](https://github.com/lukyanov-anton/middle.messenger.praktikum.yandex/pull/5)
-
-
-
+- [Ссылка на PR Sprint 4](https://github.com/lukyanov-anton/middle.messenger.praktikum.yandex/pull/11)
