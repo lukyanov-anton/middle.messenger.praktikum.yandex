@@ -116,7 +116,7 @@ export class LoginPage extends Block<LoginPageProps> {
   protected render(): string {
     const { values, errors } = this.state;
     return `  
-        <main class="container" > 
+          {{#BaseLayout}}
             <div class='card'>
                 <header class="card__header">
                 <p class="card__title">Вход</p>
@@ -160,7 +160,7 @@ export class LoginPage extends Block<LoginPageProps> {
                     </form>
                 </div>    
             </div>
-        </main>
+          {{/BaseLayout}}
         `;
   }
 }

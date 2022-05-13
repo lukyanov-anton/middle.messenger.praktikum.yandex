@@ -7,3 +7,4 @@ export { default as LinkBlock } from "./link";
 export { default as LoadingBlock } from "./loading";
 export { default as PropertyBlock } from "./property";
 export { default as SearchFieldBlock } from "./searchField";
+export { default as BaseLayout } from "./layouts/BaseLayout";

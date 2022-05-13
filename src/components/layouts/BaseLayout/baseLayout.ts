@@ -1,11 +1,25 @@
 import { Block } from "../../../core";
+import { withIsLoading } from "../../../core/hoc";
 import "./baseLayout";
 
-export class BaseLayout extends Block {
+interface BaseLayoutProps {
+  isLoading: boolean;
+  fullscrean: string;
+}
+class BaseLayout extends Block<BaseLayoutProps> {
   static componentName = "BaseLayout";
   protected render(): string {
     return `
-            <main class="container"> {{> @partial-block }}</main>
+        {{#if fullscrean}}
+          <main>
+        {{else}}
+          <main class="container {{className}}">
+        {{/if}}                
+          <div data-layout="1"></div>           
+          {{#if isLoading}} {{{LoadingBlock}}} {{/if}}   
+        </main>                  
         `;
   }
 }
+
+export default withIsLoading(BaseLayout);

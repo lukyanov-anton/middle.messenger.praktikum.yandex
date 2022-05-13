@@ -244,11 +244,20 @@ export default class Block<P = any> {
       if (!stub) {
         return;
       }
-
+      const stubChilds = stub.childNodes.length ? stub.childNodes : [];
       /**
        * Заменяем заглушку на component._element
        */
-      stub.replaceWith(component.getContent());
+      const content = component.getContent();
+      stub.replaceWith(content);
+      /**
+       * Ищем элемент layout-а, куда вставлять детей
+       */
+      const layoutContent = content.querySelector('[data-layout="1"]');
+
+      if (layoutContent && stubChilds.length) {
+        layoutContent.append(...stubChilds);
+      }
     });
 
     /**

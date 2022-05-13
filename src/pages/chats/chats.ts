@@ -33,7 +33,8 @@ class ChatsPage extends Block<ChatsPageProps> {
     });
   }
 
-  async componentDidMount() {
+  async componentDidMount(props: ChatsPageProps) {
+    super.componentDidMount(props);
     if (!this.props.store.getState().chats) {
       await getChats();
     }
@@ -46,7 +47,7 @@ class ChatsPage extends Block<ChatsPageProps> {
     }
 
     return `
-        <main>
+      <main>
         <div class="chats">
             <section class="chats__left-panel">
                 <div class="left-panel">
@@ -80,7 +81,7 @@ class ChatsPage extends Block<ChatsPageProps> {
                 {{/if}}
             </section>
           </div>
-        </main>
+          </main>
         `;
   }
 }

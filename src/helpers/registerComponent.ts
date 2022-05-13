@@ -10,7 +10,7 @@ interface BlockConstructable<Props = any> {
 export default function registerComponent(Component: BlockConstructable) {
   Handlebars.registerHelper(
     Component.componentName || Component.name,
-    function ({ hash: { ref, ...hash }, data }: HelperOptions) {
+    ({ hash: { ref, ...hash }, data, fn }: HelperOptions) => {
       if (!data.root.children) {
         data.root.children = {};
       }
@@ -28,8 +28,10 @@ export default function registerComponent(Component: BlockConstructable) {
       if (ref) {
         refs[ref] = component.getContent();
       }
+      // @ts-expect-error this is not typed
+      const contents = fn ? fn(this) : "";
 
-      return `<div data-id="${component.id}"></div>`;
+      return `<div data-id="${component.id}">${contents}</div>`;
     }
   );
 }

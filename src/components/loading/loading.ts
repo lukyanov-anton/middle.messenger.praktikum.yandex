@@ -6,7 +6,7 @@ export class LoadingBlock extends Block {
   protected render(): string {
     return `
         <div class="loading">
-            <p class="loading-content">...Loading</p>
+            <p class="loading-content">Loading...</p>
         </div>
         `;
   }
