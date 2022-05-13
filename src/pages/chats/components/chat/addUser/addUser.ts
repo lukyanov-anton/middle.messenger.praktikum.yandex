@@ -6,6 +6,7 @@ import { required } from "../../../../../modules/validation/common";
 
 interface AddUserToChatProps {
   chatId: number;
+  onCancel: () => void;
 }
 
 export class AddUserToChatBlock extends Block {
@@ -83,12 +84,20 @@ export class AddUserToChatBlock extends Block {
                         error="${errors.login}"
                         className="form__field"
                     }}}
-                    {{{ ButtonBlock 
-                        text="Добавить" 
-                        mode="primary" 
-                        onClick=onSubmit
+                    <div class="dialog__buttons">
+                      {{{ ButtonBlock 
+                          text="Добавить" 
+                          mode="primary" 
+                          onClick=onSubmit
+                          className="form__field"
+                      }}}
+                      {{{ ButtonBlock 
+                        text="Отмена" 
+                        mode="secondary" 
+                        onClick=onCancel
                         className="form__field"
-                    }}}       
+                      }}}
+                    </div>       
                 </form>          
             </div>    
         </dialog>`;

@@ -8,11 +8,12 @@ import { connectToChat } from "../../controllers/chat";
 interface ChatsPageProps {
   router: Router;
   store: Store<AppState>;
+  user: User | null;
   profileClick: () => void;
   onChatSelect: (chat: Chat) => void;
 }
 
-class ChatsPage extends Block {
+class ChatsPage extends Block<ChatsPageProps> {
   static componentName = "ChatsPage";
   constructor(props: ChatsPageProps) {
     super(props);
@@ -21,20 +22,32 @@ class ChatsPage extends Block {
         this.props.router.go("/profile");
       },
       onChatSelect: async (chat: Chat) => {
-        this.props.store.dispatch({ selectedChat: chat });
-        await connectToChat(chat.id, this.props.user.id);
+        if (this.props.user !== null) {
+          this.props.store.dispatch({
+            selectedChat: chat,
+            selectedChatMessages: null,
+          });
+          await connectToChat(chat.id, this.props.user.id);
+        }
       },
     });
   }
 
-  async componentDidMount() {
+  async componentDidMount(props: ChatsPageProps) {
+    super.componentDidMount(props);
     if (!this.props.store.getState().chats) {
       await getChats();
     }
   }
   protected render(): string {
+    if (!this.props.user) {
+      return `
+        <div> no authorized user</div>
+      `;
+    }
+
     return `
-        <main>
+      <main>
         <div class="chats">
             <section class="chats__left-panel">
                 <div class="left-panel">
@@ -52,7 +65,7 @@ class ChatsPage extends Block {
                             }}}
                       </div>
                     </div>
-                    <div class="left-panel__content">
+                    <div class="left-panel__content">                        
                         {{{ ChatList 
                           items=store.state.chats 
                           onChatSelect=onChatSelect 
@@ -68,7 +81,7 @@ class ChatsPage extends Block {
                 {{/if}}
             </section>
           </div>
-        </main>
+          </main>
         `;
   }
 }

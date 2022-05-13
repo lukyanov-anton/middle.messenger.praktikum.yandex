@@ -3,10 +3,10 @@ import Route from "./Route";
 
 export default class Router {
   private static __instance: Router;
-  private routes: Route[];
-  private _currentRoute: Route | null;
-  private _history: History;
-  private _rootQuery: string;
+  private routes!: Route[];
+  private _currentRoute!: Route | null;
+  private _history!: History;
+  private _rootQuery!: string;
 
   constructor(rootQuery: string) {
     if (Router.__instance) {
@@ -21,7 +21,7 @@ export default class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: BlockClass2, props?: PlainObject) {
+  use<P>(pathname: string, block: BlockClass2<P>, props?: PlainObject) {
     const route = new Route(pathname, block, {
       rootQuery: this._rootQuery,
       ...props,
@@ -32,7 +32,9 @@ export default class Router {
 
   start() {
     window.onpopstate = ((event: PopStateEvent) => {
-      this._onRoute(event.currentTarget.location.pathname);
+      if (event.currentTarget) {
+        this._onRoute((event.currentTarget as Window).location.pathname);
+      }
     }).bind(this);
 
     this._onRoute(window.location.pathname);
@@ -70,7 +72,7 @@ export default class Router {
     const notfoundRoute = this.routes.find((route) => route.match("*"));
     if (notfoundRoute) return notfoundRoute;
     throw new Error(
-      `Route for path '${pathname}' not fount and catch rout not register.`
+      `Route for path '${pathname}' not found and catch rout not register.`
     );
   }
 }

@@ -8,7 +8,7 @@ import Handlebars from "handlebars";
 type Events = Values<typeof Block.EVENTS>;
 
 export interface BlockClass2<P> extends Function {
-  new (props?: P): Block<P>;
+  new (props: P): Block<P>;
   componentName?: string;
 }
 
@@ -80,7 +80,7 @@ export default class Block<P = any> {
     this._element = this._createDocumentElement("div");
   }
 
-  protected getStateFromProps(props: any): void {
+  protected getStateFromProps(_props: any): void {
     this.state = {};
   }
 
@@ -94,7 +94,7 @@ export default class Block<P = any> {
     this.componentDidMount(props);
   }
 
-  componentDidMount(props: P) {}
+  componentDidMount(_props: P) {}
 
   _componentWillUnmount() {
     this.eventBus().destroy();
@@ -110,7 +110,7 @@ export default class Block<P = any> {
     this._render();
   }
 
-  componentDidUpdate(oldProps: P, newProps: P) {
+  componentDidUpdate(_oldProps: P, _newProps: P) {
     return true;
   }
 
@@ -244,11 +244,20 @@ export default class Block<P = any> {
       if (!stub) {
         return;
       }
-
+      const stubChilds = stub.childNodes.length ? stub.childNodes : [];
       /**
        * Заменяем заглушку на component._element
        */
-      stub.replaceWith(component.getContent());
+      const content = component.getContent();
+      stub.replaceWith(content);
+      /**
+       * Ищем элемент layout-а, куда вставлять детей
+       */
+      const layoutContent = content.querySelector('[data-layout="1"]');
+
+      if (layoutContent && stubChilds.length) {
+        layoutContent.append(...stubChilds);
+      }
     });
 
     /**

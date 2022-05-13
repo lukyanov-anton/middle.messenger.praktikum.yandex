@@ -1,4 +1,4 @@
-import EventBus from "./EventBus";
+import EventBus from "../EventBus";
 
 export enum StoreEvents {
   Updated = "updated",
@@ -39,7 +39,11 @@ class Store<TState extends Record<string, unknown>> extends EventBus {
     payload?: PlainObject
   ) {
     if (typeof nextStateOrAction === "function") {
-      nextStateOrAction(this.dispatch.bind(this), this.state, payload);
+      nextStateOrAction(
+        this.dispatch.bind(this),
+        this.state,
+        payload as PlainObject
+      );
     } else {
       this.set({ ...this.state, ...nextStateOrAction });
     }

@@ -5,3 +5,9 @@
   border-radius: 12px;
   border: none;
 }
+
+.dialog__buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

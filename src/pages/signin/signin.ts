@@ -155,7 +155,7 @@ class SigninPage extends Block {
   protected render(): string {
     const { values, errors } = this.state;
     return `  
-        <main class="container"> 
+          {{#BaseLayout}} 
             <div class='card'>
                 <header class="card__header">
                 <p class="card__title">Регистрация</p>
@@ -246,7 +246,7 @@ class SigninPage extends Block {
                     </form> 
                 </div>    
             </div>
-        </main>
+        {{/BaseLayout}}
         `;
   }
 }

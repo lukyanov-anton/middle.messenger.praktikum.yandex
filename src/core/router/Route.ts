@@ -39,7 +39,7 @@ class Route<P = any> {
 
   render() {
     if (!this._block) {
-      this._block = new this._blockClass();
+      this._block = new this._blockClass({} as P);
       this.setTitle();
       if (this._props) {
         renderDOM(this._props.rootQuery, this._block);

@@ -6,6 +6,7 @@ import { required } from "../../../../../modules/validation/common";
 
 interface RemoveUserFromChatProps {
   chatId: number;
+  onCancel: () => void;
 }
 
 export class RemoveUserFromChatBlock extends Block {
@@ -77,12 +78,20 @@ export class RemoveUserFromChatBlock extends Block {
                         error="${errors.login}"
                         className="form__field"
                     }}}
-                    {{{ ButtonBlock 
-                        text="Удалить" 
-                        mode="primary" 
-                        onClick=onSubmit
+                    <div class="dialog__buttons">
+                      {{{ ButtonBlock 
+                          text="Удалить" 
+                          mode="primary" 
+                          onClick=onSubmit
+                          className="form__field"
+                      }}}
+                      {{{ ButtonBlock 
+                        text="Отмена" 
+                        mode="secondary" 
+                        onClick=onCancel
                         className="form__field"
-                    }}}       
+                      }}}       
+                    </div>
                 </form>          
             </div>    
         </dialog>`;

@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 export type Listener<T extends unknown[]> = (...args: T) => void;
 
 export default class EventBus<
   E extends string = string,
-  M extends { [K in E]: unknown[] } = Record<E, unknown[]>
+  M extends { [K in E]: unknown[] } = Record<E, any[]>
 > {
   private listeners: { [key in E]?: Listener<M[E]>[] } = {};
 
@@ -10,7 +11,9 @@ export default class EventBus<
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
-    this.listeners[event].push(callback);
+    if (this.listeners[event] !== undefined) {
+      this.listeners[event]!.push(callback);
+    }
   }
 
   off(event: E, callback: Listener<M[E]>): void {
@@ -18,7 +21,7 @@ export default class EventBus<
       throw new Error(`Нет события: ${event}`);
     }
 
-    this.listeners[event] = this.listeners[event].filter(
+    this.listeners[event] = this.listeners[event]!.filter(
       (listener) => listener !== callback
     );
   }
@@ -28,7 +31,7 @@ export default class EventBus<
       return;
     }
 
-    this.listeners[event].forEach(function (listener) {
+    this.listeners[event]!.forEach(function (listener) {
       listener(...args);
     });
   }

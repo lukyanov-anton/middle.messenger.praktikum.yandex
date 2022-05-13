@@ -12,9 +12,15 @@ type LoginPageProps = {
   store: Store<AppState>;
   formError?: () => string | null;
   onLogout?: () => void;
+  events: {
+    input: (e: Event) => void;
+    focusin: (e: Event) => void;
+    focusout: (e: Event) => void;
+    submit: (e: Event) => void;
+  };
 };
 
-class LoginPage extends Block {
+export class LoginPage extends Block<LoginPageProps> {
   static componentName = "LoginPage";
   constructor(props: LoginPageProps) {
     const onChange = (e: Event) => {
@@ -110,7 +116,7 @@ class LoginPage extends Block {
   protected render(): string {
     const { values, errors } = this.state;
     return `  
-        <main class="container" > 
+          {{#BaseLayout}}
             <div class='card'>
                 <header class="card__header">
                 <p class="card__title">Вход</p>
@@ -154,7 +160,7 @@ class LoginPage extends Block {
                     </form>
                 </div>    
             </div>
-        </main>
+          {{/BaseLayout}}
         `;
   }
 }

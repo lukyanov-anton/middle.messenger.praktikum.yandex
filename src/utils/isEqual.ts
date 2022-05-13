@@ -20,9 +20,10 @@ export default function isEqual(lhs: PlainObject, rhs: PlainObject): boolean {
     return false;
   }
   for (const [key, value] of Object.entries(lhs)) {
-    const rightValue = rhs[key];
+    const rightValue = rhs[key] as unknown;
     if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
-      if (isEqual(value, rightValue)) {
+      //todo это касяк в теории, пока чтобы не ругался typescript привел к типу PlainObject
+      if (isEqual(value as PlainObject, rightValue as PlainObject)) {
         continue;
       }
       return false;
@@ -34,27 +35,3 @@ export default function isEqual(lhs: PlainObject, rhs: PlainObject): boolean {
   }
   return true;
 }
-/*function isEqual2(a, b) {
-  if (a == null || b == null) return false;
-  if (typeof a !== "object" || typeof b !== "object")
-    throw "Support only aguments type of object";
-  const aKeys = Object.keys(a);
-  const bKeys = Object.keys(b);
-  let isEqual = true;
-  aKeys.forEach((key) => {
-    if (!bKeys.includes(key)) {
-      console.log("0");
-      isEqual = false;
-      return;
-    }
-    if (typeof a[key] === "object" && typeof b[key] === "object") {
-      isEqual = isEqual(a[key], b[key]);
-    } else if (a[key] !== b[key]) {
-      isEqual = false;
-      return;
-    }
-    if (!isEqual) return;
-  });
-
-  return isEqual;
-}*/

@@ -5,7 +5,8 @@ import { Store, StoreEvents } from "../index";
 type WithStateProps = { store: Store<AppState> };
 
 export function withStore<P extends WithStateProps>(
-  WrappedBlock: BlockClass2<P>
+  WrappedBlock: BlockClass2<P>,
+  mapStateToProps?: (state: Indexed) => Indexed
 ) {
   // @ts-expect-error No base constructor has the specified
   return class extends WrappedBlock<P> {
@@ -22,8 +23,17 @@ export function withStore<P extends WithStateProps>(
        * и прокидывать не целый стор, а необходимые поля
        * с помощью метода mapStateToProps
        */
-      // @ts-expect-error this is not typed
-      this.setProps({ ...this.props, store: AppStore });
+
+      if (mapStateToProps) {
+        // @ts-expect-error this is not typed
+        this.setProps({
+          ...mapStateToProps(AppStore.getState()),
+          store: AppStore,
+        });
+      } else {
+        // @ts-expect-error this is not typed
+        this.setProps({ ...this.props, store: AppStore });
+      }
     };
 
     componentDidMount(props: P) {

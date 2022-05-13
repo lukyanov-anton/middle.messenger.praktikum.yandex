@@ -43,11 +43,27 @@
   margin-right: 7px;
 }
 
-.header__controls {
+.header__controls-menu {
   width: 30px;
+  position: relative;
 }
 
-.header__controls::after {
+.header__controls-panel {  
+  position: absolute;  
+  top: 45px;
+  right: 0;
+  background: var(--color-white);
+  box-shadow: 0 0 6px rgb(0 0 0 / 14%);
+  border-radius: 12px;
+  border: none;
+  padding: 10px;
+}
+
+.header__controls {
+  list-style-type: none;
+}
+
+.header__controls-menu::after {
   content: "\2807";
   font-size: 30px;
 }

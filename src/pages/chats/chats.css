@@ -27,6 +27,8 @@
   display: flex;
   height: 56px;
   color: var(--color-dark-gray);
+  align-items: center;
+  padding: 10px;
 }
 
 .left-panel__profile {
