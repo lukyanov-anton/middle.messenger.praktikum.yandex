@@ -6,16 +6,29 @@ interface ChatBlockProps {
   messages: DailyMessages[];
   showAddUserDialog: boolean;
   showRemoveUserDialog: boolean;
+  showMenu: boolean;
   addUserClick: () => void;
   cancelAddUserClick: () => void;
   removeUserClick: () => void;
   cancelRemoveUserClick: () => void;
 }
 
-export class ChatBlock extends Block<ChatBlockProps> {
+export class ChatBlock extends Block {
   static componentName = "ChatBlock";
   constructor(props: ChatBlockProps) {
-    super(props);
+    const menuClick = (e: Event) => {
+      if (e.target) {
+        const isMenu = (e.target as HTMLDivElement).classList.contains(
+          "header__controls-menu"
+        );
+        if (isMenu) {
+          this.setProps({
+            showMenu: !this.props.showMenu,
+          });
+        }
+      }
+    };
+    super({ ...props, events: { click: menuClick } });
     this.setProps({
       showAddUserDialog: false,
       showRemoveUserDialog: false,
@@ -23,6 +36,7 @@ export class ChatBlock extends Block<ChatBlockProps> {
         this.setProps({
           showAddUserDialog: !this.props.showAddUserDialog,
           showRemoveUserDialog: false,
+          showMenu: false,
         });
       },
       cancelAddUserClick: () => {
@@ -34,6 +48,7 @@ export class ChatBlock extends Block<ChatBlockProps> {
         this.setProps({
           showRemoveUserDialog: !this.props.showRemoveUserDialog,
           showAddUserDialog: false,
+          showMenu: false,
         });
       },
       cancelRemoveUserClick: () => {
@@ -50,20 +65,32 @@ export class ChatBlock extends Block<ChatBlockProps> {
                 <div class="header__image">
                     {{{ImagePlaceholderBlock }}}
                 </div>                
-                <h1 class="header__title">{{chat.title}}</h1>
-                {{{ ButtonBlock 
-                  text="Добавить пользователя"
-                  onClick=addUserClick
-                  mode="text" 
-                  className="button--text header__button"
-                }}}
-                {{{ ButtonBlock 
-                  text="Удалить пользователя"
-                  onClick=removeUserClick
-                  mode="text" 
-                  className="button--text header__button"
-                }}}         
-                <div class="header__controls"></div>
+                <h1 class="header__title">{{chat.title}}</h1>                   
+                <div class="header__controls-menu">
+                  {{#if showMenu}}
+                    <div class="header__controls-panel">
+                      <ul class="header__controls">
+                        <li>
+                          {{{ ButtonBlock 
+                            text="Добавить пользователя"
+                            onClick=addUserClick
+                            mode="text" 
+                            className="button--text header__button chat__add-user"
+                          }}}
+                        </li>
+                        <li>
+                          {{{ ButtonBlock 
+                            text="Удалить пользователя"
+                            onClick=removeUserClick
+                            mode="text" 
+                            className="button--text header__button"
+                          }}}
+                        </li>
+                      </ul>
+                    </div>
+                  {{/if}}                                   
+                </div>
+                
             </header>
             <div class="chat__message-ribbon">
                 {{#each messages}}

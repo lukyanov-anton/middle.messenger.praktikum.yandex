@@ -76,13 +76,7 @@ export class NewMessage extends Block {
   protected render(): string {
     const { values, errors } = this.state;
     return `
-        <form class="new-message" >            
-            {{{ ButtonBlock 
-                text="Вложение" 
-                type='button'               
-                onClick=onFileSubmit
-                className='new-message__file'
-            }}}
+        <form class="new-message" >
             {{{ InputBlock                
                 name="message" 
                 ref="message"

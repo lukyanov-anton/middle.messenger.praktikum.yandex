@@ -8,11 +8,14 @@ interface SearchFieldProps {
   className: string;
 }
 
-export class SearchFieldBlock extends Block<SearchFieldProps> {
+export class SearchFieldBlock extends Block {
   static componentName = "SearchFieldBlock";
+  constructor({ onInput, ...props }: SearchFieldProps) {
+    super({ ...props, events: { input: onInput } });
+  }
   protected render(): string {
     return `
-            <input type='text' name='search' class='search-field {{className}}'  placeholder='{{placeholder}}' value='{{value}}' input=onInput />       
+            <input type='text' name='search' class='search-field {{className}}'  placeholder='{{placeholder}}' value='{{value}}'/>       
         `;
   }
 }

@@ -64,7 +64,7 @@ class ChatsPage extends Block<ChatsPageProps> {
                             }}}
                       </div>
                     </div>
-                    <div class="left-panel__content">
+                    <div class="left-panel__content">                        
                         {{{ ChatList 
                           items=store.state.chats 
                           onChatSelect=onChatSelect 

@@ -3,8 +3,8 @@ import { Block } from "../../../../core";
 
 interface ChatListProps {
   items?: Chat[];
+  filteredItems?: Chat[];
   searchString: string;
-  searchInput: () => void;
   onChatSelect: (chat: Chat) => void;
   selectedChat: Chat;
 }
@@ -17,16 +17,28 @@ export class ChatList extends Block {
       events: {
         input: (e: Event) => {
           if (e.target) {
-            console.log((e.target as HTMLInputElement).value);
+            const searchString = (e.target as HTMLInputElement).value;
+            this.setProps({
+              searchString: searchString,
+              filteredItems: this.props.items.filter((chat: Chat) =>
+                chat.title.startsWith(searchString)
+              ),
+            });
           }
         },
       },
     });
-    this.setProps({
-      isSelectedChat: (id: number) => {
-        return this.props.selectedChat.id === id;
-      },
-    });
+    if (props.searchString && props.items) {
+      this.setProps({
+        filteredItems: props.items.filter((chat: Chat) =>
+          chat.title.startsWith(props.searchString)
+        ),
+      });
+    } else {
+      this.setProps({
+        filteredItems: props.items,
+      });
+    }
   }
   protected render(): string {
     return `
@@ -34,9 +46,10 @@ export class ChatList extends Block {
             {{{ SearchFieldBlock 
                 onInput=searchInput 
                 placeholder="Поиск" 
+                value=searchString
                 className="chat-list__search"
             }}}
-            {{#each items}}
+            {{#each filteredItems}}
                 {{#ifEquals ../selectedChat.id this.id}}
                   <div class="chat-list__item chat-list__item--selected">
                 {{else}}
