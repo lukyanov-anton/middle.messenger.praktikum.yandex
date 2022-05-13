@@ -99,7 +99,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [16.15.0]
     steps:
       - name: Set up GitHub Actions
         uses: actions/checkout@v2
